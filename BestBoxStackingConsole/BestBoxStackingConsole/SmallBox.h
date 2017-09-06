@@ -1,4 +1,6 @@
 #pragma once
+#ifndef SMALLBOX_H
+#define SMALLBOX_H
 class SmallBox
 {
 public:
@@ -13,4 +15,4 @@ private:
 	double height;
 	double length;
 };
-
+#endif // !SMALLBOX_H

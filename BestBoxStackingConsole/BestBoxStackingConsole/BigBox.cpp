@@ -4,23 +4,22 @@
 
 BigBox::BigBox()
 {
-	this->width = 0;
-	this->height = 0;
-	this->length = 0;
 }
 
-BigBox::BigBox(double width, double height, double length)
+void BigBox::setBigBoxWidth(double width)
 {
 	this->width = width;
-	this->height = height;
-	this->length = length;
 }
 
-BigBox::BigBox(const BigBox &obj)
+void BigBox::setBigBoxHeight(double height)
 {
-	width = obj.width;
-	height = obj.height;
-	length = obj.length;
+	this->height = height;
+}
+
+
+void BigBox::setBigBoxLength(double length)
+{
+	this->length = length;
 }
 
 double BigBox::getBigBoxWidth()
