@@ -6,6 +6,13 @@ BigBox::BigBox()
 {
 }
 
+BigBox::BigBox(double width, double height, double length)
+{
+	this->width = width;
+	this->height = height;
+	this->length = length;
+}
+
 void BigBox::setBigBoxWidth(double width)
 {
 	this->width = width;

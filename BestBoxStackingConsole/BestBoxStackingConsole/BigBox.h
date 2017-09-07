@@ -6,7 +6,7 @@ class BigBox
 {
 public:
 	BigBox();
-
+	BigBox(double width, double height, double length);
 	void setBigBoxWidth(double width);
 	void setBigBoxHeight(double height);
 	void setBigBoxLength(double length);

@@ -1,27 +1,21 @@
-// BestBoxStackingConsole.cpp : Defines the entry point for the console application.
-//
-
 #include "stdafx.h"
 #include "BigBox.h"
 #include "SmallBox.h"
 #include "Stack.h"
 #include<algorithm>
 #include<iostream>
+#include<list>
 
 using namespace std;
 int main()
 {
-	BigBox bigBox;
-	bigBox.setBigBoxWidth(14);
-	bigBox.setBigBoxHeight(13);
-	bigBox.setBigBoxLength(7);
-	//SmallBox smallBox(2.5, 3.5, 1.5);
-
-	cout << "BigBox : " << bigBox.getBigBoxWidth() << ", " << bigBox.getBigBoxHeight() << ", " << bigBox.getBigBoxLength() << "" << endl;
-	//cout << "SmallBox : " << smallBox.getSmallBoxWidth() << ", " << smallBox.getSmallBoxHeight() << ", " << smallBox.getSmallBoxLength() << "" << endl;
-
-	//Stack stack1(bigBox);
-	//stack1.getStack();
+	BigBox bigBox(14,13,7);
+	SmallBox smallBox(2.5, 3.5, 1.5);
+	list<Stack> listOfStacks;
+	list<BigBox> listOfNewBigBoxes;
+	Stack stack1(bigBox,smallBox);
+	listOfStacks.push_back(stack1);
+	stack1.getStack();
 	int test;
 	cin >> test;
     return 0;
