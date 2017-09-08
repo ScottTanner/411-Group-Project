@@ -8,9 +8,7 @@ private:
 	SmallBox smallBox;
 public:
 	Stack();
-	Stack(BigBox bigBox1,SmallBox smallBox1) :bigBox(bigBox1),smallBox(smallBox1) {
-
-	}
+	Stack(BigBox bigBox, SmallBox smallBox);
 	void getStack();
 	~Stack();
 };
