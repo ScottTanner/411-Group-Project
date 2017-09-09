@@ -13,7 +13,7 @@ int main()
 	BigBox bigBox(14,13,7);
 
 	// Create a Small Box
-	SmallBox smallBox(2.5, 3.5, 1.5);
+	SmallBox smallBox(5.5, 3.5, 1.5);
 	
 	//Create a list of stacks
 	list<Stack> listOfStacks;
@@ -23,12 +23,11 @@ int main()
 
 	//Create a Stack
 	Stack stack1(bigBox,smallBox);
-	
 	// Add stack 1
 	listOfStacks.push_back(stack1);
 	
 	// Print stack out
-	stack1.getStack();
+	stack1.GetStack();
 	int test;
 	cin >> test;
     return 0;
