@@ -18,8 +18,42 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+<<<<<<< HEAD
+    <ClCompile Include="game_system.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="color_system.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="menu_system.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+=======
+>>>>>>> ad136db88dda661af039a2a8438ca338a52c0118
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+<<<<<<< HEAD
+  <ItemGroup>
+    <ClInclude Include="menu_system.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game_system.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="color_system.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\Boxstack.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Resources\Button.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+=======
+>>>>>>> ad136db88dda661af039a2a8438ca338a52c0118
 </Project>

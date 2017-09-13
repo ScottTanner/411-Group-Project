@@ -82,6 +82,22 @@
     <Allegro_AddonColor>true</Allegro_AddonColor>
     <Allegro_AddonVideo>true</Allegro_AddonVideo>
   </PropertyGroup>
+<<<<<<< HEAD
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Allegro_AddonImage>true</Allegro_AddonImage>
+    <Allegro_AddonTTF>true</Allegro_AddonTTF>
+    <Allegro_AddonPrimitives>true</Allegro_AddonPrimitives>
+    <Allegro_AddonAudio>true</Allegro_AddonAudio>
+    <Allegro_AddonAcodec>true</Allegro_AddonAcodec>
+    <Allegro_AddonPhysfs>true</Allegro_AddonPhysfs>
+    <Allegro_AddonDialog>true</Allegro_AddonDialog>
+    <Allegro_AddonMemfile>true</Allegro_AddonMemfile>
+    <Allegro_AddonFont>true</Allegro_AddonFont>
+    <Allegro_AddonColor>true</Allegro_AddonColor>
+    <Allegro_AddonVideo>true</Allegro_AddonVideo>
+  </PropertyGroup>
+=======
+>>>>>>> ad136db88dda661af039a2a8438ca338a52c0118
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -96,7 +112,11 @@
       <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
+<<<<<<< HEAD
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+=======
       <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;allegro-5.0.10-monolith-mt-debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
+>>>>>>> ad136db88dda661af039a2a8438ca338a52c0118
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -126,11 +146,30 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+<<<<<<< HEAD
+    <ClCompile Include="color_system.cpp" />
+    <ClCompile Include="game_system.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="menu_system.cpp" />
+=======
+    <ClCompile Include="main.cpp" />
+>>>>>>> ad136db88dda661af039a2a8438ca338a52c0118
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+<<<<<<< HEAD
+  <ItemGroup>
+    <ClInclude Include="color_system.h" />
+    <ClInclude Include="game_system.h" />
+    <ClInclude Include="menu_system.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\Boxstack.jpg" />
+    <Image Include="Resources\Button.bmp" />
+  </ItemGroup>
+=======
+>>>>>>> ad136db88dda661af039a2a8438ca338a52c0118
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="..\packages\AllegroDeps.1.5.0.1\build\native\AllegroDeps.targets" Condition="Exists('..\packages\AllegroDeps.1.5.0.1\build\native\AllegroDeps.targets')" />
