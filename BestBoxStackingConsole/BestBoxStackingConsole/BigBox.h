@@ -13,6 +13,7 @@ public:
 	double getBigBoxWidth();
 	double getBigBoxHeight();
 	double getBigBoxLength();
+	std::string printBigBox();
 	~BigBox();
 private:
 	double width;

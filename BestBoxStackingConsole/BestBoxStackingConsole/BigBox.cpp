@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include <string>
 #include "BigBox.h"
 
 
@@ -43,6 +44,13 @@ double BigBox::getBigBoxLength()
 {
 	return this->length;
 }
+
+std::string BigBox::printBigBox()
+{
+	std::string textBigBox = "Width: " + std::to_string(width) + " Height: " + std::to_string(height) + " Length: " + std::to_string(length) + "\n";
+	return textBigBox;
+}
+
 
 
 BigBox::~BigBox()

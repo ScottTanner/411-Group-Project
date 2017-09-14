@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include <iostream>
+
 #include <list>
+#include <string>
+
 #include "BigBox.h"
 #include "SmallBox.h"
 #include "Stack.h"
@@ -17,7 +20,7 @@ Stack::Stack(BigBox bigBox, SmallBox smallBox)
 	this->smallBox = smallBox;
 	CalculateDemention(this->bigBox, this->smallBox);
 	CalculateTotalNumber();
-	CalculateRestBoxes(this->bigBox, this->smallBox, this->listOfDemention);
+	this->listOfRestBoxes = CalculateRestBoxes(this->bigBox, this->smallBox, this->listOfDemention);
 }
 
 
@@ -28,10 +31,11 @@ void Stack::GetStack()
 	cout << "SmallBox : " << smallBox.getSmallBoxWidth() << ", " << smallBox.getSmallBoxHeight() << ", " << smallBox.getSmallBoxLength() << "\n";
 	cout << "x = " << this->listOfDemention[0] <<", y = "<< this->listOfDemention[1] << " , z = " << this->listOfDemention[2] << endl;
 	cout << "Totalnumber: " << this->totalNumber << endl;
-//out << "BigBox1: \nWidth: " << test[0].getBigBoxWidth() << ", " << test[0].getBigBoxHeight() << ", " << test[0].getBigBoxLength() << "\n";
-	//cout << "BigBox2: \nWidth: " << test[1].getBigBoxWidth() << ", " << test[1].getBigBoxHeight() << ", " << test[1].getBigBoxLength() << "\n";
-	//cout << "BigBox3: \nWidth: " << test[2].getBigBoxWidth() << ", " << test[2].getBigBoxHeight() << ", " << test[2].getBigBoxLength() << "\n";
-
+	int count = 0;
+	for (std::list<BigBox*>::iterator it = listOfRestBoxes.begin(); it != listOfRestBoxes.end(); it++) 
+	{
+		cout << "BigBox" << ++count << ": \n" << ((BigBox)**it).printBigBox() << endl;
+	}
 }
 void Stack::CalculateDemention(BigBox bigBox, SmallBox smallBox)
 {
@@ -49,7 +53,6 @@ list<BigBox*> Stack::CalculateRestBoxes(BigBox bigBox, SmallBox smallBox, int li
 {
 	list<BigBox*> listBigBox;
 	double tmp;
-
 	for (int i = 0; i < 3; i++) 
 	{
 		switch (i) 
