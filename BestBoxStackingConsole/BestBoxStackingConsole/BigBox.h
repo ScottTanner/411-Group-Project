@@ -1,6 +1,7 @@
 #pragma once
 #ifndef BigBox_H
 #define BigBox_H
+#include <string>
 
 class BigBox
 {

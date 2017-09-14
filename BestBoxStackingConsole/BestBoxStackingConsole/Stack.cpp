@@ -34,7 +34,7 @@ void Stack::GetStack()
 	int count = 0;
 	for (std::list<BigBox*>::iterator it = listOfRestBoxes.begin(); it != listOfRestBoxes.end(); it++) 
 	{
-		cout << "BigBox" << ++count << ": \n" << ((BigBox)**it).printBigBox() << endl;
+		cout << "BigBox" << ++count<< ": \n" << ((BigBox)**it).printBigBox() << endl;
 	}
 }
 void Stack::CalculateDemention(BigBox bigBox, SmallBox smallBox)
@@ -82,7 +82,7 @@ list<BigBox*> Stack::CalculateRestBoxes(BigBox bigBox, SmallBox smallBox, int li
 				break;
 
 			case(2):	
-				tmp = bigBox.getBigBoxWidth() - (smallBox.getSmallBoxWidth()*listOfDemention[0]);
+				tmp = bigBox.getBigBoxLength() - (smallBox.getSmallBoxLength()*listOfDemention[2]);
 					
 				if ((bigBox.getBigBoxWidth() > smallBox.getSmallBoxWidth() || bigBox.getBigBoxWidth() > smallBox.getSmallBoxHeight() || bigBox.getBigBoxWidth() > smallBox.getSmallBoxHeight()) &&
 					(bigBox.getBigBoxHeight() > smallBox.getSmallBoxWidth() || bigBox.getBigBoxHeight()  > smallBox.getSmallBoxHeight() || bigBox.getBigBoxHeight() > smallBox.getSmallBoxHeight()) &&
@@ -96,9 +96,6 @@ list<BigBox*> Stack::CalculateRestBoxes(BigBox bigBox, SmallBox smallBox, int li
 	}
 	return listBigBox;
 }
-
-
-
 
 Stack::~Stack()
 {

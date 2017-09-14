@@ -2,7 +2,7 @@
 
 #ifndef STACK_H
 #define STACK_H
-#include<list>
+#include <list>
 
 class Stack
 {
