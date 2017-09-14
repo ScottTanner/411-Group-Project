@@ -23,6 +23,7 @@ int main()
 
 	//Create a Stack
 	Stack stack1(bigBox,smallBox);
+
 	// Add stack 1
 	listOfStacks.push_back(stack1);
 	

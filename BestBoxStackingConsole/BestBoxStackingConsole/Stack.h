@@ -2,6 +2,7 @@
 
 #ifndef STACK_H
 #define STACK_H
+#include<list>
 
 class Stack
 {
@@ -10,15 +11,14 @@ private:
 	SmallBox smallBox;
 	int listOfDemention [3];
 	int totalNumber;
-	//list<BigBox> listOfRestBoxes;
-	BigBox test[3];
+	std::list<BigBox*> listOfRestBoxes;
 public:
 	Stack();
 	Stack(BigBox bigBox, SmallBox smallBox);
 	void GetStack();
 	void CalculateDemention(BigBox bigBox, SmallBox smallBox);
 	void CalculateTotalNumber();
-	void CalculateRestBoxes(BigBox bigBox, SmallBox smallBox, int listOfDemention[3]);
+	std::list<BigBox*> CalculateRestBoxes(BigBox bigBox, SmallBox smallBox, int listOfDemention[3]);
 	~Stack();
 };
 
