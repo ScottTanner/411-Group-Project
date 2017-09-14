@@ -50,50 +50,46 @@ list<BigBox*> Stack::CalculateRestBoxes(BigBox bigBox, SmallBox smallBox, int li
 	list<BigBox*> listBigBox;
 	double tmp;
 
-	for (int i = 0; i < 3; i++) {
-
-		switch (i) {
-		case(0):	
-			tmp = bigBox.getBigBoxWidth() - (smallBox.getSmallBoxWidth()*listOfDemention[0]);
-
-			if (smallBox.getSmallBoxWidth() < tmp && smallBox.getSmallBoxHeight() < tmp &&  smallBox.getSmallBoxLength() < tmp ||
-				smallBox.getSmallBoxWidth() < bigBox.getBigBoxHeight() && smallBox.getSmallBoxHeight() < bigBox.getBigBoxHeight() && smallBox.getSmallBoxHeight() < bigBox.getBigBoxHeight() ||
-				smallBox.getSmallBoxWidth() < bigBox.getBigBoxLength() && smallBox.getSmallBoxHeight() < bigBox.getBigBoxLength() && smallBox.getSmallBoxHeight() < bigBox.getBigBoxLength()
-				)
-			{
-				listBigBox.push_back(new BigBox(tmp, bigBox.getBigBoxHeight(), bigBox.getBigBoxLength()));
-			}
-			break;
-		case(1):	
-			tmp = bigBox.getBigBoxHeight() - (smallBox.getSmallBoxHeight()*listOfDemention[1]);
-
-			if (smallBox.getSmallBoxWidth() < bigBox.getBigBoxWidth() && smallBox.getSmallBoxHeight() < bigBox.getBigBoxWidth() && smallBox.getSmallBoxHeight() < bigBox.getBigBoxWidth() ||
-				smallBox.getSmallBoxWidth() < tmp && smallBox.getSmallBoxHeight() < tmp &&  smallBox.getSmallBoxLength() < tmp ||
-				smallBox.getSmallBoxWidth() < bigBox.getBigBoxLength() && smallBox.getSmallBoxHeight() < bigBox.getBigBoxLength() && smallBox.getSmallBoxHeight() < bigBox.getBigBoxLength()
-				)
-			{
-				listBigBox.push_back(new BigBox(bigBox.getBigBoxWidth(), bigBox.getBigBoxHeight() - (smallBox.getSmallBoxHeight()*listOfDemention[1]), bigBox.getBigBoxLength()));
-			}
-			break;
-		case(2):	
-			tmp = bigBox.getBigBoxWidth() - (smallBox.getSmallBoxWidth()*listOfDemention[0]);
-
-			if (smallBox.getSmallBoxWidth() < bigBox.getBigBoxWidth() && smallBox.getSmallBoxHeight() < bigBox.getBigBoxWidth() && smallBox.getSmallBoxHeight() < bigBox.getBigBoxWidth() ||
-				smallBox.getSmallBoxWidth() < bigBox.getBigBoxHeight() && smallBox.getSmallBoxHeight() < bigBox.getBigBoxHeight() && smallBox.getSmallBoxHeight() < bigBox.getBigBoxHeight() ||
-				smallBox.getSmallBoxWidth() < tmp && smallBox.getSmallBoxHeight() < tmp &&  smallBox.getSmallBoxLength() < tmp 
-				)
-			{
-				listBigBox.push_back(new BigBox(bigBox.getBigBoxWidth(), bigBox.getBigBoxHeight(), bigBox.getBigBoxLength() - (smallBox.getSmallBoxLength()*listOfDemention[2])));
-			}
-			break;
-		}
-
-		/*if (test[i].getBigBoxWidth() < smallBox.getSmallBoxWidth() && test[i].getBigBoxWidth() < smallBox.getSmallBoxHeight() && test[i].getBigBoxWidth() < smallBox.getSmallBoxLength() ||
-			test[i].getBigBoxHeight() < smallBox.getSmallBoxWidth() && test[i].getBigBoxHeight() < smallBox.getSmallBoxHeight() && test[i].getBigBoxHeight() < smallBox.getSmallBoxLength() ||
-			test[i].getBigBoxLength() < smallBox.getSmallBoxWidth() && test[i].getBigBoxLength() < smallBox.getSmallBoxHeight() && test[i].getBigBoxLength() < smallBox.getSmallBoxLength()) 
+	for (int i = 0; i < 3; i++) 
+	{
+		switch (i) 
 		{
-			test[i] = *new BigBox(0, 0, 0);
-		}*/
+			case(0):
+				tmp = bigBox.getBigBoxWidth() - (smallBox.getSmallBoxWidth()*listOfDemention[0]);
+
+				if ((tmp > smallBox.getSmallBoxWidth() || tmp > smallBox.getSmallBoxHeight() || tmp > smallBox.getSmallBoxLength()) &&
+					(bigBox.getBigBoxHeight() > smallBox.getSmallBoxWidth() || bigBox.getBigBoxHeight()  > smallBox.getSmallBoxHeight() || bigBox.getBigBoxHeight() > smallBox.getSmallBoxHeight()) &&
+					(bigBox.getBigBoxLength() > smallBox.getSmallBoxWidth() || bigBox.getBigBoxLength() > smallBox.getSmallBoxHeight()  || bigBox.getBigBoxLength() > smallBox.getSmallBoxHeight())
+					)
+				{
+					listBigBox.push_back(new BigBox(tmp, bigBox.getBigBoxHeight(), bigBox.getBigBoxLength()));
+				}
+				break;
+
+			case(1):	
+				tmp = bigBox.getBigBoxHeight() - (smallBox.getSmallBoxHeight()*listOfDemention[1]);
+
+				if ((bigBox.getBigBoxWidth() > smallBox.getSmallBoxWidth()  || bigBox.getBigBoxWidth() > smallBox.getSmallBoxHeight()  || bigBox.getBigBoxWidth() > smallBox.getSmallBoxHeight()) &&
+					(tmp > smallBox.getSmallBoxWidth() || tmp > smallBox.getSmallBoxHeight() || tmp > smallBox.getSmallBoxLength()) &&
+					(bigBox.getBigBoxLength() > smallBox.getSmallBoxWidth() || bigBox.getBigBoxLength() > smallBox.getSmallBoxHeight() || bigBox.getBigBoxLength() > smallBox.getSmallBoxHeight())
+					)
+				{
+					listBigBox.push_back(new BigBox(bigBox.getBigBoxWidth(), bigBox.getBigBoxHeight() - (smallBox.getSmallBoxHeight()*listOfDemention[1]), bigBox.getBigBoxLength()));
+				}
+				break;
+
+			case(2):	
+				tmp = bigBox.getBigBoxWidth() - (smallBox.getSmallBoxWidth()*listOfDemention[0]);
+					
+				if ((bigBox.getBigBoxWidth() > smallBox.getSmallBoxWidth() || bigBox.getBigBoxWidth() > smallBox.getSmallBoxHeight() || bigBox.getBigBoxWidth() > smallBox.getSmallBoxHeight()) &&
+					(bigBox.getBigBoxHeight() > smallBox.getSmallBoxWidth() || bigBox.getBigBoxHeight()  > smallBox.getSmallBoxHeight() || bigBox.getBigBoxHeight() > smallBox.getSmallBoxHeight()) &&
+					(tmp > smallBox.getSmallBoxWidth() || tmp > smallBox.getSmallBoxHeight() || tmp > smallBox.getSmallBoxLength())
+				)
+				{
+					listBigBox.push_back(new BigBox(bigBox.getBigBoxWidth(), bigBox.getBigBoxHeight(), bigBox.getBigBoxLength() - (smallBox.getSmallBoxLength()*listOfDemention[2])));
+				}
+				break;
+		}
 	}
 	return listBigBox;
 }
