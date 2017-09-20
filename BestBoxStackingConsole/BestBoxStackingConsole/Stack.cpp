@@ -29,7 +29,7 @@ void Stack::GetStack()
 {
 	cout <<"BigBox : " << this->bigBox.getBigBoxWidth() << ", " << bigBox.getBigBoxHeight() << ", " << bigBox.getBigBoxLength() << "\n";
 	cout << "SmallBox : " << smallBox.getSmallBoxWidth() << ", " << smallBox.getSmallBoxHeight() << ", " << smallBox.getSmallBoxLength() << "\n";
-	cout << "x = " << this->listOfDemention[0] <<", y = "<< this->listOfDemention[1] << " , z = " << this->listOfDemention[2] << endl;
+	cout << "Demension: x = " << this->listOfDemention[0] <<", y = "<< this->listOfDemention[1] << " , z = " << this->listOfDemention[2] << endl;
 	cout << "Totalnumber: " << this->totalNumber << endl;
 	int count = 0;
 	for (std::list<BigBox*>::iterator it = listOfRestBoxes.begin(); it != listOfRestBoxes.end(); it++) 
@@ -49,6 +49,7 @@ void Stack::CalculateTotalNumber()
 	this->totalNumber = this->listOfDemention[0] * this->listOfDemention[1] * this->listOfDemention[2];
 }
 
+// Calculate the Rest Boxes with only the Boxes which are allowed
 list<BigBox*> Stack::CalculateRestBoxes(BigBox bigBox, SmallBox smallBox, int listOfDemention[3])
 {
 	list<BigBox*> listBigBox;
@@ -59,11 +60,7 @@ list<BigBox*> Stack::CalculateRestBoxes(BigBox bigBox, SmallBox smallBox, int li
 		{
 			case(0):
 				tmp = bigBox.getBigBoxWidth() - (smallBox.getSmallBoxWidth()*listOfDemention[0]);
-
-				if ((tmp > smallBox.getSmallBoxWidth() || tmp > smallBox.getSmallBoxHeight() || tmp > smallBox.getSmallBoxLength()) &&
-					(bigBox.getBigBoxHeight() > smallBox.getSmallBoxWidth() || bigBox.getBigBoxHeight()  > smallBox.getSmallBoxHeight() || bigBox.getBigBoxHeight() > smallBox.getSmallBoxHeight()) &&
-					(bigBox.getBigBoxLength() > smallBox.getSmallBoxWidth() || bigBox.getBigBoxLength() > smallBox.getSmallBoxHeight()  || bigBox.getBigBoxLength() > smallBox.getSmallBoxHeight())
-					)
+				if (Prove(tmp, bigBox.getBigBoxHeight(), bigBox.getBigBoxLength(), smallBox))
 				{
 					listBigBox.push_back(new BigBox(tmp, bigBox.getBigBoxHeight(), bigBox.getBigBoxLength()));
 				}
@@ -71,11 +68,7 @@ list<BigBox*> Stack::CalculateRestBoxes(BigBox bigBox, SmallBox smallBox, int li
 
 			case(1):	
 				tmp = bigBox.getBigBoxHeight() - (smallBox.getSmallBoxHeight()*listOfDemention[1]);
-
-				if ((bigBox.getBigBoxWidth() > smallBox.getSmallBoxWidth()  || bigBox.getBigBoxWidth() > smallBox.getSmallBoxHeight()  || bigBox.getBigBoxWidth() > smallBox.getSmallBoxHeight()) &&
-					(tmp > smallBox.getSmallBoxWidth() || tmp > smallBox.getSmallBoxHeight() || tmp > smallBox.getSmallBoxLength()) &&
-					(bigBox.getBigBoxLength() > smallBox.getSmallBoxWidth() || bigBox.getBigBoxLength() > smallBox.getSmallBoxHeight() || bigBox.getBigBoxLength() > smallBox.getSmallBoxHeight())
-					)
+				if (Prove( bigBox.getBigBoxWidth(), tmp, bigBox.getBigBoxLength(), smallBox))
 				{
 					listBigBox.push_back(new BigBox(bigBox.getBigBoxWidth(), bigBox.getBigBoxHeight() - (smallBox.getSmallBoxHeight()*listOfDemention[1]), bigBox.getBigBoxLength()));
 				}
@@ -83,11 +76,7 @@ list<BigBox*> Stack::CalculateRestBoxes(BigBox bigBox, SmallBox smallBox, int li
 
 			case(2):	
 				tmp = bigBox.getBigBoxLength() - (smallBox.getSmallBoxLength()*listOfDemention[2]);
-					
-				if ((bigBox.getBigBoxWidth() > smallBox.getSmallBoxWidth() || bigBox.getBigBoxWidth() > smallBox.getSmallBoxHeight() || bigBox.getBigBoxWidth() > smallBox.getSmallBoxHeight()) &&
-					(bigBox.getBigBoxHeight() > smallBox.getSmallBoxWidth() || bigBox.getBigBoxHeight()  > smallBox.getSmallBoxHeight() || bigBox.getBigBoxHeight() > smallBox.getSmallBoxHeight()) &&
-					(tmp > smallBox.getSmallBoxWidth() || tmp > smallBox.getSmallBoxHeight() || tmp > smallBox.getSmallBoxLength())
-				)
+				if (Prove( bigBox.getBigBoxWidth(), bigBox.getBigBoxHeight(), tmp, smallBox))
 				{
 					listBigBox.push_back(new BigBox(bigBox.getBigBoxWidth(), bigBox.getBigBoxHeight(), bigBox.getBigBoxLength() - (smallBox.getSmallBoxLength()*listOfDemention[2])));
 				}
@@ -95,6 +84,55 @@ list<BigBox*> Stack::CalculateRestBoxes(BigBox bigBox, SmallBox smallBox, int li
 		}
 	}
 	return listBigBox;
+}
+
+std::list<BigBox*> Stack::getBigBox()
+{
+	return this->listOfRestBoxes;
+}
+
+bool Stack::Prove(double bigBoxWidth, double bigBoxHeight, double bigBoxLength, SmallBox smallBox)
+{
+	double top=smallBox.getSmallBoxWidth();
+	double middle = smallBox.getSmallBoxHeight();
+	double down = smallBox.getSmallBoxLength();
+	bool test = true;
+	while (test) {
+		if (middle > top)
+		{
+			double tmp = top;
+			top = middle;
+			middle = tmp;
+		}
+		else if (down > middle) {
+			double tmp = middle;
+			middle = down;
+			down = tmp;
+		}
+		else if (down > top) {
+			double tmp = top;
+			top = down;
+			down = tmp;
+		}
+		else {
+			test = false;
+		}
+	}
+
+	if (bigBoxWidth >= top && bigBoxHeight >= middle && bigBoxLength >= down ||
+		bigBoxWidth >= middle && bigBoxHeight >= top && bigBoxLength >= down ||
+		bigBoxWidth >= top && bigBoxHeight >= down && bigBoxLength >= middle ||
+		bigBoxWidth >= down && bigBoxHeight >= top && bigBoxLength >= middle ||
+		bigBoxWidth >= down && bigBoxHeight >= middle && bigBoxLength >= top ||
+		bigBoxWidth >= middle && bigBoxHeight >= down && bigBoxLength >= top ){
+		return true;
+	}
+	return false;
+}
+
+int Stack::getTotalNumber()
+{
+	return this->totalNumber;
 }
 
 Stack::~Stack()

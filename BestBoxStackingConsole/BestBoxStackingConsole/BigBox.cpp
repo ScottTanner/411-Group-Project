@@ -56,3 +56,21 @@ std::string BigBox::printBigBox()
 BigBox::~BigBox()
 {
 }
+
+bool BigBox::operator==(BigBox & bigBox)const
+{
+	if (this->width == bigBox.width && this->height == bigBox.height && this->length == bigBox.length) 
+	{
+		return true;
+	}
+	return false;
+}
+
+bool BigBox::operator!=(BigBox & bigBox) const
+{
+	if (!(this->width == bigBox.width && this->height == bigBox.height && this->length == bigBox.length))
+	{
+		return true;
+	}
+	return false;
+}

@@ -16,6 +16,8 @@ public:
 	double getBigBoxLength();
 	std::string printBigBox();
 	~BigBox();
+	bool operator==(BigBox& bigBox)const;
+	bool operator!=(BigBox &bigBox)const;
 private:
 	double width;
 	double height;
