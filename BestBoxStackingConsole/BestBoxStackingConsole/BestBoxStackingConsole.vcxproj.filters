@@ -36,6 +36,9 @@
     <ClInclude Include="StackCollection.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ShowStack.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -54,6 +57,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="StackCollection.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ShowStack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

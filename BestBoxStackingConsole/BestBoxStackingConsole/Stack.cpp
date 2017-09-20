@@ -86,7 +86,7 @@ list<BigBox*> Stack::CalculateRestBoxes(BigBox bigBox, SmallBox smallBox, int li
 	return listBigBox;
 }
 
-std::list<BigBox*> Stack::getBigBox()
+std::list<BigBox*> Stack::getListBigBox()
 {
 	return this->listOfRestBoxes;
 }
@@ -134,6 +134,17 @@ int Stack::getTotalNumber()
 {
 	return this->totalNumber;
 }
+
+BigBox Stack::getBigBox()
+{
+	return this->bigBox;
+}
+
+SmallBox Stack::getSmallBox()
+{
+	return this->smallBox;
+}
+
 
 Stack::~Stack()
 {

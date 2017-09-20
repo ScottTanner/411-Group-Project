@@ -28,38 +28,38 @@ void StackCollection::sixDifferentWays(BigBox bigBox, SmallBox smallBox)
 	double sHeight = smallBox.getSmallBoxHeight();
 	double sLength = smallBox.getSmallBoxLength();
 	Stack* stack = new Stack(bigBox,smallBox);
-	
+	std::list<Stack*> listStack;
 	for (int i = 0; i < 6; i++) 
 	{
 		switch (i) 
 		{
 		case 0:
 			stack = new Stack(bigBox, *new SmallBox(sWidth, sHeight, sLength));
-			this->collection.push_back(stack);
+			listStack.push_back(stack);
 				break;
 		case 1:
 			stack = new Stack(bigBox, *new SmallBox(sWidth, sLength, sHeight));
-			this->collection.push_back(stack);
+			listStack.push_back(stack);
 			break;
 		case 2:
 			stack = new Stack(bigBox, *new SmallBox(sHeight,sWidth, sLength));
-			this->collection.push_back(stack);
+			listStack.push_back(stack);
 			break;
 		case 3:
 			stack = new Stack(bigBox, *new SmallBox(sHeight, sLength, sWidth));
-			this->collection.push_back(stack);
+			listStack.push_back(stack);
 			break;
 		case 4:
 			stack = new Stack(bigBox, *new SmallBox(sLength, sWidth, sHeight));
-			this->collection.push_back(stack);
+			listStack.push_back(stack);
 			break;
 		case 5:
 			stack = new Stack(bigBox, *new SmallBox(sLength, sHeight, sWidth));
-			this->collection.push_back(stack);
+			listStack.push_back(stack);
 			break;
 		}
 		bool add = true;;
-		std::list<BigBox*> tmpList = stack->getBigBox();
+		std::list<BigBox*> tmpList = stack->getListBigBox();
 		for (std::list<BigBox*>::iterator it = tmpList.begin(); it != tmpList.end(); it++)
 		{
 			for (std::list<BigBox*>::iterator its = BigBoxList.begin(); its != BigBoxList.end(); its++)
@@ -80,20 +80,24 @@ void StackCollection::sixDifferentWays(BigBox bigBox, SmallBox smallBox)
 			}
 		}
 	}
-	for (std::list<Stack*>::iterator it = this->collection.begin(); it != this->collection.end(); it++) 
+	for (std::list<Stack*>::iterator it = listStack.begin(); it != listStack.end();)
 	{
 		int check = ((Stack)(**it)).getTotalNumber();
 		if (check == 0) 
 		{
-			this->collection.remove(*it);
-			it = this->collection.begin();
+			listStack.remove(*it);
+			it = listStack.begin();
+		}
+		else {
+			it++;
 		}
 	}
-		nextStacking();
+	this->collection.push_back(listStack);
+	nextStacking();
 }
 
 
-std::list<Stack*> StackCollection::GetCollection()
+std::list<std::list<Stack*>> StackCollection::GetCollection()
 {
 	return this->collection;
 }
@@ -110,8 +114,8 @@ void StackCollection::nextStacking()
 void StackCollection::combineStacks()
 {
 	int count=0;
-	for (std::list<Stack*>::iterator it = this->collection.begin(); it != this->collection.end(); it++) 
-	{
+	//for (std::list<Stack*>::iterator it = this->collection.begin(); it != this->collection.end(); it++) 
+	//{
 
 
 
@@ -121,8 +125,8 @@ void StackCollection::combineStacks()
 
 
 		if (count == 5) {
-			break;
+			//break;
 		}
 		count++;
-	}
+	//}
 }

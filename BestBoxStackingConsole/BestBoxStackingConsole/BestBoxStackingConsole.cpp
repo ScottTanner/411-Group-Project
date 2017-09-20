@@ -16,9 +16,9 @@ int main()
 	// Create a Small Box
 	SmallBox smallBox(3.5, 1.5, 5.5);
 	*/
-	StackCollection stackCollection(14, 13, 7, 3.5, 1.5, 5.5);
+	StackCollection stackCollection(14, 13, 7, 3, 1.5, 5.5);
 	//Create a list of stacks
-	list<Stack*> listOfStacks = stackCollection.GetCollection();
+	list<list<Stack*>> listOfStacks = stackCollection.GetCollection();
 
 	//Create a list of new Big Box
 	list<BigBox> listOfNewBigBoxes;
