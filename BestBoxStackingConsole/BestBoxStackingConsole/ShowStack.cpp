@@ -13,6 +13,11 @@ ShowStack::ShowStack(Stack stack)
 	this->totalnumber = stack.getTotalNumber();
 }
 
+BigBox ShowStack::getBigBox()
+{
+	return this->bigBox;
+}
+
 
 ShowStack::~ShowStack()
 {

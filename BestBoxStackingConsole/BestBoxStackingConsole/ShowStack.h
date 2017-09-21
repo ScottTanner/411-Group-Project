@@ -7,6 +7,7 @@ class ShowStack
 public:
 	ShowStack();
 	ShowStack(Stack stack);
+	BigBox getBigBox();
 	~ShowStack();
 private:
 	BigBox bigBox;

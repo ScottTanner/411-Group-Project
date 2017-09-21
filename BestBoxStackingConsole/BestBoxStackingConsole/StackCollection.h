@@ -12,18 +12,18 @@ public:
 	StackCollection(double bigBoxWidth, double bigBoxHeight, double bigBoxLength, double smallBoxWidth, double smallBoxHeight, double smallBoxLength);
 	~StackCollection();
 	void sixDifferentWays(BigBox bigBox, SmallBox smallBox);
-	std::list<std::list<Stack*>>GetCollection();
+	std::list<Stack*>GetCollection();
 	void nextStacking();
-	void combineStacks();
-
+	std::list<std::list<ShowStack*>> combineStacks(std::list<std::list<ShowStack*>> stackedList);
+	std::list<std::pair<std::list<ShowStack*>, int>> calculateShowingList();
 
 private:
-	std::list<std::list<Stack*>> collection;
+	std::list<Stack*> collection;
 	BigBox bigBox;
 	SmallBox smallBox;
 	std::list<BigBox*> bigBoxQueue;
 	std::list<BigBox*> BigBoxList;
-	std::list<std::list<Stack*>> listShowsStacking;
-	std::list<std::list<ShowStack*>> showingList;
+	std::list<Stack*> listShowsStacking;
+	std::list<std::pair<std::list<ShowStack*>,int>> showingList;
 };
 
