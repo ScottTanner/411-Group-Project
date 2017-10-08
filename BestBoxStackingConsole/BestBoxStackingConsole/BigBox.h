@@ -1,26 +1,25 @@
 #pragma once
-#ifndef BigBox_H
-#define BigBox_H
-#include <string>
-
 class BigBox
 {
-public:
-	BigBox();
-	BigBox(double width, double height, double length);
-	void setBigBoxWidth(double width);
-	void setBigBoxHeight(double height);
-	void setBigBoxLength(double length);
-	double getBigBoxWidth();
-	double getBigBoxHeight();
-	double getBigBoxLength();
-	std::string printBigBox();
-	~BigBox();
-	bool operator==(BigBox& bigBox)const;
-	bool operator!=(BigBox &bigBox)const;
 private:
 	double width;
 	double height;
 	double length;
+public:
+	BigBox();
+	// Create a BigBox
+	BigBox(double width, double height, double length);
+	~BigBox();
+	// Get the width by BigBox
+	double GetBigBoxWidth();
+
+	// Get the height by BigBox
+	double GetBigBoxHeight();
+
+	// Get the length by BigBox
+	double GetBigBoxLength();
+
+	bool operator==(BigBox& bigBox)const;
+	bool operator!=(BigBox &bigBox)const;
 };
-#endif // !BigBox_H
+

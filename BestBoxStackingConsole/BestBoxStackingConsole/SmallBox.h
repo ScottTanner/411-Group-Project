@@ -1,18 +1,22 @@
 #pragma once
-#ifndef SMALLBOX_H
-#define SMALLBOX_H
 class SmallBox
 {
-public:
-	SmallBox(); 
-	SmallBox(double width, double height, double length);
-	double getSmallBoxWidth();
-	double getSmallBoxHeight();
-	double getSmallBoxLength();
-	~SmallBox();
 private:
 	double width;
-	double height;
 	double length;
+	double height;
+public:
+	SmallBox();
+	SmallBox(double width, double height, double length);
+	~SmallBox();
+
+	// Get width by SmallBox
+	double GetSmallBoxWidth();
+
+	//Get height by SmallBox
+	double GetSmallBoxHeight();
+
+	//Get length by SmallBox
+	double GetSmallBoxLength();
 };
-#endif // !SMALLBOX_H
+

@@ -149,7 +149,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BigBox.h" />
-    <ClInclude Include="ShowStack.h" />
     <ClInclude Include="SmallBox.h" />
     <ClInclude Include="Stack.h" />
     <ClInclude Include="StackCollection.h" />
@@ -159,7 +158,6 @@
   <ItemGroup>
     <ClCompile Include="BestBoxStackingConsole.cpp" />
     <ClCompile Include="BigBox.cpp" />
-    <ClCompile Include="ShowStack.cpp" />
     <ClCompile Include="SmallBox.cpp" />
     <ClCompile Include="Stack.cpp" />
     <ClCompile Include="StackCollection.cpp" />

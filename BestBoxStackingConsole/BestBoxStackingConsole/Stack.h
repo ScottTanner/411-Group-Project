@@ -1,32 +1,24 @@
 #pragma once
-
-#ifndef STACK_H
-#define STACK_H
+#include "BigBox.h"
+#include "SmallBox.h"
 #include <list>
-
 class Stack
 {
 private:
 	BigBox bigBox;
 	SmallBox smallBox;
-	int listOfDemention [3];
-	int totalNumber;
-	std::list<BigBox*> listOfRestBoxes;
+	int listNumbers[3];
+	int number;
+	std::list<BigBox> listRestBigBox;
+	void calculateNumber();
+	void calculateListRestBigBoxes();
+	bool prove(double bigBoxWidth, double bigBoxHeight, double bigBoxLength, SmallBox smallBox);
 public:
-	Stack();
 	Stack(BigBox bigBox, SmallBox smallBox);
-	void GetStack();
-	void CalculateDemention(BigBox bigBox, SmallBox smallBox);
-	void CalculateTotalNumber();
-	std::list<BigBox*> CalculateRestBoxes(BigBox bigBox, SmallBox smallBox, int listOfDemention[3]);
-	std::list<BigBox*> getListBigBox();
-	bool Prove(double bigBoxWidth, double bigBoxHeight, double bigBoxLength, SmallBox smallBox);
-	int getTotalNumber();
-	BigBox getBigBox();
-	SmallBox getSmallBox();
-
+	int GetNumber();
+	BigBox GetBigBox();
+	std::list<BigBox> getListRestBigBox();
 	~Stack();
+
 };
 
-
-#endif // !STACK_H

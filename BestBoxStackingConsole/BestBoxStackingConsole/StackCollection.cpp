@@ -1,9 +1,5 @@
 #include "stdafx.h"
 #include "StackCollection.h"
-#include "Stack.h"
-#include "BigBox.h"
-#include "SmallBox.h"
-#include <list>
 
 
 StackCollection::StackCollection()
@@ -12,10 +8,7 @@ StackCollection::StackCollection()
 
 StackCollection::StackCollection(double bigBoxWidth, double bigBoxHeight, double bigBoxLength, double smallBoxWidth, double smallBoxHeight, double smallBoxLength)
 {
-	this->bigBox = *new BigBox(bigBoxWidth, bigBoxHeight, bigBoxLength);
-	this->smallBox = *new SmallBox(smallBoxWidth, smallBoxHeight, smallBoxLength);
-	sixDifferentWays(this->bigBox, this->smallBox);
-	this->showingList = calculateShowingList();
+	stacking(*new BigBox(bigBoxWidth, bigBoxHeight, bigBoxLength), *new SmallBox(smallBoxWidth, smallBoxHeight, smallBoxLength));
 }
 
 
@@ -23,152 +16,224 @@ StackCollection::~StackCollection()
 {
 }
 
+void StackCollection::stacking(BigBox bigBox, SmallBox smallBox)
+{
+	sixDifferentWays(bigBox, smallBox);
+	while (this->queueRestBigBoxes.size() != 0)
+	{
+		BigBox tmpBigBox = *this->queueRestBigBoxes.begin();
+		this->queueRestBigBoxes.pop_front();
+		sixDifferentWays(tmpBigBox, smallBox);
+	}
+	completeStackCollection();
+
+}
+
 void StackCollection::sixDifferentWays(BigBox bigBox, SmallBox smallBox)
 {
-	double sWidth = smallBox.getSmallBoxWidth();
-	double sHeight = smallBox.getSmallBoxHeight();
-	double sLength = smallBox.getSmallBoxLength();
-	Stack* stack = new Stack(bigBox,smallBox);
-	for (int i = 0; i < 6; i++) 
+	// Values of the smallBox
+	double smallX = smallBox.GetSmallBoxWidth();
+	double smallY = smallBox.GetSmallBoxHeight();
+	double smallZ = smallBox.GetSmallBoxLength();
+
+	//Six different ways to lay the smallBoxes in the bigBox
+	for (int i = 0; i < 6; i++)
 	{
-		switch (i) 
+		Stack stack(bigBox, smallBox);
+		switch (i)
 		{
 		case 0:
-			stack = new Stack(bigBox, *new SmallBox(sWidth, sHeight, sLength));
-			this->collection.push_back(stack);
-				break;
+			// Create a new Stack
+			stack = *new Stack(bigBox, *new SmallBox(smallX, smallY, smallZ));
+
+			// Proof if the number is not 0
+			if (stack.GetNumber() > 0)
+			{
+				// Add the stack to the listStack
+				listStack.push_back(stack);
+				nextRestBigBox(stack);
+			}
+			break;
 		case 1:
-			stack = new Stack(bigBox, *new SmallBox(sWidth, sLength, sHeight));
-			this->collection.push_back(stack);
+			// Create a new Stack
+			stack = *new Stack(bigBox, *new SmallBox(smallX, smallZ, smallY));
+
+			// Proof if the number is not 0
+			if (stack.GetNumber() > 0)
+			{
+				// Add the stack to the listStack
+				listStack.push_back(stack);
+				nextRestBigBox(stack);
+			}
 			break;
 		case 2:
-			stack = new Stack(bigBox, *new SmallBox(sHeight,sWidth, sLength));
-			this->collection.push_back(stack);
+			// Create a new Stack
+			stack = *new Stack(bigBox, *new SmallBox(smallY, smallX, smallZ));
+
+			// Proof if the number is not 0
+			if (stack.GetNumber() > 0)
+			{
+				// Add the stack to the listStack
+				listStack.push_back(stack);
+				nextRestBigBox(stack);
+			}
 			break;
 		case 3:
-			stack = new Stack(bigBox, *new SmallBox(sHeight, sLength, sWidth));
-			this->collection.push_back(stack);
+			// Create a new Stack
+			stack = *new Stack(bigBox, *new SmallBox(smallY, smallZ, smallX));
+
+			// Proof if the number is not 0
+			if (stack.GetNumber() > 0)
+			{
+				// Add the stack to the listStack
+				listStack.push_back(stack);
+				nextRestBigBox(stack);
+			}
 			break;
 		case 4:
-			stack = new Stack(bigBox, *new SmallBox(sLength, sWidth, sHeight));
-			this->collection.push_back(stack);
+			// Create a new Stack
+			stack = *new Stack(bigBox, *new SmallBox(smallZ, smallX, smallY));
+
+			// Proof if the number is not 0
+			if (stack.GetNumber() > 0)
+			{
+				// Add the stack to the listStack
+				listStack.push_back(stack);
+				nextRestBigBox(stack);
+			}
 			break;
 		case 5:
-			stack = new Stack(bigBox, *new SmallBox(sLength, sHeight, sWidth));
-			this->collection.push_back(stack);
+			// Create a new Stack
+			Stack stack = *new Stack(bigBox, *new SmallBox(smallZ, smallY, smallX));
+
+			// Proof if the number is not 0
+			if (stack.GetNumber() > 0)
+			{
+				// Add the stack to the listStack
+				listStack.push_back(stack);
+				nextRestBigBox(stack);
+			}
 			break;
 		}
-		bool add = true;;
-		std::list<BigBox*> tmpList = stack->getListBigBox();
-		for (std::list<BigBox*>::iterator it = tmpList.begin(); it != tmpList.end(); it++)
+	}
+}
+
+void StackCollection::nextRestBigBox(Stack stack)
+{
+	// get the list of restBoxes from the actual stack
+	std::list<BigBox> tmpList = stack.getListRestBigBox();
+	bool check = true;
+
+	// Add all possible Restboxes the listResBigBoxes
+	for (std::list<BigBox>::iterator it = tmpList.begin(); it != tmpList.end(); it++)
+	{
+		check = true;
+
+		// Check if the BigBox is still existing in the listRestBigBoxes
+		for (std::list<BigBox>::iterator itList = this->listRestBigBoxes.begin(); itList != this->listRestBigBoxes.end(); itList++)
 		{
-			for (std::list<BigBox*>::iterator its = BigBoxList.begin(); its != BigBoxList.end(); its++)
+			if ((*itList).GetBigBoxWidth() == (*it).GetBigBoxWidth() && (*itList).GetBigBoxHeight() == (*it).GetBigBoxHeight() && (*itList).GetBigBoxLength() == (*it).GetBigBoxLength())
 			{
-				if (**it == **its)
+				check = false;
+			}
+		}
+
+		// if check is true then add the actual RestBox to the list and the queue
+		if (check == true)
+		{
+			this->listRestBigBoxes.push_back(*it);
+			this->queueRestBigBoxes.push_back(*it);
+		}
+	}
+}
+
+void StackCollection::completeStackCollection()
+{
+	int countOriginalBB = 0;
+	for (std::list<Stack>::iterator itOriginalBB = this->listStack.begin(); itOriginalBB != this->listStack.end(); itOriginalBB++)
+	{
+		if (++countOriginalBB == 6)
+		{
+			break;
+		}
+		std::list<Stack> listStacks;
+		int totalNumber = 0;
+		Stack firstStack = *itOriginalBB;
+		totalNumber += firstStack.GetNumber();
+		std::list<BigBox>listRestBB = firstStack.getListRestBigBox();
+		listStacks.push_back(firstStack);
+		if (listRestBB.size() == 4)
+		{
+			BigBox arrayRestBigBox[4];
+			int count = 0;
+			for (std::list<BigBox>::iterator itArray = listRestBB.begin(); itArray != listRestBB.end(); itArray++)
+			{
+				arrayRestBigBox[count++] = *itArray;
+			}
+			for (std::list<Stack>::iterator itRestBoxes = this->listStack.begin(); itRestBoxes != this->listStack.end(); itRestBoxes++)
+			{
+				Stack secondRestBox = *itRestBoxes;
+
+				// First Way to lay the cut
+				if (secondRestBox.GetBigBox().GetBigBoxWidth() == arrayRestBigBox[0].GetBigBoxWidth() && secondRestBox.GetBigBox().GetBigBoxHeight() == arrayRestBigBox[0].GetBigBoxHeight() && secondRestBox.GetBigBox().GetBigBoxLength() == arrayRestBigBox[0].GetBigBoxLength())
 				{
-					add = false;
-					break;
+					listStacks.push_back(secondRestBox);
+					totalNumber += secondRestBox.GetNumber();
+					for (std::list<Stack>::iterator itThirdRestBox = this->listStack.begin(); itThirdRestBox != this->listStack.end(); itThirdRestBox++)
+					{
+						Stack thirdRestBox = *itThirdRestBox;
+						if (thirdRestBox.GetBigBox().GetBigBoxWidth() == arrayRestBigBox[2].GetBigBoxWidth() && thirdRestBox.GetBigBox().GetBigBoxHeight() == arrayRestBigBox[2].GetBigBoxHeight() && thirdRestBox.GetBigBox().GetBigBoxLength() == arrayRestBigBox[2].GetBigBoxLength())
+						{
+							totalNumber += thirdRestBox.GetNumber();
+							listStacks.push_back(thirdRestBox);
+							this->completedStackCollection.push_back(std::make_pair(listStacks, totalNumber));
+							listStacks.pop_back();
+							totalNumber -= thirdRestBox.GetNumber();
+						}
+					}
+					totalNumber -= secondRestBox.GetNumber();
+					listStacks.pop_back();
 				}
-				else {
-					add = true;
-				}
-			}
-			if (add)
-			{
-				this->BigBoxList.push_back(*it);
-				this->bigBoxQueue.push_back(*it);
-			}
-		}
-	}
-	for (std::list<Stack*>::iterator it = this->collection.begin(); it != this->collection.end();)
-	{
-		int check = ((Stack)(**it)).getTotalNumber();
-		if (check == 0) 
-		{
-			this->collection.remove(*it);
-			it = this->collection.begin();
-		}
-		else {
-			it++;
-		}
-	}
-	nextStacking();
-}
 
-
-std::list<Stack*> StackCollection::GetCollection()
-{
-	return this->collection;
-}
-
-void StackCollection::nextStacking()
-{
-	if (this->bigBoxQueue.size() != 0) {
-		BigBox* bigBoxs = this->bigBoxQueue.front();
-		this->bigBoxQueue.pop_front();
-		sixDifferentWays(*bigBoxs, this->smallBox);
-	}
-}
-
-std::list<std::list<ShowStack*>> StackCollection::combineStacks(std::list<std::list<ShowStack*>> stackedList)
-{
-
-	for (std::list<std::list<ShowStack*>>::iterator it = stackedList.begin(); it != stackedList.end(); it++) 
-	{
-		for (std::list<std::list<ShowStack*>>::iterator it2 = stackedList.begin(); it2 != stackedList.end(); it2++) 
-		{
-			std::list<ShowStack*> listShowStack1 = *it;
-			ShowStack showstack1 = *listShowStack1.back();
-			std::list<ShowStack*> listShowStack2 = *it2;
-			ShowStack showstack2 = *listShowStack2.front();
-			if (showstack1.getBigBox() == showstack2.getBigBox()) 
-			{
-				listShowStack1.pop_back();
-				it = stackedList.begin();
-			}
-			else
-			{
-				continue;
-			}
-
-		}
-
-	}
-	return stackedList;
-}
-
-std::list<std::pair<std::list<ShowStack*>, int>> StackCollection::calculateShowingList()
-{
-	std::list<std::list<ShowStack*>> stackedList;
-	for (std::list<Stack*>::iterator it = this->collection.begin(); it != this->collection.end(); it++) 
-	{
-		std::list<BigBox*> listBigBox = (*it)->getListBigBox();
-		for (std::list<BigBox*>::iterator itRest = listBigBox.begin(); itRest != listBigBox.end(); itRest++) 
-		{
-			BigBox bigBoxElement = **itRest;
-			for (std::list<Stack*>::iterator it2 = this->collection.begin(); it2 != this->collection.end(); it2++)
-			{
-				if (bigBoxElement == (*it2)->getBigBox()) 
+				// Second way to lay the cut
+				if (secondRestBox.GetBigBox().GetBigBoxWidth() == arrayRestBigBox[1].GetBigBoxWidth() && secondRestBox.GetBigBox().GetBigBoxHeight() == arrayRestBigBox[1].GetBigBoxHeight() && secondRestBox.GetBigBox().GetBigBoxLength() == arrayRestBigBox[1].GetBigBoxLength())
 				{
-					
-					ShowStack stack1(**it);
-					ShowStack stack2(**it2);
-					std::list<ShowStack*> tmp;
-					tmp.push_back(&stack1);
-					tmp.push_back(&stack2);
-					stackedList.push_back(tmp);
+					listStacks.push_back(secondRestBox);
+					totalNumber += secondRestBox.GetNumber();
+					for (std::list<Stack>::iterator itThirdRestBox = this->listStack.begin(); itThirdRestBox != this->listStack.end(); itThirdRestBox++)
+					{
+						Stack thirdRestBox = *itThirdRestBox;
+						if (thirdRestBox.GetBigBox().GetBigBoxWidth() == arrayRestBigBox[3].GetBigBoxWidth() && thirdRestBox.GetBigBox().GetBigBoxHeight() == arrayRestBigBox[3].GetBigBoxHeight() && thirdRestBox.GetBigBox().GetBigBoxLength() == arrayRestBigBox[3].GetBigBoxLength())
+						{
+							totalNumber += thirdRestBox.GetNumber();
+							listStacks.push_back(thirdRestBox);
+							this->completedStackCollection.push_back(std::make_pair(listStacks, totalNumber));
+							listStacks.pop_back();
+							totalNumber -= thirdRestBox.GetNumber();
+						}
+					}
+					totalNumber -= secondRestBox.GetNumber();
+					listStacks.pop_back();
+				}
+
+			}
+		}
+		else
+		{
+			for (std::list<Stack>::iterator itRestBoxes = this->listStack.begin(); itRestBoxes != this->listStack.end(); itRestBoxes++)
+			{
+				Stack secondStack = *itRestBoxes;
+				BigBox firstRestBigBox = firstStack.getListRestBigBox().front();
+				BigBox scondStackBigBox = secondStack.GetBigBox();
+				if (firstRestBigBox.GetBigBoxWidth() == scondStackBigBox.GetBigBoxWidth() && firstRestBigBox.GetBigBoxHeight() == scondStackBigBox.GetBigBoxHeight() && firstRestBigBox.GetBigBoxLength() == scondStackBigBox.GetBigBoxLength())
+				{
+					totalNumber += secondStack.GetNumber();
+					listStacks.push_back(secondStack);
+					this->completedStackCollection.push_back(std::make_pair(listStacks, totalNumber));
+					listStacks.pop_back();
+					totalNumber -= secondStack.GetNumber();
 				}
 			}
-
-
-
 		}
 	}
-
-
-	stackedList = combineStacks(stackedList);
-
-
-
-	return this->showingList;
 }

@@ -1,102 +1,141 @@
 #include "stdafx.h"
-#include <iostream>
-
-#include <list>
-#include <string>
-
-#include "BigBox.h"
-#include "SmallBox.h"
 #include "Stack.h"
 
-using namespace std;
-
-Stack::Stack()
+// Calculate the number of staks in one way
+void Stack::calculateNumber()
 {
+	// X == number width ; y == number of height; z == number of length
+	int x;
+	int y;
+	int z;
+
+	// Calculate the number of width
+	x = this->bigBox.GetBigBoxWidth() / this->smallBox.GetSmallBoxWidth();
+	// Calculate the number of height
+	y = this->bigBox.GetBigBoxHeight() / this->smallBox.GetSmallBoxHeight();
+	//Calculate the number of length
+	z = this->bigBox.GetBigBoxLength() / this->smallBox.GetSmallBoxLength();
+
+	//Add x to listNumbers
+	listNumbers[0] = x;
+
+	//Add y to listNumbers
+	listNumbers[1] = y;
+
+	//Add z to listNumbers
+	listNumbers[2] = z;
+
+	// Calculate the totalnumber of this stack
+	this->number = x*y*z;
 }
 
-Stack::Stack(BigBox bigBox, SmallBox smallBox)
+
+void Stack::calculateListRestBigBoxes()
 {
-	this->bigBox = bigBox;
-	this->smallBox = smallBox;
-	CalculateDemention(this->bigBox, this->smallBox);
-	CalculateTotalNumber();
-	this->listOfRestBoxes = CalculateRestBoxes(this->bigBox, this->smallBox, this->listOfDemention);
-}
+	//Changed element for x
+	double x = this->bigBox.GetBigBoxWidth() - (this->smallBox.GetSmallBoxWidth()* listNumbers[0]);
 
+	//Changed element for y
+	double y = this->bigBox.GetBigBoxHeight() - (this->smallBox.GetSmallBoxHeight()* listNumbers[1]);
 
+	//Changed element for z
+	double z = this->bigBox.GetBigBoxLength() - (this->smallBox.GetSmallBoxLength()* listNumbers[2]);
 
-void Stack::GetStack()
-{
-	cout <<"BigBox : " << this->bigBox.getBigBoxWidth() << ", " << bigBox.getBigBoxHeight() << ", " << bigBox.getBigBoxLength() << "\n";
-	cout << "SmallBox : " << smallBox.getSmallBoxWidth() << ", " << smallBox.getSmallBoxHeight() << ", " << smallBox.getSmallBoxLength() << "\n";
-	cout << "Demension: x = " << this->listOfDemention[0] <<", y = "<< this->listOfDemention[1] << " , z = " << this->listOfDemention[2] << endl;
-	cout << "Totalnumber: " << this->totalNumber << endl;
-	int count = 0;
-	for (std::list<BigBox*>::iterator it = listOfRestBoxes.begin(); it != listOfRestBoxes.end(); it++) 
+	// Proof the x one
+	if (prove(x, this->bigBox.GetBigBoxHeight(), this->bigBox.GetBigBoxLength(), this->smallBox))
 	{
-		cout << "BigBox" << ++count<< ": \n" << ((BigBox)**it).printBigBox() << endl;
+		// Add the rest box
+		this->listRestBigBox.push_back(*new BigBox(x, this->bigBox.GetBigBoxHeight(), this->bigBox.GetBigBoxLength()));
 	}
-}
-void Stack::CalculateDemention(BigBox bigBox, SmallBox smallBox)
-{
-	this->listOfDemention[0] = (int)(bigBox.getBigBoxWidth() / smallBox.getSmallBoxWidth());
-	this->listOfDemention[1] = (int)(bigBox.getBigBoxHeight() / smallBox.getSmallBoxHeight());
-	this->listOfDemention[2] = (int)(bigBox.getBigBoxLength() / smallBox.getSmallBoxLength());
-}
-
-void Stack::CalculateTotalNumber()
-{
-	this->totalNumber = this->listOfDemention[0] * this->listOfDemention[1] * this->listOfDemention[2];
-}
-
-// Calculate the Rest Boxes with only the Boxes which are allowed
-list<BigBox*> Stack::CalculateRestBoxes(BigBox bigBox, SmallBox smallBox, int listOfDemention[3])
-{
-	list<BigBox*> listBigBox;
-	double tmp;
-	for (int i = 0; i < 3; i++) 
+	// Proof the y one
+	if (prove(this->bigBox.GetBigBoxWidth(), y, this->bigBox.GetBigBoxLength(), this->smallBox))
 	{
-		switch (i) 
+		// Add the rest box
+		this->listRestBigBox.push_back(*new BigBox(this->bigBox.GetBigBoxWidth(), y, this->bigBox.GetBigBoxLength()));
+	}
+	// Proof the z one
+	if (prove(this->bigBox.GetBigBoxWidth(), this->bigBox.GetBigBoxHeight(), z, this->smallBox))
+	{
+		// Add the rest box
+		this->listRestBigBox.push_back(*new BigBox(this->bigBox.GetBigBoxWidth(), this->bigBox.GetBigBoxHeight(), z));
+	}
+
+	// Proof if in the list are 2 restBigBoxes
+	if (this->listRestBigBox.size() == 2)
+	{
+		BigBox bigBoxfront = *this->listRestBigBox.begin();
+		BigBox bigBoxback = this->listRestBigBox.back();
+		double cutX = this->bigBox.GetBigBoxWidth();
+		double cutY = this->bigBox.GetBigBoxHeight();
+		double cutZ = this->bigBox.GetBigBoxLength();
+
+		// Proof the size of the two rest boxes
+		if (x == bigBoxfront.GetBigBoxWidth())
 		{
-			case(0):
-				tmp = bigBox.getBigBoxWidth() - (smallBox.getSmallBoxWidth()*listOfDemention[0]);
-				if (Prove(tmp, bigBox.getBigBoxHeight(), bigBox.getBigBoxLength(), smallBox))
-				{
-					listBigBox.push_back(new BigBox(tmp, bigBox.getBigBoxHeight(), bigBox.getBigBoxLength()));
-				}
-				break;
-
-			case(1):	
-				tmp = bigBox.getBigBoxHeight() - (smallBox.getSmallBoxHeight()*listOfDemention[1]);
-				if (Prove( bigBox.getBigBoxWidth(), tmp, bigBox.getBigBoxLength(), smallBox))
-				{
-					listBigBox.push_back(new BigBox(bigBox.getBigBoxWidth(), bigBox.getBigBoxHeight() - (smallBox.getSmallBoxHeight()*listOfDemention[1]), bigBox.getBigBoxLength()));
-				}
-				break;
-
-			case(2):	
-				tmp = bigBox.getBigBoxLength() - (smallBox.getSmallBoxLength()*listOfDemention[2]);
-				if (Prove( bigBox.getBigBoxWidth(), bigBox.getBigBoxHeight(), tmp, smallBox))
-				{
-					listBigBox.push_back(new BigBox(bigBox.getBigBoxWidth(), bigBox.getBigBoxHeight(), bigBox.getBigBoxLength() - (smallBox.getSmallBoxLength()*listOfDemention[2])));
-				}
-				break;
+			cutX -= x;
+			if (y == bigBoxback.GetBigBoxHeight())
+			{
+				cutY = y;
+				// Add the rest box
+				this->listRestBigBox.push_back(*new BigBox(cutX, cutY, cutZ));
+				this->listRestBigBox.push_back(*new BigBox(x, bigBox.GetBigBoxHeight() - y, cutZ));
+			}
+			else
+			{
+				cutZ = z;
+				// Add the rest box
+				this->listRestBigBox.push_back(*new BigBox(cutX, cutY, cutZ));
+				this->listRestBigBox.push_back(*new BigBox(x, cutY, bigBox.GetBigBoxHeight() - z));
+			}
+		}
+		else if (y == bigBoxfront.GetBigBoxHeight())
+		{
+			cutY -= y;
+			if (x == bigBoxback.GetBigBoxHeight())
+			{
+				cutX = x;
+				// Add the rest box
+				this->listRestBigBox.push_back(*new BigBox(cutX, cutY, cutZ));
+				this->listRestBigBox.push_back(*new BigBox(bigBox.GetBigBoxHeight() - x, y, cutZ));
+			}
+			else
+			{
+				cutZ = z;
+				// Add the rest box
+				this->listRestBigBox.push_back(*new BigBox(cutX, cutY, cutZ));
+				this->listRestBigBox.push_back(*new BigBox(cutX, y, bigBox.GetBigBoxHeight() - z));
+			}
+		}
+		else if (z == bigBoxfront.GetBigBoxLength())
+		{
+			cutZ -= z;
+			if (x == bigBoxback.GetBigBoxHeight())
+			{
+				cutX = x;
+				// Add the rest box
+				this->listRestBigBox.push_back(*new BigBox(cutX, cutY, cutZ));
+				this->listRestBigBox.push_back(*new BigBox(bigBox.GetBigBoxHeight() - x, cutY, z));
+			}
+			else
+			{
+				cutY = y;
+				// Add the rest box
+				this->listRestBigBox.push_back(*new BigBox(cutX, cutY, cutZ));
+				this->listRestBigBox.push_back(*new BigBox(cutX, bigBox.GetBigBoxHeight() - y, z));
+			}
 		}
 	}
-	return listBigBox;
 }
 
-std::list<BigBox*> Stack::getListBigBox()
+// Proof if a SmallBox fit in a bigBox
+bool Stack::prove(double bigBoxWidth, double bigBoxHeight, double bigBoxLength, SmallBox smallBox)
 {
-	return this->listOfRestBoxes;
-}
-
-bool Stack::Prove(double bigBoxWidth, double bigBoxHeight, double bigBoxLength, SmallBox smallBox)
-{
-	double top=smallBox.getSmallBoxWidth();
-	double middle = smallBox.getSmallBoxHeight();
-	double down = smallBox.getSmallBoxLength();
+	double top = smallBox.GetSmallBoxWidth();
+	double middle = smallBox.GetSmallBoxHeight();
+	double down = smallBox.GetSmallBoxLength();
 	bool test = true;
+
+	// Rearrange the top,middle,down to the right order
 	while (test) {
 		if (middle > top)
 		{
@@ -119,32 +158,40 @@ bool Stack::Prove(double bigBoxWidth, double bigBoxHeight, double bigBoxLength, 
 		}
 	}
 
+	// Proof if a smallBox is stackable in the bigBox
 	if (bigBoxWidth >= top && bigBoxHeight >= middle && bigBoxLength >= down ||
 		bigBoxWidth >= middle && bigBoxHeight >= top && bigBoxLength >= down ||
 		bigBoxWidth >= top && bigBoxHeight >= down && bigBoxLength >= middle ||
 		bigBoxWidth >= down && bigBoxHeight >= top && bigBoxLength >= middle ||
 		bigBoxWidth >= down && bigBoxHeight >= middle && bigBoxLength >= top ||
-		bigBoxWidth >= middle && bigBoxHeight >= down && bigBoxLength >= top ){
+		bigBoxWidth >= middle && bigBoxHeight >= down && bigBoxLength >= top) {
 		return true;
 	}
 	return false;
 }
 
-int Stack::getTotalNumber()
+Stack::Stack(BigBox bigBox, SmallBox smallBox)
 {
-	return this->totalNumber;
+	this->bigBox = bigBox;
+	this->smallBox = smallBox;
+	calculateNumber();
+	calculateListRestBigBoxes();
 }
 
-BigBox Stack::getBigBox()
+int Stack::GetNumber()
+{
+	return this->number;
+}
+
+BigBox Stack::GetBigBox()
 {
 	return this->bigBox;
 }
 
-SmallBox Stack::getSmallBox()
+std::list<BigBox> Stack::getListRestBigBox()
 {
-	return this->smallBox;
+	return this->listRestBigBox;
 }
-
 
 Stack::~Stack()
 {
