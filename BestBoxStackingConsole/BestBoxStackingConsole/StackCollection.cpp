@@ -149,46 +149,144 @@ void StackCollection::nextRestBigBox(Stack stack)
 
 void StackCollection::completeStackCollection()
 {
+	// Counter to get just the first 6 Ways
 	int countOriginalBB = 0;
+
 	for (std::list<Stack>::iterator itOriginalBB = this->listStack.begin(); itOriginalBB != this->listStack.end(); itOriginalBB++)
 	{
+		// Check if the loop was run 6 times and the break up
 		if (++countOriginalBB == 6)
 		{
 			break;
 		}
-		std::list<Stack> listStacks;
-		int totalNumber = 0;
+
+		// The first level of stacking 
 		Stack firstStack = *itOriginalBB;
-		totalNumber += firstStack.GetNumber();
+
+		// Sotre the total number of smallBoxes in the BigBox
+		int totalNumber = firstStack.GetNumber();
+
+		// List for storing the First Restboxes that it can be check if there are cuts
 		std::list<BigBox>listRestBB = firstStack.getListRestBigBox();
+
+		// List of Stacks for each way
+		std::list<Stack> listStacks;
 		listStacks.push_back(firstStack);
+
+		// If there are cuts then ther are 4 RestBoxes
 		if (listRestBB.size() == 4)
 		{
+			// Count the steps in the loop for storing the RestBoxes in the array
+			int arrayCount = 0;
+
+			// Array of Rest BigBoxes
 			BigBox arrayRestBigBox[4];
-			int count = 0;
+
 			for (std::list<BigBox>::iterator itArray = listRestBB.begin(); itArray != listRestBB.end(); itArray++)
 			{
-				arrayRestBigBox[count++] = *itArray;
+				arrayRestBigBox[arrayCount++] = *itArray;
 			}
+
+			// Store the second level
 			for (std::list<Stack>::iterator itRestBoxes = this->listStack.begin(); itRestBoxes != this->listStack.end(); itRestBoxes++)
 			{
+				// Stack n the second level
 				Stack secondRestBox = *itRestBoxes;
 
 				// First Way to lay the cut
-				if (secondRestBox.GetBigBox().GetBigBoxWidth() == arrayRestBigBox[0].GetBigBoxWidth() && secondRestBox.GetBigBox().GetBigBoxHeight() == arrayRestBigBox[0].GetBigBoxHeight() && secondRestBox.GetBigBox().GetBigBoxLength() == arrayRestBigBox[0].GetBigBoxLength())
+				if (secondRestBox.GetBigBox() == arrayRestBigBox[0])
 				{
+					// Add the acutal Stack to the list of stack
 					listStacks.push_back(secondRestBox);
+
+					// Increase the totalnumber
 					totalNumber += secondRestBox.GetNumber();
-					for (std::list<Stack>::iterator itThirdRestBox = this->listStack.begin(); itThirdRestBox != this->listStack.end(); itThirdRestBox++)
+
+					if (secondRestBox.getListRestBigBox().size() != 0)
 					{
-						Stack thirdRestBox = *itThirdRestBox;
-						if (thirdRestBox.GetBigBox().GetBigBoxWidth() == arrayRestBigBox[2].GetBigBoxWidth() && thirdRestBox.GetBigBox().GetBigBoxHeight() == arrayRestBigBox[2].GetBigBoxHeight() && thirdRestBox.GetBigBox().GetBigBoxLength() == arrayRestBigBox[2].GetBigBoxLength())
+						for (std::list<Stack>::iterator itRestBoxSecond = this->listStack.begin(); itRestBoxSecond != this->listStack.end(); itRestBoxSecond++)
 						{
-							totalNumber += thirdRestBox.GetNumber();
-							listStacks.push_back(thirdRestBox);
-							this->completedStackCollection.push_back(std::make_pair(listStacks, totalNumber));
-							listStacks.pop_back();
-							totalNumber -= thirdRestBox.GetNumber();
+							Stack stackOfRestBoxSecond = *itRestBoxSecond;
+
+							if (secondRestBox.getListRestBigBox().front() == stackOfRestBoxSecond.GetBigBox())
+							{
+								listStacks.push_back(stackOfRestBoxSecond);
+								totalNumber += stackOfRestBoxSecond.GetNumber();
+
+								// Find the cut stacking
+								for (std::list<Stack>::iterator itThirdRestBox = this->listStack.begin(); itThirdRestBox != this->listStack.end(); itThirdRestBox++)
+								{
+									// Stack in the thrid level
+									Stack thirdRestBox = *itThirdRestBox;
+
+									if (thirdRestBox.GetBigBox() == arrayRestBigBox[2])
+									{
+										totalNumber += thirdRestBox.GetNumber();
+										listStacks.push_back(thirdRestBox);
+										if (thirdRestBox.getListRestBigBox().size() != 0)
+										{
+											for (std::list<Stack>::iterator itFourthRestBox = this->listStack.begin(); itFourthRestBox != this->listStack.end(); itFourthRestBox++)
+											{
+												Stack fourthStack = *itFourthRestBox;
+												BigBox restBox = thirdRestBox.getListRestBigBox().front();
+												if (fourthStack.GetBigBox() == restBox)
+												{
+													totalNumber += fourthStack.GetNumber();
+													listStacks.push_back(fourthStack);
+													this->completedStackCollection.push_back(std::make_pair(listStacks, totalNumber));
+													listStacks.pop_back();
+													totalNumber -= fourthStack.GetNumber();
+												}
+											}
+										}
+										else
+										{
+											this->completedStackCollection.push_back(std::make_pair(listStacks, totalNumber));
+										}
+										listStacks.pop_back();
+										totalNumber -= thirdRestBox.GetNumber();
+									}
+								}
+								listStacks.pop_back();
+								totalNumber -= stackOfRestBoxSecond.GetNumber();
+							}
+						}
+					}
+					else {
+
+						// Find the cut stacking
+						for (std::list<Stack>::iterator itThirdRestBox = this->listStack.begin(); itThirdRestBox != this->listStack.end(); itThirdRestBox++)
+						{
+							// Stack in the thrid level
+							Stack thirdRestBox = *itThirdRestBox;
+
+							if (thirdRestBox.GetBigBox() == arrayRestBigBox[2])
+							{
+								totalNumber += thirdRestBox.GetNumber();
+								listStacks.push_back(thirdRestBox);
+								if (thirdRestBox.getListRestBigBox().size() != 0)
+								{
+									for (std::list<Stack>::iterator itFourthRestBox = this->listStack.begin(); itFourthRestBox != this->listStack.end(); itFourthRestBox++)
+									{
+										Stack fourthStack = *itFourthRestBox;
+										BigBox restBox = thirdRestBox.getListRestBigBox().front();
+										if (fourthStack.GetBigBox() == restBox)
+										{
+											totalNumber += fourthStack.GetNumber();
+											listStacks.push_back(fourthStack);
+											this->completedStackCollection.push_back(std::make_pair(listStacks, totalNumber));
+											listStacks.pop_back();
+											totalNumber -= fourthStack.GetNumber();
+										}
+									}
+								}
+								else
+								{
+									this->completedStackCollection.push_back(std::make_pair(listStacks, totalNumber));
+								}
+								listStacks.pop_back();
+								totalNumber -= thirdRestBox.GetNumber();
+							}
 						}
 					}
 					totalNumber -= secondRestBox.GetNumber();
@@ -196,20 +294,94 @@ void StackCollection::completeStackCollection()
 				}
 
 				// Second way to lay the cut
-				if (secondRestBox.GetBigBox().GetBigBoxWidth() == arrayRestBigBox[1].GetBigBoxWidth() && secondRestBox.GetBigBox().GetBigBoxHeight() == arrayRestBigBox[1].GetBigBoxHeight() && secondRestBox.GetBigBox().GetBigBoxLength() == arrayRestBigBox[1].GetBigBoxLength())
+				if (secondRestBox.GetBigBox() == arrayRestBigBox[1])
 				{
 					listStacks.push_back(secondRestBox);
 					totalNumber += secondRestBox.GetNumber();
-					for (std::list<Stack>::iterator itThirdRestBox = this->listStack.begin(); itThirdRestBox != this->listStack.end(); itThirdRestBox++)
+
+					if (secondRestBox.getListRestBigBox().size() != 0)
 					{
-						Stack thirdRestBox = *itThirdRestBox;
-						if (thirdRestBox.GetBigBox().GetBigBoxWidth() == arrayRestBigBox[3].GetBigBoxWidth() && thirdRestBox.GetBigBox().GetBigBoxHeight() == arrayRestBigBox[3].GetBigBoxHeight() && thirdRestBox.GetBigBox().GetBigBoxLength() == arrayRestBigBox[3].GetBigBoxLength())
+						for (std::list<Stack>::iterator itRestBoxSecond = this->listStack.begin(); itRestBoxSecond != this->listStack.end(); itRestBoxSecond++)
 						{
-							totalNumber += thirdRestBox.GetNumber();
-							listStacks.push_back(thirdRestBox);
-							this->completedStackCollection.push_back(std::make_pair(listStacks, totalNumber));
-							listStacks.pop_back();
-							totalNumber -= thirdRestBox.GetNumber();
+							Stack stackOfRestBoxSecond = *itRestBoxSecond;
+
+							if (secondRestBox.getListRestBigBox().front() == stackOfRestBoxSecond.GetBigBox())
+							{
+								listStacks.push_back(stackOfRestBoxSecond);
+								totalNumber += stackOfRestBoxSecond.GetNumber();
+
+								for (std::list<Stack>::iterator itThirdRestBox = this->listStack.begin(); itThirdRestBox != this->listStack.end(); itThirdRestBox++)
+								{
+									Stack thirdRestBox = *itThirdRestBox;
+									if (thirdRestBox.GetBigBox() == arrayRestBigBox[3])
+									{
+										totalNumber += thirdRestBox.GetNumber();
+										listStacks.push_back(thirdRestBox);
+
+
+
+										if (thirdRestBox.getListRestBigBox().size() != 0)
+										{
+											for (std::list<Stack>::iterator itFourthRestBox = this->listStack.begin(); itFourthRestBox != this->listStack.end(); itFourthRestBox++)
+											{
+												Stack fourthStack = *itFourthRestBox;
+												BigBox restBox = thirdRestBox.getListRestBigBox().front();
+												if (fourthStack.GetBigBox() == restBox)
+												{
+													totalNumber += fourthStack.GetNumber();
+													listStacks.push_back(fourthStack);
+													this->completedStackCollection.push_back(std::make_pair(listStacks, totalNumber));
+													listStacks.pop_back();
+													totalNumber -= fourthStack.GetNumber();
+												}
+											}
+										}
+										else
+										{
+											this->completedStackCollection.push_back(std::make_pair(listStacks, totalNumber));
+										}
+										listStacks.pop_back();
+										totalNumber -= thirdRestBox.GetNumber();
+									}
+								}
+							}
+						}
+					}
+					else {
+
+						for (std::list<Stack>::iterator itThirdRestBox = this->listStack.begin(); itThirdRestBox != this->listStack.end(); itThirdRestBox++)
+						{
+							Stack thirdRestBox = *itThirdRestBox;
+							if (thirdRestBox.GetBigBox() == arrayRestBigBox[3])
+							{
+								totalNumber += thirdRestBox.GetNumber();
+								listStacks.push_back(thirdRestBox);
+
+
+
+								if (thirdRestBox.getListRestBigBox().size() != 0)
+								{
+									for (std::list<Stack>::iterator itFourthRestBox = this->listStack.begin(); itFourthRestBox != this->listStack.end(); itFourthRestBox++)
+									{
+										Stack fourthStack = *itFourthRestBox;
+										BigBox restBox = thirdRestBox.getListRestBigBox().front();
+										if (fourthStack.GetBigBox() == restBox)
+										{
+											totalNumber += fourthStack.GetNumber();
+											listStacks.push_back(fourthStack);
+											this->completedStackCollection.push_back(std::make_pair(listStacks, totalNumber));
+											listStacks.pop_back();
+											totalNumber -= fourthStack.GetNumber();
+										}
+									}
+								}
+								else
+								{
+									this->completedStackCollection.push_back(std::make_pair(listStacks, totalNumber));
+								}
+								listStacks.pop_back();
+								totalNumber -= thirdRestBox.GetNumber();
+							}
 						}
 					}
 					totalNumber -= secondRestBox.GetNumber();
@@ -223,15 +395,17 @@ void StackCollection::completeStackCollection()
 			for (std::list<Stack>::iterator itRestBoxes = this->listStack.begin(); itRestBoxes != this->listStack.end(); itRestBoxes++)
 			{
 				Stack secondStack = *itRestBoxes;
-				BigBox firstRestBigBox = firstStack.getListRestBigBox().front();
-				BigBox scondStackBigBox = secondStack.GetBigBox();
-				if (firstRestBigBox.GetBigBoxWidth() == scondStackBigBox.GetBigBoxWidth() && firstRestBigBox.GetBigBoxHeight() == scondStackBigBox.GetBigBoxHeight() && firstRestBigBox.GetBigBoxLength() == scondStackBigBox.GetBigBoxLength())
-				{
-					totalNumber += secondStack.GetNumber();
-					listStacks.push_back(secondStack);
-					this->completedStackCollection.push_back(std::make_pair(listStacks, totalNumber));
-					listStacks.pop_back();
-					totalNumber -= secondStack.GetNumber();
+				if (firstStack.getListRestBigBox().size() != 0) {
+					BigBox firstRestBigBox = firstStack.getListRestBigBox().front();
+					BigBox scondStackBigBox = secondStack.GetBigBox();
+					if (firstRestBigBox == scondStackBigBox)
+					{
+						totalNumber += secondStack.GetNumber();
+						listStacks.push_back(secondStack);
+						this->completedStackCollection.push_back(std::make_pair(listStacks, totalNumber));
+						listStacks.pop_back();
+						totalNumber -= secondStack.GetNumber();
+					}
 				}
 			}
 		}
