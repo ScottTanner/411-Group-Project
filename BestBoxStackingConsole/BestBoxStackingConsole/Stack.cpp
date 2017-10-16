@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Stack.h"
+#include <iostream>
 
 // Calculate the number of staks in one way
 void Stack::calculateNumber()
@@ -63,66 +64,88 @@ void Stack::calculateListRestBigBoxes()
 	// Proof if in the list are 2 restBigBoxes
 	if (this->listRestBigBox.size() == 2)
 	{
-		BigBox bigBoxfront = *this->listRestBigBox.begin();
+		BigBox bigBoxfront = this->listRestBigBox.front();
 		BigBox bigBoxback = this->listRestBigBox.back();
-		double cutX = this->bigBox.GetBigBoxWidth();
-		double cutY = this->bigBox.GetBigBoxHeight();
-		double cutZ = this->bigBox.GetBigBoxLength();
+		double cutX;
+		double cutY;
+		double cutZ;
 
-		// Proof the size of the two rest boxes
-		if (x == bigBoxfront.GetBigBoxWidth())
+		if (bigBoxfront.GetBigBoxWidth() == bigBoxback.GetBigBoxWidth())
 		{
-			cutX -= x;
-			if (y == bigBoxback.GetBigBoxHeight())
+			if (bigBoxfront.GetBigBoxHeight() > bigBoxback.GetBigBoxHeight())
 			{
-				cutY = y;
-				// Add the rest box
+				cutZ = this->bigBox.GetBigBoxLength() - bigBoxfront.GetBigBoxLength();
+				cutY = bigBoxback.GetBigBoxHeight();
+				cutX = this->bigBox.GetBigBoxWidth();
 				this->listRestBigBox.push_back(*new BigBox(cutX, cutY, cutZ));
-				this->listRestBigBox.push_back(*new BigBox(x, bigBox.GetBigBoxHeight() - y, cutZ));
+
+				cutZ = bigBoxfront.GetBigBoxLength();
+				cutY = this->bigBox.GetBigBoxHeight() - bigBoxback.GetBigBoxHeight();
+				this->listRestBigBox.push_back(*new BigBox(cutX, cutY, cutZ));
 			}
 			else
 			{
-				cutZ = z;
-				// Add the rest box
+				cutX = this->bigBox.GetBigBoxWidth();
+				cutY = this->bigBox.GetBigBoxHeight() - bigBoxfront.GetBigBoxHeight();
+				cutZ = bigBoxback.GetBigBoxLength();
 				this->listRestBigBox.push_back(*new BigBox(cutX, cutY, cutZ));
-				this->listRestBigBox.push_back(*new BigBox(x, cutY, bigBox.GetBigBoxHeight() - z));
+
+				cutY = bigBoxfront.GetBigBoxHeight();
+				cutZ = this->bigBox.GetBigBoxLength() - bigBoxback.GetBigBoxLength();
+				this->listRestBigBox.push_back(*new BigBox(cutX, cutY, cutZ));
 			}
 		}
-		else if (y == bigBoxfront.GetBigBoxHeight())
-		{
-			cutY -= y;
-			if (x == bigBoxback.GetBigBoxHeight())
+		else if (bigBoxfront.GetBigBoxWidth() > bigBoxback.GetBigBoxWidth()) {
+
+			if (bigBoxfront.GetBigBoxHeight() == bigBoxback.GetBigBoxHeight())
 			{
-				cutX = x;
-				// Add the rest box
+				cutX = bigBoxback.GetBigBoxWidth();
+				cutY = this->bigBox.GetBigBoxHeight();
+				cutZ = this->bigBox.GetBigBoxLength() - bigBoxfront.GetBigBoxLength();
 				this->listRestBigBox.push_back(*new BigBox(cutX, cutY, cutZ));
-				this->listRestBigBox.push_back(*new BigBox(bigBox.GetBigBoxHeight() - x, y, cutZ));
+
+				cutX = this->bigBox.GetBigBoxWidth() - bigBoxback.GetBigBoxWidth();
+				cutZ = bigBoxfront.GetBigBoxLength();
+				this->listRestBigBox.push_back(*new BigBox(cutX, cutY, cutZ));
 			}
 			else
 			{
-				cutZ = z;
-				// Add the rest box
+				cutX = bigBoxback.GetBigBoxWidth();
+				cutY = this->bigBox.GetBigBoxHeight() - bigBoxfront.GetBigBoxHeight();
+				cutZ = this->bigBox.GetBigBoxLength();
 				this->listRestBigBox.push_back(*new BigBox(cutX, cutY, cutZ));
-				this->listRestBigBox.push_back(*new BigBox(cutX, y, bigBox.GetBigBoxHeight() - z));
+
+				cutX = this->bigBox.GetBigBoxWidth() - bigBoxback.GetBigBoxWidth();
+				cutY = bigBoxfront.GetBigBoxHeight();
+				this->listRestBigBox.push_back(*new BigBox(cutX, cutY, cutZ));
 			}
 		}
-		else if (z == bigBoxfront.GetBigBoxLength())
-		{
-			cutZ -= z;
-			if (x == bigBoxback.GetBigBoxHeight())
+		else if (bigBoxfront.GetBigBoxWidth() < bigBoxback.GetBigBoxWidth()) {
+			if (bigBoxfront.GetBigBoxHeight() == bigBoxback.GetBigBoxHeight())
 			{
-				cutX = x;
-				// Add the rest box
+				cutX = this->bigBox.GetBigBoxWidth() - bigBoxfront.GetBigBoxWidth();
+				cutY = this->bigBox.GetBigBoxHeight();
+				cutZ = bigBoxback.GetBigBoxLength();
 				this->listRestBigBox.push_back(*new BigBox(cutX, cutY, cutZ));
-				this->listRestBigBox.push_back(*new BigBox(bigBox.GetBigBoxHeight() - x, cutY, z));
+
+				cutX = bigBoxfront.GetBigBoxWidth();
+				cutZ = this->bigBox.GetBigBoxLength() - bigBoxback.GetBigBoxLength();
+				this->listRestBigBox.push_back(*new BigBox(cutX, cutY, cutZ));
 			}
 			else
 			{
-				cutY = y;
-				// Add the rest box
+				cutX = this->bigBox.GetBigBoxWidth() - bigBoxfront.GetBigBoxWidth();
+				cutY = bigBoxback.GetBigBoxHeight();
+				cutZ = this->bigBox.GetBigBoxLength();
 				this->listRestBigBox.push_back(*new BigBox(cutX, cutY, cutZ));
-				this->listRestBigBox.push_back(*new BigBox(cutX, bigBox.GetBigBoxHeight() - y, z));
+
+				cutX = bigBoxfront.GetBigBoxWidth();
+				cutY = this->bigBox.GetBigBoxHeight() - bigBoxback.GetBigBoxHeight();
+				this->listRestBigBox.push_back(*new BigBox(cutX, cutY, cutZ));
 			}
+		}
+		else {
+			std::cout << "Hello";
 		}
 	}
 }
