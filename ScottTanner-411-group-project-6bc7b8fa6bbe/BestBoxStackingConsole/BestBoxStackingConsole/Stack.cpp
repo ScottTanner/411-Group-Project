@@ -211,6 +211,11 @@ BigBox Stack::GetBigBox()
 	return this->bigBox;
 }
 
+SmallBox Stack::GetSmallBox()
+{
+	return this->smallBox;
+}
+
 std::list<BigBox> Stack::getListRestBigBox()
 {
 	return this->listRestBigBox;

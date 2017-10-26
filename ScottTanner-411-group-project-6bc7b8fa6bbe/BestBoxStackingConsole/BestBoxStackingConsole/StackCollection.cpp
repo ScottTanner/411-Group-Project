@@ -1,6 +1,12 @@
 #include "stdafx.h"
 #include "StackCollection.h"
+#include <algorithm> 
 
+
+std::list<std::pair<std::list<Stack>, int>> StackCollection::GetCompletedStackCollection()
+{
+	return this->completedStackCollection;
+}
 
 StackCollection::StackCollection()
 {
@@ -36,6 +42,9 @@ StackCollection::StackCollection(double bigBoxWidth, double bigBoxHeight, double
 		}
 	}
 	stacking(*new BigBox(bigBoxWidth, bigBoxHeight, bigBoxLength), *new SmallBox(top, down, middle));
+	
+	// Sort the Collection descending
+	completedStackCollection.sort(pairCompareDesc);
 }
 
 
@@ -435,5 +444,12 @@ void StackCollection::completeStackCollection()
 		}
 	}
 }
+
+bool StackCollection::pairCompareDesc(const std::pair<std::list<Stack>, int>& firstItem, const std::pair<std::list<Stack>, int>& secondItem)
+{
+	return firstItem.second > secondItem.second;
+}
+
+
 
 

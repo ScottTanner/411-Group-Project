@@ -1,0 +1,43 @@
+# depslib dependency file v1.0
+1504719894 source:c:\users\sgens\documents\github\411-group-project\411-group-project\bestboxstackingconsole\bestboxstackingconsole\bestboxstackingconsole.cpp
+	"stdafx.h"
+	"BigBox.h"
+	"SmallBox.h"
+	"Stack.h"
+	<algorithm>
+	<iostream>
+
+1504288705 c:\users\sgens\documents\github\411-group-project\411-group-project\bestboxstackingconsole\bestboxstackingconsole\stdafx.h
+	"targetver.h"
+	<stdio.h>
+	<tchar.h>
+
+1504288706 c:\users\sgens\documents\github\411-group-project\411-group-project\bestboxstackingconsole\bestboxstackingconsole\targetver.h
+	<SDKDDKVer.h>
+
+1504718902 c:\users\sgens\documents\github\411-group-project\411-group-project\bestboxstackingconsole\bestboxstackingconsole\bigbox.h
+
+1504718902 c:\users\sgens\documents\github\411-group-project\411-group-project\bestboxstackingconsole\bestboxstackingconsole\smallbox.h
+
+1504719894 c:\users\sgens\documents\github\411-group-project\411-group-project\bestboxstackingconsole\bestboxstackingconsole\stack.h
+	"BigBox.h"
+
+1504719436 source:c:\users\sgens\documents\github\411-group-project\411-group-project\bestboxstackingconsole\bestboxstackingconsole\bigbox.cpp
+	"stdafx.h"
+	"BigBox.h"
+
+1504719277 source:c:\users\sgens\documents\github\411-group-project\411-group-project\bestboxstackingconsole\bestboxstackingconsole\smallbox.cpp
+	"stdafx.h"
+	"SmallBox.h"
+
+1504721449 source:c:\users\sgens\documents\github\411-group-project\411-group-project\bestboxstackingconsole\bestboxstackingconsole\stack.cpp
+	<iostream>
+	<string>
+	<sstream>
+	"stdafx.h"
+	"Stack.h"
+	"Stack.h"
+
+1504719372 source:c:\users\sgens\documents\github\411-group-project\411-group-project\bestboxstackingconsole\bestboxstackingconsole\stdafx.cpp
+	"stdafx.h"
+
