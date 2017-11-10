@@ -18,12 +18,16 @@ public:
 	
 
 private slots:
-	void on_algorithim_One_clicked();
-
-    void on_pushButton_3_clicked();
+	void on_OneSized_clicked();
 
 private:
     Ui::MainWindow *ui;
+	double containerX;
+	double containerY;
+	double containerZ;
+	double smallBoxX;
+	double smallBoxY;
+	double smallBoxZ;
 };
 
 #endif // MAINWINDOW_H

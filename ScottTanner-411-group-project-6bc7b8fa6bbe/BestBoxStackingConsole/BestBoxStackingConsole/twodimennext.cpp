@@ -103,6 +103,7 @@ void TwoDimenNext::fill_ComboBox()
 	std::string fileContainerX;
 	std::string fileContainerY;
 	std::string fileContainerZ;
+	this->listItems.clear();
 
 	ui->comboBox_smallBoxcontainer->addItem("Select to load");
 	if (file.is_open()) {

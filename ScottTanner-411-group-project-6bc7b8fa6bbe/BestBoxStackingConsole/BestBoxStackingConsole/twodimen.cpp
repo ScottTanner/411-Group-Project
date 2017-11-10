@@ -87,7 +87,7 @@ void TwoDimen::fill_ComboBox()
 	std::string fileContainerX;
 	std::string fileContainerY;
 	std::string fileContainerZ;
-	
+	listItems.clear();
 	ui->comboBox_Container->addItem("Select to load");
 	if (file.is_open()) {
 		while(file.good()) 

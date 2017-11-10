@@ -1,12 +1,13 @@
-#include "twodimen.h"
+#include "OneSizedAlgorithm.h"
 #include "mainwindow.h"
-#include "ui_mainwindow.h"
+#include "ui_boxstacking.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+	connect(ui->actionOne_Sized_Small_Boxes, &QAction::triggered, this, &MainWindow::on_OneSized_clicked);
 }
 
 MainWindow::~MainWindow()
@@ -14,14 +15,9 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::on_algorithim_One_clicked()
+void MainWindow::on_OneSized_clicked()
 {
-    TwoDimen gui2;
-    gui2.setModal(true);
-    gui2.exec();
-}
-
-void MainWindow::on_pushButton_3_clicked()
-{
-    close();
+	Dialog_OneSized oneSized;
+	oneSized.setModal(true);
+	oneSized.exec();
 }
