@@ -27,9 +27,9 @@ private:
 	double containerX;
 	double containerY;
 	double containerZ;
-	double smallBoxX;
-	double smallBoxY;
-	double smallBoxZ;
+	double boxX;
+	double boxY;
+	double boxZ;
 };
 
 #endif // MAINWINDOW_H

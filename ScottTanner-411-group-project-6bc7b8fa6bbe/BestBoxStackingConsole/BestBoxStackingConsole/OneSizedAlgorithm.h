@@ -14,6 +14,7 @@ class Dialog_OneSized : public QDialog
 
 public:
 	explicit Dialog_OneSized(QWidget *parent = 0);
+	void set_container(double cX, double cY, double cZ, double boxX, double boxY, double boxZ);
 	~Dialog_OneSized();
 
 private slots:
@@ -21,6 +22,13 @@ private slots:
 	void on_pushButton_2_clicked();
 	void on_pushButton_ContainerDelete_clicked();
 	void on_pushButton_SmallBoxDelete_clicked();
+	void on_pushButton_clicked();
+	void on_pushButton_Done_clicked();
+	void on_pushButton_Done2_clicked();
+	void on_pushButton_Back_clicked();
+
+	void update_SMvalues();
+	void update_CNvalues();
 
 private:
 	Ui::Dialog_OneSized *ui;
@@ -31,7 +39,8 @@ private:
 	double boxX;
 	double boxY;
 	double boxZ;
-	void fill_ComboBox();
+	void fill_ComboSMBox();
+	void fill_ComboCNBox();
 };
 
 

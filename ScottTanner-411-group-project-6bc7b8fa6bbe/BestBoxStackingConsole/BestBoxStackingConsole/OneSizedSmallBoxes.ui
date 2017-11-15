@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>Dialog_OneSized</class>
  <widget class="QDialog" name="Dialog_OneSized">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -14,9 +17,12 @@
    <string>One Sized Small Boxes</string>
   </property>
   <widget class="QGroupBox" name="groupBox_Container">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>30</x>
      <y>20</y>
      <width>531</width>
      <height>161</height>
@@ -107,8 +113,8 @@
    <widget class="QPushButton" name="pushButton_ContainerSave">
     <property name="geometry">
      <rect>
-      <x>450</x>
-      <y>130</y>
+      <x>440</x>
+      <y>60</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -120,7 +126,7 @@
    <widget class="QPushButton" name="pushButton_ContainerDelete">
     <property name="geometry">
      <rect>
-      <x>180</x>
+      <x>10</x>
       <y>130</y>
       <width>75</width>
       <height>23</height>
@@ -143,11 +149,27 @@
      <string>Load:</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButton_Done">
+    <property name="geometry">
+     <rect>
+      <x>440</x>
+      <y>130</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Done</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QGroupBox" name="groupBox_SmallBox">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>30</x>
      <y>190</y>
      <width>531</width>
      <height>161</height>
@@ -157,6 +179,9 @@
     <string>Small Box</string>
    </property>
    <widget class="QLabel" name="label_4">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -170,6 +195,9 @@
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit_SmallBoxWidth">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>80</x>
@@ -180,6 +208,9 @@
     </property>
    </widget>
    <widget class="QLabel" name="label_5">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -193,6 +224,9 @@
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit_SmallBoxHeight">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>80</x>
@@ -203,6 +237,9 @@
     </property>
    </widget>
    <widget class="QLabel" name="label_6">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -216,6 +253,9 @@
     </property>
    </widget>
    <widget class="QLineEdit" name="lineEdit_SmallBoxLength">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>80</x>
@@ -226,6 +266,9 @@
     </property>
    </widget>
    <widget class="QComboBox" name="comboBox_SmallBoxes">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>330</x>
@@ -236,10 +279,13 @@
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_SmallBoxSave">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>450</x>
-      <y>130</y>
+      <y>60</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -249,9 +295,12 @@
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_SmallBoxDelete">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>190</x>
+      <x>10</x>
       <y>130</y>
       <width>75</width>
       <height>23</height>
@@ -262,6 +311,9 @@
     </property>
    </widget>
    <widget class="QLabel" name="label_8">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>320</x>
@@ -274,13 +326,48 @@
      <string>Load:</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButton_Done2">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>130</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Done</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_Back">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>130</y>
+      <width>71</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Back</string>
+    </property>
+   </widget>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="pushButton_Calulate">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
-     <x>240</x>
+     <x>210</x>
      <y>370</y>
-     <width>121</width>
+     <width>181</width>
      <height>23</height>
     </rect>
    </property>

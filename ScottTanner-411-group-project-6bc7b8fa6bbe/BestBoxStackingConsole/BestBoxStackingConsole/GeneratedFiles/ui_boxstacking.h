@@ -13,6 +13,7 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QCommandLinkButton>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHeaderView>
@@ -40,7 +41,9 @@ public:
     QWidget *centralwidget;
     QTabWidget *tabWidge_Models;
     QWidget *tab;
+    QPushButton *pushButton_2;
     QWidget *tab_2;
+    QPushButton *pushButton_3;
     QGroupBox *groupBoxContainer;
     QGridLayout *gridLayout;
     QLabel *label;
@@ -59,6 +62,7 @@ public:
     QLineEdit *lineEdit_SmallBoxLength;
     QTableWidget *tableWidget_Result;
     QPushButton *pushButton_SaveValues;
+    QCommandLinkButton *commandLinkButton;
     QMenuBar *menubar;
     QMenu *menuFile;
     QMenu *menuNew;
@@ -90,13 +94,19 @@ public:
         tabWidge_Models->setGeometry(QRect(290, 0, 1081, 871));
         tab = new QWidget();
         tab->setObjectName(QStringLiteral("tab"));
+        pushButton_2 = new QPushButton(tab);
+        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
+        pushButton_2->setGeometry(QRect(160, 170, 75, 23));
         tabWidge_Models->addTab(tab, QString());
         tab_2 = new QWidget();
         tab_2->setObjectName(QStringLiteral("tab_2"));
+        pushButton_3 = new QPushButton(tab_2);
+        pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
+        pushButton_3->setGeometry(QRect(220, 220, 75, 23));
         tabWidge_Models->addTab(tab_2, QString());
         groupBoxContainer = new QGroupBox(centralwidget);
         groupBoxContainer->setObjectName(QStringLiteral("groupBoxContainer"));
-        groupBoxContainer->setGeometry(QRect(10, 20, 271, 171));
+        groupBoxContainer->setGeometry(QRect(0, 0, 271, 171));
         gridLayout = new QGridLayout(groupBoxContainer);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
         label = new QLabel(groupBoxContainer);
@@ -134,7 +144,7 @@ public:
 
         groupBoxContainer_2 = new QGroupBox(centralwidget);
         groupBoxContainer_2->setObjectName(QStringLiteral("groupBoxContainer_2"));
-        groupBoxContainer_2->setGeometry(QRect(10, 200, 271, 171));
+        groupBoxContainer_2->setGeometry(QRect(0, 170, 271, 171));
         gridLayout_2 = new QGridLayout(groupBoxContainer_2);
         gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
         label_4 = new QLabel(groupBoxContainer_2);
@@ -176,6 +186,9 @@ public:
         pushButton_SaveValues = new QPushButton(centralwidget);
         pushButton_SaveValues->setObjectName(QStringLiteral("pushButton_SaveValues"));
         pushButton_SaveValues->setGeometry(QRect(100, 800, 75, 23));
+        commandLinkButton = new QCommandLinkButton(centralwidget);
+        commandLinkButton->setObjectName(QStringLiteral("commandLinkButton"));
+        commandLinkButton->setGeometry(QRect(190, 340, 101, 41));
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QStringLiteral("menubar"));
@@ -208,7 +221,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        tabWidge_Models->setCurrentIndex(0);
+        tabWidge_Models->setCurrentIndex(1);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -222,7 +235,9 @@ public:
         actionExit->setText(QApplication::translate("MainWindow", "Exit", nullptr));
         actionOne_Sized_Small_Boxes->setText(QApplication::translate("MainWindow", "One Sized Small Boxes", nullptr));
         actionDiffrent_Siezed_Small_Boxes->setText(QApplication::translate("MainWindow", "Diffrent Sized Small Boxes", nullptr));
+        pushButton_2->setText(QApplication::translate("MainWindow", "PushButton", nullptr));
         tabWidge_Models->setTabText(tabWidge_Models->indexOf(tab), QApplication::translate("MainWindow", "2D", nullptr));
+        pushButton_3->setText(QApplication::translate("MainWindow", "PushButton", nullptr));
         tabWidge_Models->setTabText(tabWidge_Models->indexOf(tab_2), QApplication::translate("MainWindow", "3D", nullptr));
         groupBoxContainer->setTitle(QApplication::translate("MainWindow", "Container", nullptr));
         label->setText(QApplication::translate("MainWindow", "Width", nullptr));
@@ -239,6 +254,7 @@ public:
         label_6->setText(QApplication::translate("MainWindow", "Length", nullptr));
         lineEdit_SmallBoxLength->setText(QString());
         pushButton_SaveValues->setText(QApplication::translate("MainWindow", "Save", nullptr));
+        commandLinkButton->setText(QApplication::translate("MainWindow", "Visualize", nullptr));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", nullptr));
         menuNew->setTitle(QApplication::translate("MainWindow", "New", nullptr));
         menuEdit->setTitle(QApplication::translate("MainWindow", "Edit", nullptr));
