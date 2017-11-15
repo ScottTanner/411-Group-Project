@@ -8,11 +8,17 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 	connect(ui->actionOne_Sized_Small_Boxes, &QAction::triggered, this, &MainWindow::on_OneSized_clicked);
+	connect(ui->actionExit, &QAction::triggered, this, &MainWindow::on_Exit_clicked);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::on_Exit_clicked()
+{
+	close();
 }
 
 void MainWindow::on_OneSized_clicked()

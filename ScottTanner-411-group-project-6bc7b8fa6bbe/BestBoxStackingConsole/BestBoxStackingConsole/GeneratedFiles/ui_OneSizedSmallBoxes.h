@@ -36,6 +36,7 @@ public:
     QComboBox *comboBox_Containers;
     QPushButton *pushButton_ContainerSave;
     QPushButton *pushButton_ContainerDelete;
+    QLabel *label_7;
     QGroupBox *groupBox_SmallBox;
     QLabel *label_4;
     QLineEdit *lineEdit_SmallBoxWidth;
@@ -46,6 +47,7 @@ public:
     QComboBox *comboBox_SmallBoxes;
     QPushButton *pushButton_SmallBoxSave;
     QPushButton *pushButton_SmallBoxDelete;
+    QLabel *label_8;
     QPushButton *pushButton;
     QPushButton *pushButton_2;
 
@@ -77,13 +79,16 @@ public:
         lineEdit_ContainerLength->setGeometry(QRect(80, 90, 113, 20));
         comboBox_Containers = new QComboBox(groupBox_Container);
         comboBox_Containers->setObjectName(QStringLiteral("comboBox_Containers"));
-        comboBox_Containers->setGeometry(QRect(340, 30, 111, 22));
+        comboBox_Containers->setGeometry(QRect(330, 30, 181, 21));
         pushButton_ContainerSave = new QPushButton(groupBox_Container);
         pushButton_ContainerSave->setObjectName(QStringLiteral("pushButton_ContainerSave"));
-        pushButton_ContainerSave->setGeometry(QRect(360, 70, 75, 23));
+        pushButton_ContainerSave->setGeometry(QRect(450, 130, 75, 23));
         pushButton_ContainerDelete = new QPushButton(groupBox_Container);
         pushButton_ContainerDelete->setObjectName(QStringLiteral("pushButton_ContainerDelete"));
-        pushButton_ContainerDelete->setGeometry(QRect(360, 110, 75, 23));
+        pushButton_ContainerDelete->setGeometry(QRect(180, 120, 75, 23));
+        label_7 = new QLabel(groupBox_Container);
+        label_7->setObjectName(QStringLiteral("label_7"));
+        label_7->setGeometry(QRect(320, 10, 47, 13));
         groupBox_SmallBox = new QGroupBox(Dialog_OneSized);
         groupBox_SmallBox->setObjectName(QStringLiteral("groupBox_SmallBox"));
         groupBox_SmallBox->setGeometry(QRect(20, 190, 531, 161));
@@ -107,13 +112,16 @@ public:
         lineEdit_SmallBoxLength->setGeometry(QRect(80, 90, 113, 20));
         comboBox_SmallBoxes = new QComboBox(groupBox_SmallBox);
         comboBox_SmallBoxes->setObjectName(QStringLiteral("comboBox_SmallBoxes"));
-        comboBox_SmallBoxes->setGeometry(QRect(340, 30, 111, 22));
+        comboBox_SmallBoxes->setGeometry(QRect(330, 30, 181, 22));
         pushButton_SmallBoxSave = new QPushButton(groupBox_SmallBox);
         pushButton_SmallBoxSave->setObjectName(QStringLiteral("pushButton_SmallBoxSave"));
-        pushButton_SmallBoxSave->setGeometry(QRect(360, 70, 75, 23));
+        pushButton_SmallBoxSave->setGeometry(QRect(450, 130, 75, 23));
         pushButton_SmallBoxDelete = new QPushButton(groupBox_SmallBox);
         pushButton_SmallBoxDelete->setObjectName(QStringLiteral("pushButton_SmallBoxDelete"));
-        pushButton_SmallBoxDelete->setGeometry(QRect(360, 110, 75, 23));
+        pushButton_SmallBoxDelete->setGeometry(QRect(190, 120, 75, 23));
+        label_8 = new QLabel(groupBox_SmallBox);
+        label_8->setObjectName(QStringLiteral("label_8"));
+        label_8->setGeometry(QRect(320, 10, 47, 13));
         pushButton = new QPushButton(Dialog_OneSized);
         pushButton->setObjectName(QStringLiteral("pushButton"));
         pushButton->setGeometry(QRect(240, 370, 121, 23));
@@ -134,13 +142,15 @@ public:
         label_2->setText(QApplication::translate("Dialog_OneSized", "Height", nullptr));
         label_3->setText(QApplication::translate("Dialog_OneSized", "Length", nullptr));
         pushButton_ContainerSave->setText(QApplication::translate("Dialog_OneSized", "Save", nullptr));
-        pushButton_ContainerDelete->setText(QApplication::translate("Dialog_OneSized", "Delete", nullptr));
+        pushButton_ContainerDelete->setText(QApplication::translate("Dialog_OneSized", "Clear", nullptr));
+        label_7->setText(QApplication::translate("Dialog_OneSized", "Load:", nullptr));
         groupBox_SmallBox->setTitle(QApplication::translate("Dialog_OneSized", "Small Box", nullptr));
         label_4->setText(QApplication::translate("Dialog_OneSized", "Width", nullptr));
         label_5->setText(QApplication::translate("Dialog_OneSized", "Height", nullptr));
         label_6->setText(QApplication::translate("Dialog_OneSized", "Length", nullptr));
         pushButton_SmallBoxSave->setText(QApplication::translate("Dialog_OneSized", "Save", nullptr));
-        pushButton_SmallBoxDelete->setText(QApplication::translate("Dialog_OneSized", "Delete", nullptr));
+        pushButton_SmallBoxDelete->setText(QApplication::translate("Dialog_OneSized", "Clear", nullptr));
+        label_8->setText(QApplication::translate("Dialog_OneSized", "Load:", nullptr));
         pushButton->setText(QApplication::translate("Dialog_OneSized", "Calculate", nullptr));
         pushButton_2->setText(QApplication::translate("Dialog_OneSized", "Cancel", nullptr));
     } // retranslateUi

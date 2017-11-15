@@ -28,6 +28,12 @@
       <Extensions>moc;h;cpp</Extensions>
       <SourceControlFiles>False</SourceControlFiles>
     </Filter>
+    <Filter Include="Header Files\Backup">
+      <UniqueIdentifier>{84ea30be-cfb9-4e95-a963-45e7ca4a1087}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Backup">
+      <UniqueIdentifier>{9c8a3711-cd0b-4ac9-9f67-44ae02843d2a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GeneratedFiles\qrc_BestBoxStackingConsole.cpp">
@@ -60,22 +66,7 @@
     <ClCompile Include="mainwindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="calculate.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="save.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="threedime.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="threedimenext.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="twodimen.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="twodimennext.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_calculate.cpp">
@@ -129,30 +120,27 @@
     <ClCompile Include="OneSizedAlgorithm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="twodimen.cpp">
+      <Filter>Source Files\Backup</Filter>
+    </ClCompile>
+    <ClCompile Include="threedimenext.cpp">
+      <Filter>Source Files\Backup</Filter>
+    </ClCompile>
+    <ClCompile Include="twodimennext.cpp">
+      <Filter>Source Files\Backup</Filter>
+    </ClCompile>
+    <ClCompile Include="threedime.cpp">
+      <Filter>Source Files\Backup</Filter>
+    </ClCompile>
+    <ClCompile Include="calculate.cpp">
+      <Filter>Source Files\Backup</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="BestBoxStackingConsole.qrc">
       <Filter>Resource Files</Filter>
     </CustomBuild>
     <CustomBuild Include="mainwindow.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="calculate.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="save.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="threedime.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="threedimenext.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="twodimen.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="twodimennext.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="calculate.ui">
@@ -176,9 +164,6 @@
     <CustomBuild Include="showresult.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="showResult.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
     <CustomBuild Include="boxstacking.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
@@ -186,6 +171,27 @@
       <Filter>Form Files</Filter>
     </CustomBuild>
     <CustomBuild Include="OneSizedAlgorithm.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="calculate.h">
+      <Filter>Header Files\Backup</Filter>
+    </CustomBuild>
+    <CustomBuild Include="threedimenext.h">
+      <Filter>Header Files\Backup</Filter>
+    </CustomBuild>
+    <CustomBuild Include="twodimennext.h">
+      <Filter>Header Files\Backup</Filter>
+    </CustomBuild>
+    <CustomBuild Include="threedime.h">
+      <Filter>Header Files\Backup</Filter>
+    </CustomBuild>
+    <CustomBuild Include="twodimen.h">
+      <Filter>Header Files\Backup</Filter>
+    </CustomBuild>
+    <CustomBuild Include="showResult.h">
+      <Filter>Header Files\Backup</Filter>
+    </CustomBuild>
+    <CustomBuild Include="save.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>

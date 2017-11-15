@@ -13,12 +13,14 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
-    ~MainWindow();
+	void set_container(double cX, double cY, double cZ, double boxX, double boxY, double boxZ);
+	~MainWindow();
 
 	
 
 private slots:
 	void on_OneSized_clicked();
+	void on_Exit_clicked();
 
 private:
     Ui::MainWindow *ui;

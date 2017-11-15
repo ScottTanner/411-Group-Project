@@ -97,18 +97,18 @@
    <widget class="QComboBox" name="comboBox_Containers">
     <property name="geometry">
      <rect>
-      <x>340</x>
+      <x>330</x>
       <y>30</y>
-      <width>111</width>
-      <height>22</height>
+      <width>181</width>
+      <height>21</height>
      </rect>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_ContainerSave">
     <property name="geometry">
      <rect>
-      <x>360</x>
-      <y>70</y>
+      <x>450</x>
+      <y>130</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -120,14 +120,27 @@
    <widget class="QPushButton" name="pushButton_ContainerDelete">
     <property name="geometry">
      <rect>
-      <x>360</x>
-      <y>110</y>
+      <x>180</x>
+      <y>130</y>
       <width>75</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
-     <string>Delete</string>
+     <string>Clear</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_7">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>10</y>
+      <width>47</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Load:</string>
     </property>
    </widget>
   </widget>
@@ -215,9 +228,9 @@
    <widget class="QComboBox" name="comboBox_SmallBoxes">
     <property name="geometry">
      <rect>
-      <x>340</x>
+      <x>330</x>
       <y>30</y>
-      <width>111</width>
+      <width>181</width>
       <height>22</height>
      </rect>
     </property>
@@ -225,8 +238,8 @@
    <widget class="QPushButton" name="pushButton_SmallBoxSave">
     <property name="geometry">
      <rect>
-      <x>360</x>
-      <y>70</y>
+      <x>450</x>
+      <y>130</y>
       <width>75</width>
       <height>23</height>
      </rect>
@@ -238,14 +251,27 @@
    <widget class="QPushButton" name="pushButton_SmallBoxDelete">
     <property name="geometry">
      <rect>
-      <x>360</x>
-      <y>110</y>
+      <x>190</x>
+      <y>130</y>
       <width>75</width>
       <height>23</height>
      </rect>
     </property>
     <property name="text">
-     <string>Delete</string>
+     <string>Clear</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_8">
+    <property name="geometry">
+     <rect>
+      <x>320</x>
+      <y>10</y>
+      <width>47</width>
+      <height>13</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Load:</string>
     </property>
    </widget>
   </widget>
