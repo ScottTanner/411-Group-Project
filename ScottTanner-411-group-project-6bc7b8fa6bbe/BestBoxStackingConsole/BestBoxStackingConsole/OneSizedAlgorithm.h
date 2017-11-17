@@ -26,6 +26,8 @@ private slots:
 	void on_pushButton_Done_clicked();
 	void on_pushButton_Done2_clicked();
 	void on_pushButton_Back_clicked();
+	void on_pushButton_Calulate_clicked();
+
 
 	void update_SMvalues();
 	void update_CNvalues();

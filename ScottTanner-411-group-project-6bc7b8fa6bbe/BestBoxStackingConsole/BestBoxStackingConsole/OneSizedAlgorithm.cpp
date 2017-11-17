@@ -3,7 +3,7 @@
 #include <fstream>
 #include<string>
 
-#include "mainwindow.h"
+#include "BoxStack2.h"
 #include "OneSizedAlgorithm.h"
 #include "ui_OneSizedSmallBoxes.h"
 int Go =0;
@@ -112,6 +112,24 @@ void Dialog_OneSized::on_pushButton_Back_clicked()
 	fill_ComboCNBox();
 }
 
+void Dialog_OneSized::on_pushButton_Calulate_clicked()
+{
+	BoxStack2 gui2; 
+	this->containerX = (ui->lineEdit_ContainerWidth->text()).toDouble();
+	this->containerY = (ui->lineEdit_ContainerHeight->text()).toDouble();
+	this->containerZ = (ui->lineEdit_ContainerLength->text()).toDouble();
+
+	this->boxX = (ui->lineEdit_SmallBoxWidth->text()).toDouble();
+	this->boxY = (ui->lineEdit_SmallBoxHeight->text()).toDouble();
+	this->boxZ = (ui->lineEdit_SmallBoxLength->text()).toDouble();
+
+
+	gui2.set_container(containerX, containerY, containerZ, boxX, boxY, boxZ);
+	gui2.setModal(true);
+	close();
+	gui2.exec();
+
+}
 
 void Dialog_OneSized::update_SMvalues()
 {
@@ -237,18 +255,19 @@ void Dialog_OneSized::fill_ComboCNBox()
 
 void Dialog_OneSized::on_OneSized_Clicked()
 {
-	MainWindow gui2;
-	this->containerX = (ui->lineEdit_ContainerWidth->text()).toDouble();
-	this->containerY = (ui->lineEdit_ContainerHeight->text()).toDouble();
-	this->containerZ = (ui->lineEdit_ContainerLength->text()).toDouble();
+	//BoxStack2 gui2;
+	//this->containerX = (ui->lineEdit_ContainerWidth->text()).toDouble();
+	//this->containerY = (ui->lineEdit_ContainerHeight->text()).toDouble();
+	//this->containerZ = (ui->lineEdit_ContainerLength->text()).toDouble();
 
-	this->boxX = (ui->lineEdit_SmallBoxWidth->text()).toDouble();
-	this->boxY = (ui->lineEdit_SmallBoxHeight->text()).toDouble();
-	this->boxZ = (ui->lineEdit_SmallBoxLength->text()).toDouble();
+	//this->boxX = (ui->lineEdit_SmallBoxWidth->text()).toDouble();
+	//this->boxY = (ui->lineEdit_SmallBoxHeight->text()).toDouble();
+	//this->boxZ = (ui->lineEdit_SmallBoxLength->text()).toDouble();
 	
 	
-	gui2.set_container(containerX, containerY, containerZ, boxX, boxY, boxZ);
-	
-	close();
+	//gui2.set_container(containerX, containerY, containerZ, boxX, boxY, boxZ);
+	//gui2.setModal(true);
+//	close();
+	//gui2.exec();
 }
 

@@ -57,9 +57,6 @@
     <ClCompile Include="GeneratedFiles\Release\moc_mainwindow.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
-    <ClCompile Include="mainwindow.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="save.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -73,12 +70,6 @@
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_save.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_threedime.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_threedime.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Debug\moc_threedimenext.cpp">
@@ -114,16 +105,10 @@
     <ClCompile Include="OneSizedAlgorithm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="twodimen.cpp">
-      <Filter>Source Files\Backup</Filter>
-    </ClCompile>
     <ClCompile Include="threedimenext.cpp">
       <Filter>Source Files\Backup</Filter>
     </ClCompile>
     <ClCompile Include="twodimennext.cpp">
-      <Filter>Source Files\Backup</Filter>
-    </ClCompile>
-    <ClCompile Include="threedime.cpp">
       <Filter>Source Files\Backup</Filter>
     </ClCompile>
     <ClCompile Include="calculate.cpp">
@@ -144,13 +129,22 @@
     <ClCompile Include="BigBox.cpp">
       <Filter>Source Files\Algorithm</Filter>
     </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_BoxStack2.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="twodimen.cpp">
+      <Filter>Source Files\Backup</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxStack2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mainwindow.cpp">
+      <Filter>Source Files\Backup</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="BestBoxStackingConsole.qrc">
       <Filter>Resource Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="mainwindow.h">
-      <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="save.ui">
       <Filter>Form Files</Filter>
@@ -174,9 +168,6 @@
       <Filter>Header Files\Backup</Filter>
     </CustomBuild>
     <CustomBuild Include="twodimennext.h">
-      <Filter>Header Files\Backup</Filter>
-    </CustomBuild>
-    <CustomBuild Include="threedime.h">
       <Filter>Header Files\Backup</Filter>
     </CustomBuild>
     <CustomBuild Include="twodimen.h">
@@ -203,6 +194,15 @@
     <CustomBuild Include="calculate.ui">
       <Filter>Form Files\Backup</Filter>
     </CustomBuild>
+    <CustomBuild Include="BoxStack2.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="BoxStack2.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="mainwindow.h">
+      <Filter>Header Files\Backup</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_calculate.h">
@@ -225,9 +225,6 @@
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_showresult.h">
       <Filter>Generated Files</Filter>
-    </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_boxstacking.h">
       <Filter>Generated Files</Filter>
@@ -252,6 +249,12 @@
     </ClInclude>
     <ClInclude Include="BigBox.h">
       <Filter>Header Files\Algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files\Algorithm</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_BoxStack2.h">
+      <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
