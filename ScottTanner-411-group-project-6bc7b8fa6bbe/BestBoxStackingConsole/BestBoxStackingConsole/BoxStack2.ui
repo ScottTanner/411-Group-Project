@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>990</width>
-    <height>701</height>
+    <width>988</width>
+    <height>702</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
   <widget class="QGroupBox" name="groupBoxContainer_2">
    <property name="geometry">
     <rect>
-     <x>0</x>
+     <x>10</x>
      <y>170</y>
      <width>271</width>
      <height>171</height>
@@ -98,7 +98,7 @@
   <widget class="QCommandLinkButton" name="commandLinkButton">
    <property name="geometry">
     <rect>
-     <x>190</x>
+     <x>180</x>
      <y>340</y>
      <width>101</width>
      <height>41</height>
@@ -111,42 +111,25 @@
   <widget class="QGroupBox" name="groupBoxContainer">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>0</y>
+     <x>20</x>
+     <y>10</y>
      <width>271</width>
-     <height>171</height>
+     <height>161</height>
     </rect>
    </property>
    <property name="title">
     <string>Container</string>
    </property>
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
+    <item row="1" column="0">
      <widget class="QLabel" name="label">
       <property name="text">
        <string>Width</string>
       </property>
      </widget>
     </item>
-    <item row="0" column="1">
-     <widget class="QLineEdit" name="lineEdit_ContainerWidth">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="0">
-     <widget class="QLabel" name="label_2">
-      <property name="text">
-       <string>Height</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QLineEdit" name="lineEdit_ContainerHeight">
+    <item row="3" column="1">
+     <widget class="QLineEdit" name="lineEdit_ContainerLength">
       <property name="enabled">
        <bool>false</bool>
       </property>
@@ -156,19 +139,36 @@
      </widget>
     </item>
     <item row="2" column="0">
-     <widget class="QLabel" name="label_3">
+     <widget class="QLabel" name="label_2">
       <property name="text">
-       <string>Length</string>
+       <string>Height</string>
       </property>
      </widget>
     </item>
-    <item row="2" column="1">
-     <widget class="QLineEdit" name="lineEdit_ContainerLength">
+    <item row="1" column="1">
+     <widget class="QLineEdit" name="lineEdit_ContainerWidth">
       <property name="enabled">
        <bool>false</bool>
       </property>
       <property name="text">
        <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="1">
+     <widget class="QLineEdit" name="lineEdit_ContainerHeight">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QLabel" name="label_3">
+      <property name="text">
+       <string>Length</string>
       </property>
      </widget>
     </item>
@@ -226,6 +226,31 @@
     <attribute name="title">
      <string>Data</string>
     </attribute>
+    <widget class="QTableWidget" name="tableWidget_ShowStacks">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>30</y>
+       <width>651</width>
+       <height>571</height>
+      </rect>
+     </property>
+     <column>
+      <property name="text">
+       <string>Container</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Box</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Number</string>
+      </property>
+     </column>
+    </widget>
    </widget>
   </widget>
   <widget class="QPushButton" name="pushButton_Config">
@@ -241,16 +266,6 @@
     <string>Configure</string>
    </property>
   </widget>
-  <widget class="QTableWidget" name="tableWidget_Result">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>380</y>
-     <width>271</width>
-     <height>311</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QPushButton" name="pushButton_Exit">
    <property name="geometry">
     <rect>
@@ -262,6 +277,16 @@
    </property>
    <property name="text">
     <string>Exit</string>
+   </property>
+  </widget>
+  <widget class="QListWidget" name="listWidget_ShowResult">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>380</y>
+     <width>256</width>
+     <height>301</height>
+    </rect>
    </property>
   </widget>
  </widget>

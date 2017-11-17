@@ -123,7 +123,7 @@ void Dialog_OneSized::on_pushButton_Calulate_clicked()
 	this->boxY = (ui->lineEdit_SmallBoxHeight->text()).toDouble();
 	this->boxZ = (ui->lineEdit_SmallBoxLength->text()).toDouble();
 
-
+	gui2.set_StackCollection(StackCollection(this->containerX, this->containerY, this->containerZ, this->boxX, this->boxY, this->boxZ));
 	gui2.set_container(containerX, containerY, containerZ, boxX, boxY, boxZ);
 	gui2.setModal(true);
 	close();

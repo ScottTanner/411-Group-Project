@@ -20,6 +20,7 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
+#include <QtWidgets/QListWidget>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTableWidget>
@@ -43,30 +44,31 @@ public:
     QGroupBox *groupBoxContainer;
     QGridLayout *gridLayout;
     QLabel *label;
-    QLineEdit *lineEdit_ContainerWidth;
+    QLineEdit *lineEdit_ContainerLength;
     QLabel *label_2;
+    QLineEdit *lineEdit_ContainerWidth;
     QLineEdit *lineEdit_ContainerHeight;
     QLabel *label_3;
-    QLineEdit *lineEdit_ContainerLength;
     QTabWidget *tabWidge_Models;
     QWidget *tab;
     QPushButton *pushButton_2;
     QWidget *tab_2;
     QPushButton *pushButton_3;
     QWidget *tab_3;
+    QTableWidget *tableWidget_ShowStacks;
     QPushButton *pushButton_Config;
-    QTableWidget *tableWidget_Result;
     QPushButton *pushButton_Exit;
+    QListWidget *listWidget_ShowResult;
 
     void setupUi(QDialog *BoxStack2)
     {
         if (BoxStack2->objectName().isEmpty())
             BoxStack2->setObjectName(QStringLiteral("BoxStack2"));
         BoxStack2->setEnabled(true);
-        BoxStack2->resize(990, 701);
+        BoxStack2->resize(988, 702);
         groupBoxContainer_2 = new QGroupBox(BoxStack2);
         groupBoxContainer_2->setObjectName(QStringLiteral("groupBoxContainer_2"));
-        groupBoxContainer_2->setGeometry(QRect(0, 170, 271, 171));
+        groupBoxContainer_2->setGeometry(QRect(10, 170, 271, 171));
         gridLayout_2 = new QGridLayout(groupBoxContainer_2);
         gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
         lineEdit_SmallBoxHeight = new QLineEdit(groupBoxContainer_2);
@@ -107,44 +109,44 @@ public:
         pushButton_SaveValues->setGeometry(QRect(100, 800, 75, 23));
         commandLinkButton = new QCommandLinkButton(BoxStack2);
         commandLinkButton->setObjectName(QStringLiteral("commandLinkButton"));
-        commandLinkButton->setGeometry(QRect(190, 340, 101, 41));
+        commandLinkButton->setGeometry(QRect(180, 340, 101, 41));
         groupBoxContainer = new QGroupBox(BoxStack2);
         groupBoxContainer->setObjectName(QStringLiteral("groupBoxContainer"));
-        groupBoxContainer->setGeometry(QRect(0, 0, 271, 171));
+        groupBoxContainer->setGeometry(QRect(20, 10, 271, 161));
         gridLayout = new QGridLayout(groupBoxContainer);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
         label = new QLabel(groupBoxContainer);
         label->setObjectName(QStringLiteral("label"));
 
-        gridLayout->addWidget(label, 0, 0, 1, 1);
-
-        lineEdit_ContainerWidth = new QLineEdit(groupBoxContainer);
-        lineEdit_ContainerWidth->setObjectName(QStringLiteral("lineEdit_ContainerWidth"));
-        lineEdit_ContainerWidth->setEnabled(false);
-
-        gridLayout->addWidget(lineEdit_ContainerWidth, 0, 1, 1, 1);
-
-        label_2 = new QLabel(groupBoxContainer);
-        label_2->setObjectName(QStringLiteral("label_2"));
-
-        gridLayout->addWidget(label_2, 1, 0, 1, 1);
-
-        lineEdit_ContainerHeight = new QLineEdit(groupBoxContainer);
-        lineEdit_ContainerHeight->setObjectName(QStringLiteral("lineEdit_ContainerHeight"));
-        lineEdit_ContainerHeight->setEnabled(false);
-
-        gridLayout->addWidget(lineEdit_ContainerHeight, 1, 1, 1, 1);
-
-        label_3 = new QLabel(groupBoxContainer);
-        label_3->setObjectName(QStringLiteral("label_3"));
-
-        gridLayout->addWidget(label_3, 2, 0, 1, 1);
+        gridLayout->addWidget(label, 1, 0, 1, 1);
 
         lineEdit_ContainerLength = new QLineEdit(groupBoxContainer);
         lineEdit_ContainerLength->setObjectName(QStringLiteral("lineEdit_ContainerLength"));
         lineEdit_ContainerLength->setEnabled(false);
 
-        gridLayout->addWidget(lineEdit_ContainerLength, 2, 1, 1, 1);
+        gridLayout->addWidget(lineEdit_ContainerLength, 3, 1, 1, 1);
+
+        label_2 = new QLabel(groupBoxContainer);
+        label_2->setObjectName(QStringLiteral("label_2"));
+
+        gridLayout->addWidget(label_2, 2, 0, 1, 1);
+
+        lineEdit_ContainerWidth = new QLineEdit(groupBoxContainer);
+        lineEdit_ContainerWidth->setObjectName(QStringLiteral("lineEdit_ContainerWidth"));
+        lineEdit_ContainerWidth->setEnabled(false);
+
+        gridLayout->addWidget(lineEdit_ContainerWidth, 1, 1, 1, 1);
+
+        lineEdit_ContainerHeight = new QLineEdit(groupBoxContainer);
+        lineEdit_ContainerHeight->setObjectName(QStringLiteral("lineEdit_ContainerHeight"));
+        lineEdit_ContainerHeight->setEnabled(false);
+
+        gridLayout->addWidget(lineEdit_ContainerHeight, 2, 1, 1, 1);
+
+        label_3 = new QLabel(groupBoxContainer);
+        label_3->setObjectName(QStringLiteral("label_3"));
+
+        gridLayout->addWidget(label_3, 3, 0, 1, 1);
 
         tabWidge_Models = new QTabWidget(BoxStack2);
         tabWidge_Models->setObjectName(QStringLiteral("tabWidge_Models"));
@@ -163,16 +165,27 @@ public:
         tabWidge_Models->addTab(tab_2, QString());
         tab_3 = new QWidget();
         tab_3->setObjectName(QStringLiteral("tab_3"));
+        tableWidget_ShowStacks = new QTableWidget(tab_3);
+        if (tableWidget_ShowStacks->columnCount() < 3)
+            tableWidget_ShowStacks->setColumnCount(3);
+        QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
+        tableWidget_ShowStacks->setHorizontalHeaderItem(0, __qtablewidgetitem);
+        QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
+        tableWidget_ShowStacks->setHorizontalHeaderItem(1, __qtablewidgetitem1);
+        QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
+        tableWidget_ShowStacks->setHorizontalHeaderItem(2, __qtablewidgetitem2);
+        tableWidget_ShowStacks->setObjectName(QStringLiteral("tableWidget_ShowStacks"));
+        tableWidget_ShowStacks->setGeometry(QRect(20, 30, 651, 571));
         tabWidge_Models->addTab(tab_3, QString());
         pushButton_Config = new QPushButton(BoxStack2);
         pushButton_Config->setObjectName(QStringLiteral("pushButton_Config"));
         pushButton_Config->setGeometry(QRect(20, 350, 151, 23));
-        tableWidget_Result = new QTableWidget(BoxStack2);
-        tableWidget_Result->setObjectName(QStringLiteral("tableWidget_Result"));
-        tableWidget_Result->setGeometry(QRect(10, 380, 271, 311));
         pushButton_Exit = new QPushButton(BoxStack2);
         pushButton_Exit->setObjectName(QStringLiteral("pushButton_Exit"));
         pushButton_Exit->setGeometry(QRect(880, 670, 101, 23));
+        listWidget_ShowResult = new QListWidget(BoxStack2);
+        listWidget_ShowResult->setObjectName(QStringLiteral("listWidget_ShowResult"));
+        listWidget_ShowResult->setGeometry(QRect(20, 380, 256, 301));
 
         retranslateUi(BoxStack2);
 
@@ -196,15 +209,21 @@ public:
         commandLinkButton->setText(QApplication::translate("BoxStack2", "Visualize", nullptr));
         groupBoxContainer->setTitle(QApplication::translate("BoxStack2", "Container", nullptr));
         label->setText(QApplication::translate("BoxStack2", "Width", nullptr));
-        lineEdit_ContainerWidth->setText(QString());
+        lineEdit_ContainerLength->setText(QString());
         label_2->setText(QApplication::translate("BoxStack2", "Height", nullptr));
+        lineEdit_ContainerWidth->setText(QString());
         lineEdit_ContainerHeight->setText(QString());
         label_3->setText(QApplication::translate("BoxStack2", "Length", nullptr));
-        lineEdit_ContainerLength->setText(QString());
         pushButton_2->setText(QApplication::translate("BoxStack2", "PushButton", nullptr));
         tabWidge_Models->setTabText(tabWidge_Models->indexOf(tab), QApplication::translate("BoxStack2", "2D", nullptr));
         pushButton_3->setText(QApplication::translate("BoxStack2", "PushButton", nullptr));
         tabWidge_Models->setTabText(tabWidge_Models->indexOf(tab_2), QApplication::translate("BoxStack2", "3D", nullptr));
+        QTableWidgetItem *___qtablewidgetitem = tableWidget_ShowStacks->horizontalHeaderItem(0);
+        ___qtablewidgetitem->setText(QApplication::translate("BoxStack2", "Container", nullptr));
+        QTableWidgetItem *___qtablewidgetitem1 = tableWidget_ShowStacks->horizontalHeaderItem(1);
+        ___qtablewidgetitem1->setText(QApplication::translate("BoxStack2", "Box", nullptr));
+        QTableWidgetItem *___qtablewidgetitem2 = tableWidget_ShowStacks->horizontalHeaderItem(2);
+        ___qtablewidgetitem2->setText(QApplication::translate("BoxStack2", "Number", nullptr));
         tabWidge_Models->setTabText(tabWidge_Models->indexOf(tab_3), QApplication::translate("BoxStack2", "Data", nullptr));
         pushButton_Config->setText(QApplication::translate("BoxStack2", "Configure", nullptr));
         pushButton_Exit->setText(QApplication::translate("BoxStack2", "Exit", nullptr));
