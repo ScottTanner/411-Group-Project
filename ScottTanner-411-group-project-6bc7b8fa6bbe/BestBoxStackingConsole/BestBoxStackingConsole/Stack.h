@@ -19,6 +19,9 @@ public:
 	BigBox GetBigBox();
 	SmallBox GetSmallBox();
 	std::list<BigBox> getListRestBigBox();
+	int GetListNumbersX();
+	int GetListNumbersY();
+	int GetListNumbersZ();
 	~Stack();
 
 };

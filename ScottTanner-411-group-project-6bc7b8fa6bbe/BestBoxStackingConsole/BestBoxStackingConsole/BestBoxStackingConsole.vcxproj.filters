@@ -123,14 +123,8 @@
     <ClCompile Include="BigBox.cpp">
       <Filter>Source Files\Algorithm</Filter>
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Debug\moc_BoxStack2.cpp">
-      <Filter>Generated Files</Filter>
-    </ClCompile>
     <ClCompile Include="twodimen.cpp">
       <Filter>Source Files\Backup</Filter>
-    </ClCompile>
-    <ClCompile Include="BoxStack2.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="mainwindow.cpp">
       <Filter>Source Files\Backup</Filter>
@@ -138,8 +132,32 @@
     <ClCompile Include="showResult.cpp">
       <Filter>Source Files\Backup</Filter>
     </ClCompile>
-    <ClCompile Include="BestBoxStackingConsole.cpp">
-      <Filter>Source Files\Algorithm</Filter>
+    <ClCompile Include="mainBestStacking.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GLWidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_GLWidget.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_GLWidget.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_DeleteDialog.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DeleteDialog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogAbout.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_DialogAbout.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_DialogAbout.cpp">
+      <Filter>Generated Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -191,17 +209,26 @@
     <CustomBuild Include="calculate.ui">
       <Filter>Form Files\Backup</Filter>
     </CustomBuild>
-    <CustomBuild Include="BoxStack2.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
-    <CustomBuild Include="BoxStack2.ui">
-      <Filter>Form Files</Filter>
-    </CustomBuild>
     <CustomBuild Include="mainwindow.h">
       <Filter>Header Files\Backup</Filter>
     </CustomBuild>
     <CustomBuild Include="showresult.ui">
       <Filter>Form Files\Backup</Filter>
+    </CustomBuild>
+    <CustomBuild Include="GLWidget.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="delete.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="DeleteDialog.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="AboutDialog.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="DialogAbout.h">
+      <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
@@ -253,7 +280,13 @@
     <ClInclude Include="resource.h">
       <Filter>Header Files\Algorithm</Filter>
     </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_BoxStack2.h">
+    <ClInclude Include="GeneratedFiles\ui_delete.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource1.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_AboutDialog.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -265,5 +298,11 @@
     <None Include="SmallBox.csv">
       <Filter>Resource Files</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Untitled-4.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="BestBoxStackingConsole.rc" />
   </ItemGroup>
 </Project>

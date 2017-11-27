@@ -13,6 +13,11 @@ Save::Save(QWidget *parent) :
     ui->setupUi(this);
 }
 
+Save::~Save()
+{
+	delete ui;
+}
+
 void Save::setFlagBox(bool flag)
 {
 	this->flagBox = flag;
@@ -31,160 +36,92 @@ void Save::setValues(double boxX, double boxY, double boxZ)
 	this->boxZ = streamZ.str();
 }
 
+void Save::setFilename(std::string fName)
+{
+	this->filename = fName;
+}
+
 void Save::setlistStingsPair(std::list<std::pair<std::string, std::list<double>>> listStringsPair)
 {
 	this->listStringsPair = listStringsPair;
 }
 
-Save::~Save()
+int Save::GetIndex()
 {
-    delete ui;
+	return this->index;
 }
 
 void Save::on_pushButton_Save_clicked()
 {
-	this->name = this->ui->lineEdit_name->text().toStdString();
-	if (this->flagBox == true)
+	if (this->ui->lineEdit_name->text().toStdString() == "") 
 	{
-		int count = 0;
-		bool sameName = false;
-		for (std::list<std::pair<std::string, std::list<double>>>::iterator it = this->listStringsPair.begin(); it != this->listStringsPair.end(); it++)
-		{
-			if (this->name == (*it).first) 
-			{
-				sameName = true;
-				std::list<double> second = (*it).second;
-				int countSecond = 0;
-				for (std::list<double>::iterator itDoubles = second.begin(); itDoubles != second.end(); itDoubles++) 
-				{
-					switch(countSecond++)
-					{
-					case 0:
-						*itDoubles = std::stod(this->boxX);
-						break;
-					case 1:
-						*itDoubles = std::stod(this->boxY);
-						break;
-					case 2:
-						*itDoubles = std::stod(this->boxZ);
-						break;
-					}
-				}
-				(*it).second = second;
-				std::ofstream file("BigBox.csv");
-				for (std::list<std::pair<std::string, std::list<double>>>::iterator itNewListFile = this->listStringsPair.begin(); itNewListFile != this->listStringsPair.end(); itNewListFile++) 
-				{
-					std::string bigBoxName = (*itNewListFile).first;
-					std::string bigBoxX;
-					std::string bigBoxY;
-					std::string bigBoxZ;
-					second = (*itNewListFile).second;
-					countSecond = 0;
-					for (std::list<double>::iterator itBoxValues = second.begin(); itBoxValues != second.end(); itBoxValues++)
-					{
-						std::stringstream streamBoxX;
-						std::stringstream streamBoxY;
-						std::stringstream streamBoxZ;
-
-						switch (countSecond++)
-						{
-						case 0:
-							streamBoxX << std::fixed << std::setprecision(2) << *itBoxValues;
-							bigBoxX = streamBoxX.str();
-							break;
-						case 1:
-							streamBoxY << std::fixed << std::setprecision(2) << *itBoxValues;;
-							bigBoxY = streamBoxY.str();
-							break;
-						case 2:
-							streamBoxZ << std::fixed << std::setprecision(2) << *itBoxValues;;
-							bigBoxZ = streamBoxZ.str();
-							break;
-						}
-					}
-					file << bigBoxName << "," << bigBoxX << "," << bigBoxY << "," << bigBoxZ << "\n";
-				}
-				file.close();
-				break;
-			}
-			count++;
-		}
-		if (sameName == false) {
-			std::ofstream file("BigBox.csv", std::ios::app);
-			file << this->name << "," << this->boxX << "," << this->boxY << "," << this->boxZ << "\n";
-			file.close();
-		}
+		return;
 	}
-	else {
-		int count = 0;
-		bool sameName = false;
-		for (std::list<std::pair<std::string, std::list<double>>>::iterator it = this->listStringsPair.begin(); it != this->listStringsPair.end(); it++)
-		{
-			if (this->name == (*it).first)
-			{
-				sameName = true;
-				std::list<double> second = (*it).second;
-				int countSecond = 0;
-				for (std::list<double>::iterator itDoubles = second.begin(); itDoubles != second.end(); itDoubles++)
-				{
-					switch (countSecond++)
-					{
-					case 0:
-						*itDoubles = std::stod(this->boxX);
-						break;
-					case 1:
-						*itDoubles = std::stod(this->boxY);
-						break;
-					case 2:
-						*itDoubles = std::stod(this->boxZ);
-						break;
-					}
-				}
-				(*it).second = second;
-				std::ofstream file("SmallBox.csv");
-				for (std::list<std::pair<std::string, std::list<double>>>::iterator itNewListFile = this->listStringsPair.begin(); itNewListFile != this->listStringsPair.end(); itNewListFile++)
-				{
-					std::string smallBoxName = (*itNewListFile).first;
-					std::string smallBoxX;
-					std::string smallBoxY;
-					std::string smallBoxZ;
-					countSecond = 0;
-					second = (*itNewListFile).second;
-					for (std::list<double>::iterator itBoxValues = second.begin(); itBoxValues != second.end(); itBoxValues++)
-					{
-						std::stringstream streamBoxX;
-						std::stringstream streamBoxY;
-						std::stringstream streamBoxZ;
+	std::string oldFilename = this->filename;
+	oldFilename += ".old";
 
-						switch (countSecond++)
-						{
-						case 0:
-							streamBoxX << std::fixed << std::setprecision(2) << *itBoxValues;
-							smallBoxX = streamBoxX.str();
-							break;
-						case 1:
-							streamBoxY << std::fixed << std::setprecision(2) << *itBoxValues;;
-							smallBoxY = streamBoxY.str();
-							break;
-						case 2:
-							streamBoxZ << std::fixed << std::setprecision(2) << *itBoxValues;;
-							smallBoxZ = streamBoxZ.str();
-							break;
-						}
-					}
-					file << smallBoxName << "," << smallBoxX << "," << smallBoxY << "," << smallBoxZ << "\n";
-				}
-				file.close();
-				break;
+	rename(this->filename.c_str(), oldFilename.c_str());
+	try {
+		this->name = this->ui->lineEdit_name->text().toStdString();
+		std::ofstream file(this->filename);
+
+		std::list<double> second;
+		int countSecond = 0;
+		bool isOverwrite = false;
+		for (std::list<std::pair<std::string, std::list<double>>>::iterator itNewListFile = this->listStringsPair.begin(); itNewListFile != this->listStringsPair.end(); itNewListFile++)
+		{
+			if (isOverwrite == false) {
+				this->index++;
 			}
-			count++;
+			if (this->name == (*itNewListFile).first)
+			{
+				file << (*itNewListFile).first << "," << this->boxX << "," << this->boxY << "," << this->boxZ << "\n";
+				isOverwrite = true;
+				continue;
+			}
+			std::string BoxX;
+			std::string BoxY;
+			std::string BoxZ;
+			second = (*itNewListFile).second;
+			countSecond = 0;
+			for (std::list<double>::iterator itBoxValues = second.begin(); itBoxValues != second.end(); itBoxValues++)
+			{
+				std::stringstream streamBoxX;
+				std::stringstream streamBoxY;
+				std::stringstream streamBoxZ;
+
+				switch (countSecond++)
+				{
+				case 0:
+					streamBoxX << std::fixed << std::setprecision(2) << *itBoxValues;
+					BoxX = streamBoxX.str();
+					break;
+				case 1:
+					streamBoxY << std::fixed << std::setprecision(2) << *itBoxValues;;
+					BoxY = streamBoxY.str();
+					break;
+				case 2:
+					streamBoxZ << std::fixed << std::setprecision(2) << *itBoxValues;;
+					BoxZ = streamBoxZ.str();
+					break;
+				}
+			}
+			file << (*itNewListFile).first << "," << BoxX << "," << BoxY << "," << BoxZ << "\n";
 		}
-		if (sameName == false) {
-			std::ofstream file("SmallBox.csv", std::ios::app);
+		if (isOverwrite == false) 
+		{
 			file << this->name << "," << this->boxX << "," << this->boxY << "," << this->boxZ << "\n";
-			file.close();
+			index++;
 		}
+		file.close();
+		remove(oldFilename.c_str());
 	}
+	catch (const std::exception e)
+	{
+		rename(oldFilename.c_str(), this->filename.c_str());
+
+	}
+
 	close();
 }
 

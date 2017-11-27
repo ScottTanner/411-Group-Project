@@ -16,6 +16,11 @@
   <property name="windowTitle">
    <string>One Sized Small Boxes</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normalon>Untitled-4.ico</normalon>
+   </iconset>
+  </property>
   <widget class="QGroupBox" name="groupBox_Container">
    <property name="enabled">
     <bool>true</bool>
@@ -122,6 +127,9 @@
     <property name="text">
      <string>Save</string>
     </property>
+    <property name="autoDefault">
+     <bool>false</bool>
+    </property>
    </widget>
    <widget class="QPushButton" name="pushButton_ContainerDelete">
     <property name="geometry">
@@ -162,10 +170,23 @@
      <string>Done</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButton_DeleteCon">
+    <property name="geometry">
+     <rect>
+      <x>440</x>
+      <y>90</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Delete</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QGroupBox" name="groupBox_SmallBox">
    <property name="enabled">
-    <bool>true</bool>
+    <bool>false</bool>
    </property>
    <property name="geometry">
     <rect>
@@ -356,6 +377,22 @@
     </property>
     <property name="text">
      <string>Back</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_DeleteSB">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>90</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Delete</string>
     </property>
    </widget>
   </widget>

@@ -9,238 +9,255 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>951</width>
-    <height>681</height>
+    <width>1126</width>
+    <height>872</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>BestBoxStacking</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normalon>Untitled-4.ico</normalon>
+   </iconset>
+  </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTabWidget" name="tabWidge_Models">
-    <property name="geometry">
-     <rect>
-      <x>290</x>
-      <y>0</y>
-      <width>1081</width>
-      <height>871</height>
-     </rect>
-    </property>
-    <property name="currentIndex">
-     <number>1</number>
-    </property>
-    <widget class="QWidget" name="tab">
-     <attribute name="title">
-      <string>2D</string>
-     </attribute>
-     <widget class="QPushButton" name="pushButton_2">
-      <property name="geometry">
-       <rect>
-        <x>160</x>
-        <y>170</y>
-        <width>75</width>
-        <height>23</height>
-       </rect>
+   <layout class="QGridLayout" name="gridLayout_4">
+    <item row="0" column="0">
+     <widget class="QWidget" name="widget" native="true">
+      <property name="minimumSize">
+       <size>
+        <width>276</width>
+        <height>0</height>
+       </size>
       </property>
-      <property name="text">
-       <string>PushButton</string>
+      <property name="maximumSize">
+       <size>
+        <width>276</width>
+        <height>16777215</height>
+       </size>
       </property>
+      <widget class="QGroupBox" name="groupBoxContainer">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>10</y>
+         <width>271</width>
+         <height>171</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Container</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="0" column="0">
+         <widget class="QLabel" name="label">
+          <property name="text">
+           <string>Width</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLineEdit" name="lineEdit_ContainerWidth">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_2">
+          <property name="text">
+           <string>Height</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLineEdit" name="lineEdit_ContainerHeight">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_3">
+          <property name="text">
+           <string>Length</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLineEdit" name="lineEdit_ContainerLength">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QGroupBox" name="groupBoxContainer_2">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>190</y>
+         <width>271</width>
+         <height>171</height>
+        </rect>
+       </property>
+       <property name="title">
+        <string>Small Box</string>
+       </property>
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="0" column="0">
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>Width</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QLineEdit" name="lineEdit_SmallBoxWidth">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QLabel" name="label_5">
+          <property name="text">
+           <string>Height</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QLineEdit" name="lineEdit_SmallBoxHeight">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QLabel" name="label_6">
+          <property name="text">
+           <string>Length</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLineEdit" name="lineEdit_SmallBoxLength">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QPushButton" name="pushButton_SaveValues">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>90</x>
+         <y>740</y>
+         <width>75</width>
+         <height>23</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Save</string>
+       </property>
+      </widget>
+      <widget class="QListWidget" name="listWidget_Result">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>410</y>
+         <width>256</width>
+         <height>321</height>
+        </rect>
+       </property>
+      </widget>
      </widget>
-    </widget>
-    <widget class="QWidget" name="tab_2">
-     <attribute name="title">
-      <string>3D</string>
-     </attribute>
-     <widget class="QPushButton" name="pushButton_3">
-      <property name="geometry">
-       <rect>
-        <x>220</x>
-        <y>220</y>
-        <width>75</width>
-        <height>23</height>
-       </rect>
+    </item>
+    <item row="0" column="1">
+     <widget class="QTabWidget" name="tabWidge_Models">
+      <property name="currentIndex">
+       <number>0</number>
       </property>
-      <property name="text">
-       <string>PushButton</string>
-      </property>
+      <widget class="QWidget" name="tab_3">
+       <attribute name="title">
+        <string>Data</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="0" column="0">
+         <widget class="QTableWidget" name="tableWidget_ShowStacks">
+          <column>
+           <property name="text">
+            <string>Containers</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Box</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Number</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>2D</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_5">
+        <item row="0" column="0">
+         <widget class="QGraphicsView" name="graphicsView_TwoDim"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>3D</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_6">
+        <item row="0" column="0">
+         <widget class="GLWidget" name="widget_GL" native="true"/>
+        </item>
+       </layout>
+      </widget>
      </widget>
-    </widget>
-   </widget>
-   <widget class="QGroupBox" name="groupBoxContainer">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>271</width>
-      <height>171</height>
-     </rect>
-    </property>
-    <property name="title">
-     <string>Container</string>
-    </property>
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="0">
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>Width</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QLineEdit" name="lineEdit_ContainerWidth">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>Height</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QLineEdit" name="lineEdit_ContainerHeight">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="label_3">
-       <property name="text">
-        <string>Length</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="QLineEdit" name="lineEdit_ContainerLength">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QGroupBox" name="groupBoxContainer_2">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>170</y>
-      <width>271</width>
-      <height>171</height>
-     </rect>
-    </property>
-    <property name="title">
-     <string>Small Box</string>
-    </property>
-    <layout class="QGridLayout" name="gridLayout_2">
-     <item row="0" column="0">
-      <widget class="QLabel" name="label_4">
-       <property name="text">
-        <string>Width</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QLineEdit" name="lineEdit_SmallBoxWidth">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="label_5">
-       <property name="text">
-        <string>Height</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="1">
-      <widget class="QLineEdit" name="lineEdit_SmallBoxHeight">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="label_6">
-       <property name="text">
-        <string>Length</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="1">
-      <widget class="QLineEdit" name="lineEdit_SmallBoxLength">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QTableWidget" name="tableWidget_Result">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>380</y>
-      <width>271</width>
-      <height>391</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_SaveValues">
-    <property name="geometry">
-     <rect>
-      <x>100</x>
-      <y>800</y>
-      <width>75</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Save</string>
-    </property>
-   </widget>
-   <widget class="QCommandLinkButton" name="commandLinkButton">
-    <property name="geometry">
-     <rect>
-      <x>190</x>
-      <y>340</y>
-      <width>101</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Visualize</string>
-    </property>
-   </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>951</width>
+     <width>1126</width>
      <height>21</height>
     </rect>
    </property>
@@ -264,16 +281,23 @@
     <property name="title">
      <string>Edit</string>
     </property>
+    <addaction name="actionUndo"/>
+    <addaction name="actionRedo"/>
+    <addaction name="actionEdit_Boxes"/>
    </widget>
    <widget class="QMenu" name="menuView">
     <property name="title">
      <string>View</string>
     </property>
+    <addaction name="actionChange_Color_2D"/>
+    <addaction name="actionChange_Color_3D"/>
+    <addaction name="actionNight_View"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
      <string>Help</string>
     </property>
+    <addaction name="actionAbout_BestBoxStacking"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
@@ -302,11 +326,66 @@
    </property>
   </action>
   <action name="actionDiffrent_Siezed_Small_Boxes">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Diffrent Sized Small Boxes</string>
    </property>
   </action>
+  <action name="actionUndo">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Undo</string>
+   </property>
+  </action>
+  <action name="actionRedo">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Redo</string>
+   </property>
+  </action>
+  <action name="actionEdit_Boxes">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Edit Boxes</string>
+   </property>
+  </action>
+  <action name="actionAbout_BestBoxStacking">
+   <property name="text">
+    <string>About BestBoxStacking</string>
+   </property>
+  </action>
+  <action name="actionChange_Color_2D">
+   <property name="text">
+    <string>Change Color 2D</string>
+   </property>
+  </action>
+  <action name="actionChange_Color_3D">
+   <property name="text">
+    <string>Change Color 3D</string>
+   </property>
+  </action>
+  <action name="actionNight_View">
+   <property name="text">
+    <string>Day/Night View</string>
+   </property>
+  </action>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>GLWidget</class>
+   <extends>QWidget</extends>
+   <header>glwidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

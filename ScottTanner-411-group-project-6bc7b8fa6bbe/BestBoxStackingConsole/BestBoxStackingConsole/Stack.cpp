@@ -221,6 +221,21 @@ std::list<BigBox> Stack::getListRestBigBox()
 	return this->listRestBigBox;
 }
 
+int Stack::GetListNumbersX()
+{
+	return this->listNumbers[0];
+}
+
+int Stack::GetListNumbersY()
+{
+	return this->listNumbers[1];
+}
+
+int Stack::GetListNumbersZ()
+{
+	return this->listNumbers[2];
+}
+
 Stack::~Stack()
 {
 }

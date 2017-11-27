@@ -14,10 +14,12 @@ class Save : public QDialog
 
 public:
     explicit Save(QWidget *parent = 0);
+	~Save();
 	void setFlagBox(bool flag);
 	void setValues(double boxX,double boxY, double boxZ);
+	void setFilename(std::string fName);
 	void setlistStingsPair(std::list<std::pair<std::string, std::list<double>>> listStringsPair);
-    ~Save();
+	int GetIndex();
 
 private slots:
     void on_pushButton_Cancel_clicked();
@@ -26,6 +28,8 @@ private slots:
 private:
     Ui::Save *ui;
 	bool flagBox;
+	int index=0;
+	std::string filename;
 	std::string name;
 	std::string boxX;
 	std::string boxY;

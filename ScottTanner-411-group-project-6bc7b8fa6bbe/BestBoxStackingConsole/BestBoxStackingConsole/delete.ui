@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Save</class>
- <widget class="QDialog" name="Save">
+ <class>DeleteDialog</class>
+ <widget class="QDialog" name="DeleteDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -23,7 +23,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Save</string>
+   <string>Delete</string>
   </property>
   <property name="windowIcon">
    <iconset>
@@ -154,16 +154,6 @@ background-color:#2d89ef;
 width:20px;
 }</string>
   </property>
-  <widget class="QLineEdit" name="lineEdit_name">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>40</y>
-     <width>131</width>
-     <height>20</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
@@ -306,7 +296,7 @@ width:20px;
     <string>Name of Box:</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_Save">
+  <widget class="QPushButton" name="pushButton_Delete">
    <property name="geometry">
     <rect>
      <x>170</x>
@@ -316,7 +306,7 @@ width:20px;
     </rect>
    </property>
    <property name="text">
-    <string>Save</string>
+    <string>Delete</string>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_Cancel">
@@ -330,6 +320,16 @@ width:20px;
    </property>
    <property name="text">
     <string>Cancel</string>
+   </property>
+  </widget>
+  <widget class="QComboBox" name="comboBox_BoxDelete">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>40</y>
+     <width>131</width>
+     <height>22</height>
+    </rect>
    </property>
   </widget>
  </widget>

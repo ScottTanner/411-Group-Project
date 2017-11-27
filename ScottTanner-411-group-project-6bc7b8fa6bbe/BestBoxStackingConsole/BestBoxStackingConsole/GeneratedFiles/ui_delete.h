@@ -1,45 +1,45 @@
 /********************************************************************************
-** Form generated from reading UI file 'save.ui'
+** Form generated from reading UI file 'delete.ui'
 **
 ** Created by: Qt User Interface Compiler version 5.10.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef UI_SAVE_H
-#define UI_SAVE_H
+#ifndef UI_DELETE_H
+#define UI_DELETE_H
 
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QComboBox>
 #include <QtWidgets/QDialog>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
-#include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
 
 QT_BEGIN_NAMESPACE
 
-class Ui_Save
+class Ui_DeleteDialog
 {
 public:
-    QLineEdit *lineEdit_name;
     QLabel *label;
-    QPushButton *pushButton_Save;
+    QPushButton *pushButton_Delete;
     QPushButton *pushButton_Cancel;
+    QComboBox *comboBox_BoxDelete;
 
-    void setupUi(QDialog *Save)
+    void setupUi(QDialog *DeleteDialog)
     {
-        if (Save->objectName().isEmpty())
-            Save->setObjectName(QStringLiteral("Save"));
-        Save->resize(268, 124);
-        Save->setMinimumSize(QSize(268, 124));
-        Save->setMaximumSize(QSize(268, 124));
+        if (DeleteDialog->objectName().isEmpty())
+            DeleteDialog->setObjectName(QStringLiteral("DeleteDialog"));
+        DeleteDialog->resize(268, 124);
+        DeleteDialog->setMinimumSize(QSize(268, 124));
+        DeleteDialog->setMaximumSize(QSize(268, 124));
         QIcon icon;
         icon.addFile(QStringLiteral("Untitled-4.ico"), QSize(), QIcon::Normal, QIcon::On);
-        Save->setWindowIcon(icon);
-        Save->setStyleSheet(QLatin1String("QDialog{\n"
+        DeleteDialog->setWindowIcon(icon);
+        DeleteDialog->setStyleSheet(QLatin1String("QDialog{\n"
 "\n"
 "}\n"
 "\n"
@@ -163,10 +163,7 @@ public:
 "background-color:#2d89ef;\n"
 "width:20px;\n"
 "}"));
-        lineEdit_name = new QLineEdit(Save);
-        lineEdit_name->setObjectName(QStringLiteral("lineEdit_name"));
-        lineEdit_name->setGeometry(QRect(20, 40, 131, 20));
-        label = new QLabel(Save);
+        label = new QLabel(DeleteDialog);
         label->setObjectName(QStringLiteral("label"));
         label->setGeometry(QRect(20, 20, 81, 16));
         QFont font;
@@ -296,32 +293,35 @@ public:
 "background-color:#2d89ef;\n"
 "width:20px;\n"
 "}"));
-        pushButton_Save = new QPushButton(Save);
-        pushButton_Save->setObjectName(QStringLiteral("pushButton_Save"));
-        pushButton_Save->setGeometry(QRect(170, 40, 75, 23));
-        pushButton_Cancel = new QPushButton(Save);
+        pushButton_Delete = new QPushButton(DeleteDialog);
+        pushButton_Delete->setObjectName(QStringLiteral("pushButton_Delete"));
+        pushButton_Delete->setGeometry(QRect(170, 40, 75, 23));
+        pushButton_Cancel = new QPushButton(DeleteDialog);
         pushButton_Cancel->setObjectName(QStringLiteral("pushButton_Cancel"));
         pushButton_Cancel->setGeometry(QRect(170, 70, 75, 23));
+        comboBox_BoxDelete = new QComboBox(DeleteDialog);
+        comboBox_BoxDelete->setObjectName(QStringLiteral("comboBox_BoxDelete"));
+        comboBox_BoxDelete->setGeometry(QRect(20, 40, 131, 22));
 
-        retranslateUi(Save);
+        retranslateUi(DeleteDialog);
 
-        QMetaObject::connectSlotsByName(Save);
+        QMetaObject::connectSlotsByName(DeleteDialog);
     } // setupUi
 
-    void retranslateUi(QDialog *Save)
+    void retranslateUi(QDialog *DeleteDialog)
     {
-        Save->setWindowTitle(QApplication::translate("Save", "Save", nullptr));
-        label->setText(QApplication::translate("Save", "Name of Box:", nullptr));
-        pushButton_Save->setText(QApplication::translate("Save", "Save", nullptr));
-        pushButton_Cancel->setText(QApplication::translate("Save", "Cancel", nullptr));
+        DeleteDialog->setWindowTitle(QApplication::translate("DeleteDialog", "Delete", nullptr));
+        label->setText(QApplication::translate("DeleteDialog", "Name of Box:", nullptr));
+        pushButton_Delete->setText(QApplication::translate("DeleteDialog", "Delete", nullptr));
+        pushButton_Cancel->setText(QApplication::translate("DeleteDialog", "Cancel", nullptr));
     } // retranslateUi
 
 };
 
 namespace Ui {
-    class Save: public Ui_Save {};
+    class DeleteDialog: public Ui_DeleteDialog {};
 } // namespace Ui
 
 QT_END_NAMESPACE
 
-#endif // UI_SAVE_H
+#endif // UI_DELETE_H

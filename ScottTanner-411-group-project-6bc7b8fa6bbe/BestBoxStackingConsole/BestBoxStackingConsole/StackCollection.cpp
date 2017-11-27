@@ -5,6 +5,7 @@
 
 std::list<std::pair<std::list<Stack>, int>> StackCollection::GetCompletedStackCollection()
 {
+
 	return this->completedStackCollection;
 }
 
@@ -189,7 +190,7 @@ void StackCollection::completeStackCollection()
 
 	for (std::list<Stack>::iterator itFirstStack = this->listStack.begin(); itFirstStack != this->listStack.end(); itFirstStack++)
 	{
-		if (++countItFirstStack == 6)
+		if (++countItFirstStack == 7)
 		{
 			break;
 		}
@@ -440,6 +441,10 @@ void StackCollection::completeStackCollection()
 						}
 					}
 				}
+			}
+			else 
+			{
+				this->completedStackCollection.push_back(std::make_pair(tmpStackList, totalNumber));
 			}
 		}
 	}

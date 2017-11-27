@@ -1,9 +1,9 @@
 #include"save.h"
+#include "DeleteDialog.h"
 #include <iostream>
 #include <fstream>
 #include<string>
 
-#include "BoxStack2.h"
 #include "OneSizedAlgorithm.h"
 #include "ui_OneSizedSmallBoxes.h"
 int Go =0;
@@ -13,15 +13,16 @@ Dialog_OneSized::Dialog_OneSized(QWidget *parent) :
 	ui(new Ui::Dialog_OneSized)
 {
 	ui->setupUi(this);
-	
-	
-		fill_ComboCNBox();
-	
-		
-	
-
+	fill_ComboCNBox();
+	calculated = false;
 	connect(ui->comboBox_SmallBoxes, SIGNAL(currentIndexChanged(QString)), this, SLOT(update_SMvalues()));
 	connect(ui->comboBox_Containers, SIGNAL(currentIndexChanged(QString)), this, SLOT(update_CNvalues()));
+	connect(ui->pushButton_ContainerSave, &QPushButton::clicked, this, &Dialog_OneSized::on_pushButton_Save_Container_Clicked);
+	connect(ui->pushButton_SmallBoxSave, &QPushButton::clicked, this, &Dialog_OneSized::on_pushButton_Save_SmallBox_Clicked);
+	connect(ui->pushButton_DeleteCon, &QPushButton::clicked, this, &Dialog_OneSized::on_pushButton_ContainerDelete_Clicked);
+	connect(ui->pushButton_DeleteSB, &QPushButton::clicked, this, &Dialog_OneSized::on_pushButton_SmallBoxDelete_Clicked);
+	connect(ui->pushButton_ContainerDelete, &QPushButton::clicked, this, &Dialog_OneSized::on_pushButton_ClearContainer_Clicked);
+	connect(ui->pushButton_SmallBoxDelete, &QPushButton::clicked, this, &Dialog_OneSized::on_pushButton_ClearSmallBox_Clicked);
 }
 void Dialog_OneSized::set_container(double cX, double cY, double cZ, double boxX, double boxY, double boxZ)
 {
@@ -39,33 +40,85 @@ Dialog_OneSized::~Dialog_OneSized()
 
 }
 
+double Dialog_OneSized::GetContainerX()
+{
+	return this->containerX;
+}
+
+double Dialog_OneSized::GetContainerY()
+{
+	return this->containerY;
+}
+
+double Dialog_OneSized::GetContainerZ()
+{
+	return this->containerZ;
+}
+
+double Dialog_OneSized::GetSmallBoxX()
+{
+	return this->boxX;
+}
+
+double Dialog_OneSized::GetSmallBoxY()
+{
+	return this->boxY;
+}
+
+double Dialog_OneSized::GetSmallBoxZ()
+{
+	return this->boxZ;
+}
+
+void Dialog_OneSized::setTextBoxesEdit()
+{
+	this->ui->lineEdit_ContainerWidth->setText(QString::number(this->containerX));
+	this->ui->lineEdit_ContainerHeight->setText(QString::number(this->containerY));
+	this->ui->lineEdit_ContainerLength->setText(QString::number(this->containerZ));
+
+	this->ui->lineEdit_SmallBoxWidth->setText(QString::number(this->boxX));
+	this->ui->lineEdit_SmallBoxHeight->setText(QString::number(this->boxY));
+	this->ui->lineEdit_SmallBoxLength->setText(QString::number(this->boxZ));
+
+	return;
+}
+
+bool Dialog_OneSized::getCalculated()
+{
+	return this->calculated;
+}
+
 void Dialog_OneSized::on_pushButton_2_clicked()
 {
 	close();
 }
 
-void Dialog_OneSized::on_pushButton_ContainerDelete_clicked()
+void Dialog_OneSized::on_pushButton_ContainerDelete_Clicked()
 {
+	DeleteDialog deleteD;
+	deleteD.fill_ComboSMBox();
+	deleteD.setModal(true);
+	deleteD.exec();
+	fill_ComboCNBox();
 
-	ui->lineEdit_ContainerWidth->setText("");
-	ui->lineEdit_ContainerHeight->setText("");
-	ui->lineEdit_ContainerLength->setText("");
 }
 
-void Dialog_OneSized::on_pushButton_SmallBoxDelete_clicked()
+void Dialog_OneSized::on_pushButton_SmallBoxDelete_Clicked()
 {
 	ui->lineEdit_SmallBoxWidth->setText("");
 	ui->lineEdit_SmallBoxHeight->setText("");
 	ui->lineEdit_SmallBoxLength->setText("");
+	DeleteDialog deleteD;
+	deleteD.fill_ComboSMBox(true);
+	deleteD.setModal(true);
+	deleteD.exec();
+	fill_ComboSMBox();
 }
 
-void Dialog_OneSized::on_pushButton_clicked()
-{
-
-}
 
 void Dialog_OneSized::on_pushButton_Done_clicked()
 {
+	ui->groupBox_SmallBox->setEnabled(1);
 	ui->lineEdit_SmallBoxLength->setEnabled(1);
 	ui->lineEdit_SmallBoxHeight->setEnabled(1);
 	ui->lineEdit_SmallBoxWidth->setEnabled(1);
@@ -79,7 +132,8 @@ void Dialog_OneSized::on_pushButton_Done_clicked()
 	ui->label_4->setEnabled(1);
 	ui->label_5->setEnabled(1);
 	ui->label_6->setEnabled(1);
-	
+	ui->pushButton_DeleteSB->setEnabled(1);
+
 	ui->groupBox_Container->setDisabled(1);
 	
 	fill_ComboSMBox();
@@ -93,6 +147,7 @@ void Dialog_OneSized::on_pushButton_Done2_clicked()
 
 void Dialog_OneSized::on_pushButton_Back_clicked()
 {
+	ui->groupBox_Container->setEnabled(1);
 	ui->lineEdit_SmallBoxLength->setDisabled(1);
 	ui->lineEdit_SmallBoxHeight->setDisabled(1);
 	ui->lineEdit_SmallBoxWidth->setDisabled(1);
@@ -107,14 +162,13 @@ void Dialog_OneSized::on_pushButton_Back_clicked()
 	ui->label_5->setDisabled(1);
 	ui->label_6->setDisabled(1);
 
-	ui->pushButton_Calulate->setEnabled(0);
-	ui->groupBox_Container->setEnabled(1);
+	ui->pushButton_Calulate->setDisabled(1);
+	ui->groupBox_SmallBox->setDisabled(1);
 	fill_ComboCNBox();
 }
 
 void Dialog_OneSized::on_pushButton_Calulate_clicked()
 {
-	BoxStack2 gui2; 
 	this->containerX = (ui->lineEdit_ContainerWidth->text()).toDouble();
 	this->containerY = (ui->lineEdit_ContainerHeight->text()).toDouble();
 	this->containerZ = (ui->lineEdit_ContainerLength->text()).toDouble();
@@ -122,14 +176,59 @@ void Dialog_OneSized::on_pushButton_Calulate_clicked()
 	this->boxX = (ui->lineEdit_SmallBoxWidth->text()).toDouble();
 	this->boxY = (ui->lineEdit_SmallBoxHeight->text()).toDouble();
 	this->boxZ = (ui->lineEdit_SmallBoxLength->text()).toDouble();
-
-	gui2.set_StackCollection(StackCollection(this->containerX, this->containerY, this->containerZ, this->boxX, this->boxY, this->boxZ));
-	gui2.set_container(containerX, containerY, containerZ, boxX, boxY, boxZ);
-	gui2.setModal(true);
+	calculated = true;
 	close();
-	gui2.exec();
-
 }
+
+void Dialog_OneSized::on_pushButton_Save_Container_Clicked()
+{
+	Save save;
+	save.setFlagBox(true);
+	save.setFilename("BigBox.csv");
+	save.setValues((this->ui->lineEdit_ContainerWidth->text()).toDouble(), (this->ui->lineEdit_ContainerHeight->text()).toDouble(), (this->ui->lineEdit_ContainerLength->text()).toDouble());
+	save.setlistStingsPair(this->listItems);
+	save.setModal(true);
+	save.exec();
+	fill_ComboCNBox();
+	ui->comboBox_Containers->setCurrentIndex(save.GetIndex());
+	if (save.GetIndex() == 0) 
+	{
+		on_pushButton_ClearContainer_Clicked();
+	}
+}
+
+void Dialog_OneSized::on_pushButton_Save_SmallBox_Clicked()
+{
+	Save save;
+	save.setFlagBox(false);
+	save.setFilename("SmallBox.csv");
+	save.setValues((this->ui->lineEdit_SmallBoxWidth->text()).toDouble(), (this->ui->lineEdit_SmallBoxHeight->text()).toDouble(), (this->ui->lineEdit_SmallBoxLength->text()).toDouble());	
+	save.setlistStingsPair(this->listItems);
+	save.setModal(true);
+	save.exec();
+	fill_ComboSMBox();
+	ui->comboBox_SmallBoxes->setCurrentIndex(save.GetIndex());
+	if (save.GetIndex() == 0)
+	{
+		on_pushButton_ClearSmallBox_Clicked();
+	}
+}
+
+void Dialog_OneSized::on_pushButton_ClearContainer_Clicked()
+{
+	ui->lineEdit_ContainerWidth->setText("");
+	ui->lineEdit_ContainerHeight->setText("");
+	ui->lineEdit_ContainerLength->setText("");
+	ui->comboBox_Containers->setCurrentIndex(0);
+}
+
+void Dialog_OneSized::on_pushButton_ClearSmallBox_Clicked()
+{
+	ui->lineEdit_SmallBoxWidth->setText("");
+	ui->lineEdit_SmallBoxHeight->setText("");
+	ui->lineEdit_SmallBoxLength->setText("");
+}
+
 
 void Dialog_OneSized::update_SMvalues()
 {
@@ -250,24 +349,5 @@ void Dialog_OneSized::fill_ComboCNBox()
 		file.close();
 	}
 	
-}
-
-
-void Dialog_OneSized::on_OneSized_Clicked()
-{
-	//BoxStack2 gui2;
-	//this->containerX = (ui->lineEdit_ContainerWidth->text()).toDouble();
-	//this->containerY = (ui->lineEdit_ContainerHeight->text()).toDouble();
-	//this->containerZ = (ui->lineEdit_ContainerLength->text()).toDouble();
-
-	//this->boxX = (ui->lineEdit_SmallBoxWidth->text()).toDouble();
-	//this->boxY = (ui->lineEdit_SmallBoxHeight->text()).toDouble();
-	//this->boxZ = (ui->lineEdit_SmallBoxLength->text()).toDouble();
-	
-	
-	//gui2.set_container(containerX, containerY, containerZ, boxX, boxY, boxZ);
-	//gui2.setModal(true);
-//	close();
-	//gui2.exec();
 }
 

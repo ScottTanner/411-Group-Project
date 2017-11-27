@@ -13,12 +13,13 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
-#include <QtWidgets/QCommandLinkButton>
+#include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QGridLayout>
 #include <QtWidgets/QGroupBox>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
+#include <QtWidgets/QListWidget>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
@@ -27,6 +28,7 @@
 #include <QtWidgets/QTabWidget>
 #include <QtWidgets/QTableWidget>
 #include <QtWidgets/QWidget>
+#include "glwidget.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -38,12 +40,16 @@ public:
     QAction *actionExit;
     QAction *actionOne_Sized_Small_Boxes;
     QAction *actionDiffrent_Siezed_Small_Boxes;
+    QAction *actionUndo;
+    QAction *actionRedo;
+    QAction *actionEdit_Boxes;
+    QAction *actionAbout_BestBoxStacking;
+    QAction *actionChange_Color_2D;
+    QAction *actionChange_Color_3D;
+    QAction *actionNight_View;
     QWidget *centralwidget;
-    QTabWidget *tabWidge_Models;
-    QWidget *tab;
-    QPushButton *pushButton_2;
-    QWidget *tab_2;
-    QPushButton *pushButton_3;
+    QGridLayout *gridLayout_4;
+    QWidget *widget;
     QGroupBox *groupBoxContainer;
     QGridLayout *gridLayout;
     QLabel *label;
@@ -60,9 +66,18 @@ public:
     QLineEdit *lineEdit_SmallBoxHeight;
     QLabel *label_6;
     QLineEdit *lineEdit_SmallBoxLength;
-    QTableWidget *tableWidget_Result;
     QPushButton *pushButton_SaveValues;
-    QCommandLinkButton *commandLinkButton;
+    QListWidget *listWidget_Result;
+    QTabWidget *tabWidge_Models;
+    QWidget *tab_3;
+    QGridLayout *gridLayout_3;
+    QTableWidget *tableWidget_ShowStacks;
+    QWidget *tab;
+    QGridLayout *gridLayout_5;
+    QGraphicsView *graphicsView_TwoDim;
+    QWidget *tab_2;
+    QGridLayout *gridLayout_6;
+    GLWidget *widget_GL;
     QMenuBar *menubar;
     QMenu *menuFile;
     QMenu *menuNew;
@@ -76,7 +91,10 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
         MainWindow->setWindowModality(Qt::NonModal);
-        MainWindow->resize(951, 681);
+        MainWindow->resize(1126, 872);
+        QIcon icon;
+        icon.addFile(QStringLiteral("Untitled-4.ico"), QSize(), QIcon::Normal, QIcon::On);
+        MainWindow->setWindowIcon(icon);
         actionOpen = new QAction(MainWindow);
         actionOpen->setObjectName(QStringLiteral("actionOpen"));
         actionExport = new QAction(MainWindow);
@@ -87,26 +105,35 @@ public:
         actionOne_Sized_Small_Boxes->setObjectName(QStringLiteral("actionOne_Sized_Small_Boxes"));
         actionDiffrent_Siezed_Small_Boxes = new QAction(MainWindow);
         actionDiffrent_Siezed_Small_Boxes->setObjectName(QStringLiteral("actionDiffrent_Siezed_Small_Boxes"));
+        actionDiffrent_Siezed_Small_Boxes->setEnabled(false);
+        actionUndo = new QAction(MainWindow);
+        actionUndo->setObjectName(QStringLiteral("actionUndo"));
+        actionUndo->setEnabled(false);
+        actionRedo = new QAction(MainWindow);
+        actionRedo->setObjectName(QStringLiteral("actionRedo"));
+        actionRedo->setEnabled(false);
+        actionEdit_Boxes = new QAction(MainWindow);
+        actionEdit_Boxes->setObjectName(QStringLiteral("actionEdit_Boxes"));
+        actionEdit_Boxes->setEnabled(false);
+        actionAbout_BestBoxStacking = new QAction(MainWindow);
+        actionAbout_BestBoxStacking->setObjectName(QStringLiteral("actionAbout_BestBoxStacking"));
+        actionChange_Color_2D = new QAction(MainWindow);
+        actionChange_Color_2D->setObjectName(QStringLiteral("actionChange_Color_2D"));
+        actionChange_Color_3D = new QAction(MainWindow);
+        actionChange_Color_3D->setObjectName(QStringLiteral("actionChange_Color_3D"));
+        actionNight_View = new QAction(MainWindow);
+        actionNight_View->setObjectName(QStringLiteral("actionNight_View"));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QStringLiteral("centralwidget"));
-        tabWidge_Models = new QTabWidget(centralwidget);
-        tabWidge_Models->setObjectName(QStringLiteral("tabWidge_Models"));
-        tabWidge_Models->setGeometry(QRect(290, 0, 1081, 871));
-        tab = new QWidget();
-        tab->setObjectName(QStringLiteral("tab"));
-        pushButton_2 = new QPushButton(tab);
-        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
-        pushButton_2->setGeometry(QRect(160, 170, 75, 23));
-        tabWidge_Models->addTab(tab, QString());
-        tab_2 = new QWidget();
-        tab_2->setObjectName(QStringLiteral("tab_2"));
-        pushButton_3 = new QPushButton(tab_2);
-        pushButton_3->setObjectName(QStringLiteral("pushButton_3"));
-        pushButton_3->setGeometry(QRect(220, 220, 75, 23));
-        tabWidge_Models->addTab(tab_2, QString());
-        groupBoxContainer = new QGroupBox(centralwidget);
+        gridLayout_4 = new QGridLayout(centralwidget);
+        gridLayout_4->setObjectName(QStringLiteral("gridLayout_4"));
+        widget = new QWidget(centralwidget);
+        widget->setObjectName(QStringLiteral("widget"));
+        widget->setMinimumSize(QSize(276, 0));
+        widget->setMaximumSize(QSize(276, 16777215));
+        groupBoxContainer = new QGroupBox(widget);
         groupBoxContainer->setObjectName(QStringLiteral("groupBoxContainer"));
-        groupBoxContainer->setGeometry(QRect(0, 0, 271, 171));
+        groupBoxContainer->setGeometry(QRect(0, 10, 271, 171));
         gridLayout = new QGridLayout(groupBoxContainer);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
         label = new QLabel(groupBoxContainer);
@@ -142,9 +169,9 @@ public:
 
         gridLayout->addWidget(lineEdit_ContainerLength, 2, 1, 1, 1);
 
-        groupBoxContainer_2 = new QGroupBox(centralwidget);
+        groupBoxContainer_2 = new QGroupBox(widget);
         groupBoxContainer_2->setObjectName(QStringLiteral("groupBoxContainer_2"));
-        groupBoxContainer_2->setGeometry(QRect(0, 170, 271, 171));
+        groupBoxContainer_2->setGeometry(QRect(0, 190, 271, 171));
         gridLayout_2 = new QGridLayout(groupBoxContainer_2);
         gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
         label_4 = new QLabel(groupBoxContainer_2);
@@ -180,19 +207,63 @@ public:
 
         gridLayout_2->addWidget(lineEdit_SmallBoxLength, 2, 1, 1, 1);
 
-        tableWidget_Result = new QTableWidget(centralwidget);
-        tableWidget_Result->setObjectName(QStringLiteral("tableWidget_Result"));
-        tableWidget_Result->setGeometry(QRect(10, 380, 271, 391));
-        pushButton_SaveValues = new QPushButton(centralwidget);
+        pushButton_SaveValues = new QPushButton(widget);
         pushButton_SaveValues->setObjectName(QStringLiteral("pushButton_SaveValues"));
-        pushButton_SaveValues->setGeometry(QRect(100, 800, 75, 23));
-        commandLinkButton = new QCommandLinkButton(centralwidget);
-        commandLinkButton->setObjectName(QStringLiteral("commandLinkButton"));
-        commandLinkButton->setGeometry(QRect(190, 340, 101, 41));
+        pushButton_SaveValues->setEnabled(false);
+        pushButton_SaveValues->setGeometry(QRect(90, 740, 75, 23));
+        listWidget_Result = new QListWidget(widget);
+        listWidget_Result->setObjectName(QStringLiteral("listWidget_Result"));
+        listWidget_Result->setGeometry(QRect(10, 410, 256, 321));
+
+        gridLayout_4->addWidget(widget, 0, 0, 1, 1);
+
+        tabWidge_Models = new QTabWidget(centralwidget);
+        tabWidge_Models->setObjectName(QStringLiteral("tabWidge_Models"));
+        tab_3 = new QWidget();
+        tab_3->setObjectName(QStringLiteral("tab_3"));
+        gridLayout_3 = new QGridLayout(tab_3);
+        gridLayout_3->setObjectName(QStringLiteral("gridLayout_3"));
+        tableWidget_ShowStacks = new QTableWidget(tab_3);
+        if (tableWidget_ShowStacks->columnCount() < 3)
+            tableWidget_ShowStacks->setColumnCount(3);
+        QTableWidgetItem *__qtablewidgetitem = new QTableWidgetItem();
+        tableWidget_ShowStacks->setHorizontalHeaderItem(0, __qtablewidgetitem);
+        QTableWidgetItem *__qtablewidgetitem1 = new QTableWidgetItem();
+        tableWidget_ShowStacks->setHorizontalHeaderItem(1, __qtablewidgetitem1);
+        QTableWidgetItem *__qtablewidgetitem2 = new QTableWidgetItem();
+        tableWidget_ShowStacks->setHorizontalHeaderItem(2, __qtablewidgetitem2);
+        tableWidget_ShowStacks->setObjectName(QStringLiteral("tableWidget_ShowStacks"));
+
+        gridLayout_3->addWidget(tableWidget_ShowStacks, 0, 0, 1, 1);
+
+        tabWidge_Models->addTab(tab_3, QString());
+        tab = new QWidget();
+        tab->setObjectName(QStringLiteral("tab"));
+        gridLayout_5 = new QGridLayout(tab);
+        gridLayout_5->setObjectName(QStringLiteral("gridLayout_5"));
+        graphicsView_TwoDim = new QGraphicsView(tab);
+        graphicsView_TwoDim->setObjectName(QStringLiteral("graphicsView_TwoDim"));
+
+        gridLayout_5->addWidget(graphicsView_TwoDim, 0, 0, 1, 1);
+
+        tabWidge_Models->addTab(tab, QString());
+        tab_2 = new QWidget();
+        tab_2->setObjectName(QStringLiteral("tab_2"));
+        gridLayout_6 = new QGridLayout(tab_2);
+        gridLayout_6->setObjectName(QStringLiteral("gridLayout_6"));
+        widget_GL = new GLWidget(tab_2);
+        widget_GL->setObjectName(QStringLiteral("widget_GL"));
+
+        gridLayout_6->addWidget(widget_GL, 0, 0, 1, 1);
+
+        tabWidge_Models->addTab(tab_2, QString());
+
+        gridLayout_4->addWidget(tabWidge_Models, 0, 1, 1, 1);
+
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QStringLiteral("menubar"));
-        menubar->setGeometry(QRect(0, 0, 951, 21));
+        menubar->setGeometry(QRect(0, 0, 1126, 21));
         menuFile = new QMenu(menubar);
         menuFile->setObjectName(QStringLiteral("menuFile"));
         menuNew = new QMenu(menuFile);
@@ -218,10 +289,17 @@ public:
         menuFile->addAction(actionExit);
         menuNew->addAction(actionOne_Sized_Small_Boxes);
         menuNew->addAction(actionDiffrent_Siezed_Small_Boxes);
+        menuEdit->addAction(actionUndo);
+        menuEdit->addAction(actionRedo);
+        menuEdit->addAction(actionEdit_Boxes);
+        menuView->addAction(actionChange_Color_2D);
+        menuView->addAction(actionChange_Color_3D);
+        menuView->addAction(actionNight_View);
+        menuHelp->addAction(actionAbout_BestBoxStacking);
 
         retranslateUi(MainWindow);
 
-        tabWidge_Models->setCurrentIndex(1);
+        tabWidge_Models->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -235,10 +313,13 @@ public:
         actionExit->setText(QApplication::translate("MainWindow", "Exit", nullptr));
         actionOne_Sized_Small_Boxes->setText(QApplication::translate("MainWindow", "One Sized Small Boxes", nullptr));
         actionDiffrent_Siezed_Small_Boxes->setText(QApplication::translate("MainWindow", "Diffrent Sized Small Boxes", nullptr));
-        pushButton_2->setText(QApplication::translate("MainWindow", "PushButton", nullptr));
-        tabWidge_Models->setTabText(tabWidge_Models->indexOf(tab), QApplication::translate("MainWindow", "2D", nullptr));
-        pushButton_3->setText(QApplication::translate("MainWindow", "PushButton", nullptr));
-        tabWidge_Models->setTabText(tabWidge_Models->indexOf(tab_2), QApplication::translate("MainWindow", "3D", nullptr));
+        actionUndo->setText(QApplication::translate("MainWindow", "Undo", nullptr));
+        actionRedo->setText(QApplication::translate("MainWindow", "Redo", nullptr));
+        actionEdit_Boxes->setText(QApplication::translate("MainWindow", "Edit Boxes", nullptr));
+        actionAbout_BestBoxStacking->setText(QApplication::translate("MainWindow", "About BestBoxStacking", nullptr));
+        actionChange_Color_2D->setText(QApplication::translate("MainWindow", "Change Color 2D", nullptr));
+        actionChange_Color_3D->setText(QApplication::translate("MainWindow", "Change Color 3D", nullptr));
+        actionNight_View->setText(QApplication::translate("MainWindow", "Day/Night View", nullptr));
         groupBoxContainer->setTitle(QApplication::translate("MainWindow", "Container", nullptr));
         label->setText(QApplication::translate("MainWindow", "Width", nullptr));
         lineEdit_ContainerWidth->setText(QString());
@@ -254,7 +335,15 @@ public:
         label_6->setText(QApplication::translate("MainWindow", "Length", nullptr));
         lineEdit_SmallBoxLength->setText(QString());
         pushButton_SaveValues->setText(QApplication::translate("MainWindow", "Save", nullptr));
-        commandLinkButton->setText(QApplication::translate("MainWindow", "Visualize", nullptr));
+        QTableWidgetItem *___qtablewidgetitem = tableWidget_ShowStacks->horizontalHeaderItem(0);
+        ___qtablewidgetitem->setText(QApplication::translate("MainWindow", "Containers", nullptr));
+        QTableWidgetItem *___qtablewidgetitem1 = tableWidget_ShowStacks->horizontalHeaderItem(1);
+        ___qtablewidgetitem1->setText(QApplication::translate("MainWindow", "Box", nullptr));
+        QTableWidgetItem *___qtablewidgetitem2 = tableWidget_ShowStacks->horizontalHeaderItem(2);
+        ___qtablewidgetitem2->setText(QApplication::translate("MainWindow", "Number", nullptr));
+        tabWidge_Models->setTabText(tabWidge_Models->indexOf(tab_3), QApplication::translate("MainWindow", "Data", nullptr));
+        tabWidge_Models->setTabText(tabWidge_Models->indexOf(tab), QApplication::translate("MainWindow", "2D", nullptr));
+        tabWidge_Models->setTabText(tabWidge_Models->indexOf(tab_2), QApplication::translate("MainWindow", "3D", nullptr));
         menuFile->setTitle(QApplication::translate("MainWindow", "File", nullptr));
         menuNew->setTitle(QApplication::translate("MainWindow", "New", nullptr));
         menuEdit->setTitle(QApplication::translate("MainWindow", "Edit", nullptr));
