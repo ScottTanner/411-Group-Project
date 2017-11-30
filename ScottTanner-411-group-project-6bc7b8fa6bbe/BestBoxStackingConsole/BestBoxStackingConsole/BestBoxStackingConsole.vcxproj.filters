@@ -159,6 +159,15 @@
     <ClCompile Include="GeneratedFiles\Release\moc_DialogAbout.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="FormColorSelector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_FormColorSelector.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_FormColorSelector.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="BestBoxStackingConsole.qrc">
@@ -230,6 +239,12 @@
     <CustomBuild Include="DialogAbout.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
+    <CustomBuild Include="dialog_Color_Selector.ui">
+      <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="FormColorSelector.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_calculate.h">
@@ -287,6 +302,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GeneratedFiles\ui_AboutDialog.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GeneratedFiles\ui_dialog_Color_Selector.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
   </ItemGroup>
