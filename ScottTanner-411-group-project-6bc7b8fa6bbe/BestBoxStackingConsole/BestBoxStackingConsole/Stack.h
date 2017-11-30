@@ -15,6 +15,7 @@ private:
 	bool prove(double bigBoxWidth, double bigBoxHeight, double bigBoxLength, SmallBox smallBox);
 public:
 	Stack(BigBox bigBox, SmallBox smallBox);
+	Stack();
 	int GetNumber();
 	BigBox GetBigBox();
 	SmallBox GetSmallBox();

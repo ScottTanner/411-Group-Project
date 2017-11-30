@@ -201,6 +201,10 @@ Stack::Stack(BigBox bigBox, SmallBox smallBox)
 	calculateListRestBigBoxes();
 }
 
+Stack::Stack()
+{
+}
+
 int Stack::GetNumber()
 {
 	return this->number;

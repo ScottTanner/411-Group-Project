@@ -31,6 +31,7 @@ private slots:
 	void on_TableUpdate();
 	void on_Edit_Boxes();
 	void on_QActionAbout_Clicked();
+	void on_Night_View_clicked();
 	void on_QAction_Change_Color_2D_Clicked();
 
 private:
@@ -59,6 +60,10 @@ private:
 	void paintContainers();
 	void paintBoxes(std::list<Stack> listStack,double conCX, double conCY, double conCZ);
 	void set_Container(double cX, double cY, double cZ, double sBX, double sBY, double sBZ);
+	Stack stack1;
+	Stack stack2;
+	Stack stack3;
+	Stack stack4;
 };
 
 #endif // MAINWINDOW_H

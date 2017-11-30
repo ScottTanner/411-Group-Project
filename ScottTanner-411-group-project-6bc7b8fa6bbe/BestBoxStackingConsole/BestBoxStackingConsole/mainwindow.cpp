@@ -4,6 +4,8 @@
 #include <algorithm>
 #include "DialogAbout.h"
 #include "FormColorSelector.h"
+#include "DrawBoxes.h"
+bool styleControl = true;
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -12,11 +14,11 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 	this->showMaximized();
-
 	connect(ui->actionOne_Sized_Small_Boxes, &QAction::triggered, this, &MainWindow::on_OneSized_clicked);
 	connect(ui->actionExit, &QAction::triggered, this, &MainWindow::on_Exit_clicked);
 	connect(ui->actionEdit_Boxes, &QAction::triggered, this, &MainWindow::on_Edit_Boxes);
 	connect(ui->actionAbout_BestBoxStacking, &QAction::triggered, this, &MainWindow::on_QActionAbout_Clicked);
+	connect(ui->action_ber_BestBoxStacking, &QAction::triggered, this, &MainWindow::on_QActionAbout_Clicked);
 	connect(ui->listWidget_Result, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(on_TableUpdate()));
 	connect(ui->actionChange_Color_2D, &QAction::triggered, this, &MainWindow::on_QAction_Change_Color_2D_Clicked);
 }
@@ -180,131 +182,814 @@ void MainWindow::paintBoxes(std::list<Stack> listStack, double conCX,double conC
 	int constcY = conCY * 20;
 	int constcZ = conCZ * 20;
 
+	
+
+	int listStackSize = listStack.size();
+	double cX;
+	double cY;
+	double cZ;
+	double bX;
+	double bY;
+	double bZ;
+	double cRBX;
+	double cRBY;
+	double cRBZ;
+	int countStack = 0;
+	for (Stack stack : listStack) 
+	{
+		if (countStack++ == 1) {
+			cRBX = stack.GetBigBox().GetBigBoxWidth() * 20;
+			cRBY = stack.GetBigBox().GetBigBoxHeight() * 20;
+			cRBZ = stack.GetBigBox().GetBigBoxLength() * 20;
+		}
+	}
+	//std::reverse(listStack.begin(), listStack.end());
+	QGraphicsRectItem* rectWhite;
+	QGraphicsRectItem* rectWhite1;
+	QGraphicsRectItem* rectWhite2;
+	QGraphicsRectItem* rectWhite3;
+	QGraphicsRectItem* rectWhite4;
+
+	QGraphicsRectItem* rect;
+	QGraphicsRectItem* rect1;
+	QGraphicsRectItem* rect2;
+	QGraphicsRectItem* rect3;
+	QGraphicsRectItem* rect4;
+
+
+	bool different;
+	int countStacks=0;
+
+	for (Stack stack : listStack)
+	{
+		switch (countStacks++) 
+		{
+		case 0:
+			this->stack1 = stack;
+			continue;
+		case 1:
+			this->stack2 = stack;
+			continue;
+		case 2:
+			this->stack3 = stack;
+			continue;
+		case 3:
+			this->stack4 = stack;
+			continue;
+		}
+	}
 	std::reverse(listStack.begin(), listStack.end());
-	for (Stack stack : listStack) {
-		double cX = stack.GetBigBox().GetBigBoxWidth() * 20;
-		double cY = stack.GetBigBox().GetBigBoxHeight()* 20;
-		double cZ = stack.GetBigBox().GetBigBoxLength()* 20;
+	DrawBoxes box;
+	std::list<QGraphicsRectItem *> listItems;
+	//Section Layer desicion
+	switch (listStack.size()) 
+	{
+	case 1:
+		//Section 6
+		this->scene->addItem(box.drawSection6Layer1OverDraw(stack1, bW));
+		listItems = box.drawSection6Layer1Rect(stack1, &pr);
+		for (QGraphicsRectItem* item : listItems)
+		{
+			this->scene->addItem(item);
+		}
+		listItems.clear();
 
-		double bX = stack.GetSmallBox().GetSmallBoxWidth() * 20;
-		double bY = stack.GetSmallBox().GetSmallBoxHeight() * 20;
-		double bZ = stack.GetSmallBox().GetSmallBoxLength() * 20;
+		//Section 5
+		this->scene->addItem(box.drawSection5Layer1OverDraw(stack1, bW));
+		listItems = box.drawSection5Layer1Rect(stack1, &pr);
+		for (QGraphicsRectItem* item : listItems)
+		{
+			this->scene->addItem(item);
+		}
+		listItems.clear();
 
-		if (count == (listStack.size()-1)) {
-			QGraphicsRectItem* rectWhite = new QGraphicsRectItem(20 + cX, 20 + cX + 10 + cY, -(bX)*stack.GetListNumbersX(), -(bY)*stack.GetListNumbersY());
+		//Section 4
+		this->scene->addItem(box.drawSection4Layer1OverDraw(stack1, bW));
+		listItems = box.drawSection4Layer1Rect(stack1, &pr);
+		for (QGraphicsRectItem* item : listItems)
+		{
+			this->scene->addItem(item);
+		}
+		listItems.clear();
+
+		//Section 3
+		this->scene->addItem(box.drawSection3Layer1OverDraw(stack1, bW));
+		listItems = box.drawSection3Layer1Rect(stack1, &pr);
+		for (QGraphicsRectItem* item : listItems)
+		{
+			this->scene->addItem(item);
+		}
+		listItems.clear();
+		//Section 2
+		this->scene->addItem(box.drawSection2Layer1OverDraw(stack1, bW));
+		listItems = box.drawSection2Layer1Rect(stack1, &pr);
+		for (QGraphicsRectItem* item : listItems)
+		{
+			this->scene->addItem(item);
+		}
+		listItems.clear();
+
+		//Section 1
+		this->scene->addItem(box.drawSection1Layer1OverDraw(stack1,bW));
+		listItems = box.drawSection1Layer1Rect(stack1, &pr);
+		for (QGraphicsRectItem * item : listItems) {
+			this->scene->addItem(item);
+		}
+		listItems.clear();
+		break;
+	case 2:
+		//Section 6
+		this->scene->addItem(box.drawSection6Layer1OverDraw(stack1, bW));
+		listItems = box.drawSection6Layer1Rect(stack1, &pr);
+		for (QGraphicsRectItem* item : listItems)
+		{
+			this->scene->addItem(item);
+		}
+		listItems.clear();
+
+		this->scene->addItem(box.drawSection6Layer2OverDraw(stack2, bW,constcX,constcY,constcZ));
+		listItems = box.drawSection6Layer2Rect(stack2, &pgr, constcX, constcY, constcZ);
+		for (QGraphicsRectItem* item : listItems)
+		{
+			this->scene->addItem(item);
+		}
+		listItems.clear();
+
+		//Section 5
+		this->scene->addItem(box.drawSection5Layer1OverDraw(stack1, bW));
+		listItems = box.drawSection5Layer1Rect(stack1, &pr);
+		for (QGraphicsRectItem* item : listItems)
+		{
+			this->scene->addItem(item);
+		}
+		listItems.clear();
+
+		this->scene->addItem(box.drawSection5Layer2OverDraw(stack2, bW,constcX,constcY,constcZ));
+		listItems = box.drawSection5Layer2Rect(stack2, &pgr, constcX, constcY, constcZ);
+		for (QGraphicsRectItem* item : listItems)
+		{
+			this->scene->addItem(item);
+		}
+		listItems.clear();
+
+		//Section 4
+		this->scene->addItem(box.drawSection4Layer1OverDraw(stack1, bW));
+		listItems = box.drawSection4Layer1Rect(stack1, &pr);
+		for (QGraphicsRectItem* item : listItems)
+		{
+			this->scene->addItem(item);
+		}
+		listItems.clear();
+
+		this->scene->addItem(box.drawSection4Layer2OverDraw(stack2, bW,constcX,constcY,constcZ));
+		listItems = box.drawSection4Layer2Rect(stack2, &pgr, constcX, constcY, constcZ);
+		for (QGraphicsRectItem* item : listItems)
+		{
+			this->scene->addItem(item);
+		}
+		listItems.clear();
+
+		//Section 3
+		this->scene->addItem(box.drawSection3Layer2OverDraw(stack2, bW,constcX,constcZ));
+		listItems = box.drawSection3Layer2Rect(stack2, &pgr, constcX, constcZ);
+		for (QGraphicsRectItem* item : listItems)
+		{
+			this->scene->addItem(item);
+		}
+		listItems.clear();
+
+		this->scene->addItem(box.drawSection3Layer1OverDraw(stack1, bW));
+		listItems = box.drawSection3Layer1Rect(stack1, &pr);
+		for (QGraphicsRectItem* item : listItems)
+		{
+			this->scene->addItem(item);
+		}
+		listItems.clear();
+
+		//Section 2
+		this->scene->addItem(box.drawSection2Layer2OverDraw(stack2, bW,constcX,constcZ));
+		listItems = box.drawSection2Layer2Rect(stack2, &pgr, constcX, constcZ);
+		for (QGraphicsRectItem* item : listItems)
+		{
+			this->scene->addItem(item);
+		}
+		listItems.clear();
+
+		this->scene->addItem(box.drawSection2Layer1OverDraw(stack1, bW));
+		listItems = box.drawSection2Layer1Rect(stack1, &pr);
+		for (QGraphicsRectItem* item : listItems)
+		{
+			this->scene->addItem(item);
+		}
+		listItems.clear();
+
+		//Section 1
+		this->scene->addItem(box.drawSection1Layer2OverDraw(stack2, bW, constcX));
+		listItems = box.drawSection1Layer2Rect(stack2, &pgr, constcX);
+		for (QGraphicsRectItem * item : listItems) {
+			this->scene->addItem(item);
+		}
+		listItems.clear();
+
+		this->scene->addItem(box.drawSection1Layer1OverDraw(stack1, bW));
+		listItems = box.drawSection1Layer1Rect(stack1, &pr);
+		for (QGraphicsRectItem * item : listItems) {
+			this->scene->addItem(item);
+		}
+		listItems.clear();
+
+		break;
+	case 3:
+		different = false;
+		countStacks = 1;
+		for (Stack stack : listStack) 
+		{
+			if (countStacks != listStack.size() && stack.GetBigBox().GetBigBoxLength() != constcZ) 
+			{
+				different = true;
+			}
+			else if(countStacks != listStack.size() && stack.GetBigBox().GetBigBoxLength() == constcZ){
+				different = false;
+			}
+			countStacks++;
+		}
+		if (different == true) 
+		{
+			//Section 6
+			this->scene->addItem(box.drawSection6Layer1OverDraw(stack1, bW));
+			listItems = box.drawSection6Layer1Rect(stack1, &pr);
+			for (QGraphicsRectItem* item : listItems)
+			{
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			this->scene->addItem(box.drawSection6Layer3OverDraw(stack3, bW, constcX, constcY, constcZ,cRBX,cRBY,cRBZ));
+			listItems = box.drawSection6Layer3Rect(stack3, &pblue, constcX, constcY, constcZ, cRBX, cRBY, cRBZ);
+			for (QGraphicsRectItem* item : listItems)
+			{
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			this->scene->addItem(box.drawSection6Layer2OverDraw(stack2, bW, constcX, constcY, constcZ));
+			listItems = box.drawSection6Layer2Rect(stack2, &pgr, constcX, constcY, constcZ);
+			for (QGraphicsRectItem* item : listItems)
+			{
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			//Section 5
+			this->scene->addItem(box.drawSection5Layer1OverDraw(stack1, bW));
+			listItems = box.drawSection5Layer1Rect(stack1, &pr);
+			for (QGraphicsRectItem* item : listItems)
+			{
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			this->scene->addItem(box.drawSection5Layer3OverDraw(stack3, bW, constcX, constcY, constcZ, cRBX, cRBY, cRBZ));
+			listItems = box.drawSection5Layer3Rect(stack3, &pblue, constcX, constcY, constcZ, cRBX, cRBY, cRBZ);
+			for (QGraphicsRectItem* item : listItems)
+			{
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			this->scene->addItem(box.drawSection5Layer2OverDraw(stack2, bW, constcX, constcY, constcZ));
+			listItems = box.drawSection5Layer2Rect(stack2, &pgr, constcX, constcY, constcZ);
+			for (QGraphicsRectItem* item : listItems)
+			{
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+			
+			//Section 4
+			this->scene->addItem(box.drawSection4Layer1OverDraw(stack1, bW));
+			listItems = box.drawSection4Layer1Rect(stack1, &pr);
+			for (QGraphicsRectItem* item : listItems)
+			{
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			this->scene->addItem(box.drawSection4Layer3OverDraw(stack3, bW, constcX, constcY, constcZ,cRBX,cRBY,cRBZ));
+			listItems = box.drawSection4Layer3Rect(stack3, &pblue, constcX, constcY, constcZ, cRBX, cRBY, cRBZ);
+			for (QGraphicsRectItem* item : listItems)
+			{
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			this->scene->addItem(box.drawSection4Layer2OverDraw(stack2, bW, constcX, constcY, constcZ));
+			listItems = box.drawSection4Layer2Rect(stack2, &pgr, constcX, constcY, constcZ);
+			for (QGraphicsRectItem* item : listItems)
+			{
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			//Section 3
+			this->scene->addItem(box.drawSection3Layer2OverDraw(stack2, bW, constcX, constcZ));
+			listItems = box.drawSection3Layer2Rect(stack2, &pgr, constcX, constcZ);
+			for (QGraphicsRectItem* item : listItems)
+			{
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			this->scene->addItem(box.drawSection3Layer3OverDraw(stack3, bW, constcX, constcY, constcZ, cRBX, cRBY, cRBZ));
+			listItems = box.drawSection3Layer3Rect(stack3, &pblue, constcX, constcY, constcZ, cRBX, cRBY, cRBZ);
+			for (QGraphicsRectItem* item : listItems)
+			{
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			this->scene->addItem(box.drawSection3Layer1OverDraw(stack1, bW));
+			listItems = box.drawSection3Layer1Rect(stack1, &pr);
+			for (QGraphicsRectItem* item : listItems)
+			{
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			//Section2
+
+			this->scene->addItem(box.drawSection2Layer2OverDraw(stack2, bW, constcX, constcZ));
+			listItems = box.drawSection2Layer2Rect(stack2, &pgr, constcX, constcZ);
+			for (QGraphicsRectItem* item : listItems)
+			{
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			this->scene->addItem(box.drawSection2Layer3OverDraw(stack3, bW, constcX, constcZ, cRBX, cRBY, cRBZ));
+			listItems = box.drawSection2Layer3Rect(stack3, &pblue, constcX, constcZ, cRBX, cRBY, cRBZ);
+			for (QGraphicsRectItem* item : listItems)
+			{
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			this->scene->addItem(box.drawSection2Layer1OverDraw(stack1, bW));
+			listItems = box.drawSection2Layer1Rect(stack1, &pr);
+			for (QGraphicsRectItem* item : listItems)
+			{
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			//Section 1
+			this->scene->addItem(box.drawSection1Layer2OverDraw(stack2, bW, constcX));
+			listItems = box.drawSection1Layer2Rect(stack2, &pgr, constcX);
+			for (QGraphicsRectItem * item : listItems) {
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			this->scene->addItem(box.drawSection1Layer3OverDraw(stack3, bW, constcX, constcZ, cRBX, cRBY, cRBZ));
+			listItems = box.drawSection1Layer3Rect(stack3, &pblue, constcX, constcZ, cRBX, cRBY, cRBZ);
+			for (QGraphicsRectItem* item : listItems)
+			{
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			this->scene->addItem(box.drawSection1Layer1OverDraw(stack1, bW));
+			listItems = box.drawSection1Layer1Rect(stack1, &pr);
+			for (QGraphicsRectItem * item : listItems) {
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+		}
+		else {
+			//Section 6
+			this->scene->addItem(box.drawSection6Layer1OverDraw(stack1, bW));
+			listItems = box.drawSection6Layer1Rect(stack1, &pr);
+			for (QGraphicsRectItem* item : listItems)
+			{
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			this->scene->addItem(box.drawSection6Layer2OverDraw(stack2, bW, constcX, constcY, constcZ));
+			listItems = box.drawSection6Layer2Rect(stack2, &pgr, constcX, constcY, constcZ);
+			for (QGraphicsRectItem* item : listItems)
+			{
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			this->scene->addItem(box.drawSection6Layer3OverDraw(stack3, bW, constcX, constcY, constcZ, cRBX, cRBY, cRBZ));
+			listItems = box.drawSection6Layer3Rect(stack3, &pblue, constcX, constcY, constcZ, cRBX, cRBY, cRBZ);
+			for (QGraphicsRectItem* item : listItems)
+			{
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			//Section 5
+			this->scene->addItem(box.drawSection5Layer1OverDraw(stack1, bW));
+			listItems = box.drawSection5Layer1Rect(stack1, &pr);
+			for (QGraphicsRectItem* item : listItems)
+			{
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			this->scene->addItem(box.drawSection5Layer2OverDraw(stack2, bW, constcX, constcY, constcZ));
+			listItems = box.drawSection5Layer2Rect(stack2, &pgr, constcX, constcY, constcZ);
+			for (QGraphicsRectItem* item : listItems)
+			{
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			this->scene->addItem(box.drawSection5Layer3OverDraw(stack3, bW, constcX, constcY, constcZ, cRBX, cRBY, cRBZ));
+			listItems = box.drawSection5Layer3Rect(stack3, &pblue, constcX, constcY, constcZ, cRBX, cRBY, cRBZ);
+			for (QGraphicsRectItem* item : listItems)
+			{
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			//Section 4
+			this->scene->addItem(box.drawSection4Layer1OverDraw(stack1, bW));
+			listItems = box.drawSection4Layer1Rect(stack1, &pr);
+			for (QGraphicsRectItem* item : listItems)
+			{
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			this->scene->addItem(box.drawSection4Layer2OverDraw(stack2, bW, constcX, constcY, constcZ));
+			listItems = box.drawSection4Layer2Rect(stack2, &pgr, constcX, constcY, constcZ);
+			for (QGraphicsRectItem* item : listItems)
+			{
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			this->scene->addItem(box.drawSection4Layer3OverDraw(stack3, bW, constcX, constcY, constcZ, cRBX, cRBY, cRBZ));
+			listItems = box.drawSection4Layer3Rect(stack3, &pblue, constcX, constcY, constcZ, cRBX, cRBY, cRBZ);
+			for (QGraphicsRectItem* item : listItems)
+			{
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			//Section 3
+			this->scene->addItem(box.drawSection3Layer3OverDraw(stack3, bW, constcX, constcY, constcZ, cRBX, cRBY, cRBZ));
+			listItems = box.drawSection3Layer3Rect(stack3, &pblue, constcX, constcY, constcZ, cRBX, cRBY, cRBZ);
+			for (QGraphicsRectItem* item : listItems)
+			{
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			this->scene->addItem(box.drawSection3Layer2OverDraw(stack2, bW, constcX, constcZ));
+			listItems = box.drawSection3Layer2Rect(stack2, &pgr, constcX, constcZ);
+			for (QGraphicsRectItem* item : listItems)
+			{
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			this->scene->addItem(box.drawSection3Layer1OverDraw(stack1, bW));
+			listItems = box.drawSection3Layer1Rect(stack1, &pr);
+			for (QGraphicsRectItem* item : listItems)
+			{
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			//Section2
+			this->scene->addItem(box.drawSection2Layer3OverDraw(stack3, bW, constcX, constcZ, cRBX, cRBY, cRBZ));
+			listItems = box.drawSection2Layer3Rect(stack3, &pblue, constcX, constcZ, cRBX, cRBY, cRBZ);
+			for (QGraphicsRectItem* item : listItems)
+			{
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			this->scene->addItem(box.drawSection2Layer2OverDraw(stack2, bW, constcX, constcZ));
+			listItems = box.drawSection2Layer2Rect(stack2, &pgr, constcX, constcZ);
+			for (QGraphicsRectItem* item : listItems)
+			{
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			this->scene->addItem(box.drawSection2Layer1OverDraw(stack1, bW));
+			listItems = box.drawSection2Layer1Rect(stack1, &pr);
+			for (QGraphicsRectItem* item : listItems)
+			{
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			//Section 1
+			this->scene->addItem(box.drawSection1Layer3OverDraw(stack3, bW, constcX, constcZ, cRBX, cRBY, cRBZ));
+			listItems = box.drawSection1Layer3Rect(stack3, &pblue, constcX, constcZ, cRBX, cRBY, cRBZ);
+			for (QGraphicsRectItem * item : listItems) {
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			this->scene->addItem(box.drawSection1Layer2OverDraw(stack2, bW, constcX));
+			listItems = box.drawSection1Layer2Rect(stack2, &pgr, constcX);
+			for (QGraphicsRectItem * item : listItems) {
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			this->scene->addItem(box.drawSection1Layer1OverDraw(stack1, bW));
+			listItems = box.drawSection1Layer1Rect(stack1, &pr);
+			for (QGraphicsRectItem * item : listItems) {
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+		}
+		break;
+	case 4:
+		countStacks = 1;
+		//Section 6
+		this->scene->addItem(box.drawSection6Layer1OverDraw(stack1, bW));
+		listItems = box.drawSection6Layer1Rect(stack1, &pr);
+		for (QGraphicsRectItem* item : listItems)
+		{
+			this->scene->addItem(item);
+		}
+		listItems.clear();
+
+		this->scene->addItem(box.drawSection6Layer4OverDraw(stack4, bW, constcX, constcY, constcZ, cRBX, cRBY, cRBZ));
+		listItems = box.drawSection6Layer4Rect(stack4, &pm, constcX, constcY, constcZ, cRBX, cRBY, cRBZ);
+		for (QGraphicsRectItem* item : listItems)
+		{
+			this->scene->addItem(item);
+		}
+		listItems.clear();
+
+		this->scene->addItem(box.drawSection6Layer3OverDraw(stack3, bW, constcX, constcY, constcZ, cRBX, cRBY, cRBZ));
+		listItems = box.drawSection6Layer3Rect(stack3, &pblue, constcX, constcY, constcZ, cRBX, cRBY, cRBZ);
+		for (QGraphicsRectItem* item : listItems)
+		{
+			this->scene->addItem(item);
+		}
+		listItems.clear();
+
+		this->scene->addItem(box.drawSection6Layer2OverDraw(stack2, bW, constcX, constcY, constcZ));
+		listItems = box.drawSection6Layer2Rect(stack2, &pgr, constcX, constcY, constcZ);
+		for (QGraphicsRectItem* item : listItems)
+		{
+			this->scene->addItem(item);
+		}
+		listItems.clear();
+
+		//Section 5
+		this->scene->addItem(box.drawSection5Layer1OverDraw(stack1, bW));
+		listItems = box.drawSection5Layer1Rect(stack1, &pr);
+		for (QGraphicsRectItem* item : listItems)
+		{
+			this->scene->addItem(item);
+		}
+		listItems.clear();
+
+		this->scene->addItem(box.drawSection5Layer4OverDraw(stack4, bW, constcX, constcY, constcZ, cRBX, cRBY, cRBZ));
+		listItems = box.drawSection5Layer4Rect(stack4, &pm, constcX, constcY, constcZ, cRBX, cRBY, cRBZ);
+		for (QGraphicsRectItem* item : listItems)
+		{
+			this->scene->addItem(item);
+		}
+		listItems.clear();
+
+		this->scene->addItem(box.drawSection5Layer3OverDraw(stack3, bW, constcX, constcY, constcZ, cRBX, cRBY, cRBZ));
+		listItems = box.drawSection5Layer3Rect(stack3, &pblue, constcX, constcY, constcZ, cRBX, cRBY, cRBZ);
+		for (QGraphicsRectItem* item : listItems)
+		{
+			this->scene->addItem(item);
+		}
+		listItems.clear();
+
+		this->scene->addItem(box.drawSection5Layer2OverDraw(stack2, bW, constcX, constcY, constcZ));
+		listItems = box.drawSection5Layer2Rect(stack2, &pgr, constcX, constcY, constcZ);
+		for (QGraphicsRectItem* item : listItems)
+		{
+			this->scene->addItem(item);
+		}
+		listItems.clear();
+	
+			//Section 4
+			this->scene->addItem(box.drawSection4Layer1OverDraw(stack1, bW));
+			listItems = box.drawSection4Layer1Rect(stack1, &pr);
+			for (QGraphicsRectItem* item : listItems)
+			{
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			this->scene->addItem(box.drawSection4Layer3OverDraw(stack3, bW, constcX, constcY, constcZ, cRBX, cRBY, cRBZ));
+			listItems = box.drawSection4Layer3Rect(stack3, &pblue, constcX, constcY, constcZ, cRBX, cRBY, cRBZ);
+			for (QGraphicsRectItem* item : listItems)
+			{
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			this->scene->addItem(box.drawSection4Layer4OverDraw(stack4, bW, constcX, constcY, constcZ, cRBX, cRBY, cRBZ));
+			listItems = box.drawSection4Layer4Rect(stack4, &pm, constcX, constcY, constcZ, cRBX, cRBY, cRBZ);
+			for (QGraphicsRectItem* item : listItems)
+			{
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			this->scene->addItem(box.drawSection4Layer2OverDraw(stack2, bW, constcX, constcY, constcZ));
+			listItems = box.drawSection4Layer2Rect(stack2, &pgr, constcX, constcY, constcZ);
+			for (QGraphicsRectItem* item : listItems)
+			{
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+			
+			//Section 3
+
+			this->scene->addItem(box.drawSection3Layer2OverDraw(stack2, bW, constcX, constcZ));
+			listItems = box.drawSection3Layer2Rect(stack2, &pgr, constcX, constcZ);
+			for (QGraphicsRectItem* item : listItems)
+			{
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			this->scene->addItem(box.drawSection3Layer4OverDraw(stack4, bW, constcX, constcY, constcZ, cRBX, cRBY, cRBZ));
+			listItems = box.drawSection3Layer4Rect(stack4, &pm, constcX, constcY, constcZ, cRBX, cRBY, cRBZ);
+			for (QGraphicsRectItem* item : listItems)
+			{
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			this->scene->addItem(box.drawSection3Layer3OverDraw(stack3, bW, constcX, constcY, constcZ, cRBX, cRBY, cRBZ));
+			listItems = box.drawSection3Layer3Rect(stack3, &pblue, constcX, constcY, constcZ, cRBX, cRBY, cRBZ);
+			for (QGraphicsRectItem* item : listItems)
+			{
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			this->scene->addItem(box.drawSection3Layer1OverDraw(stack1, bW));
+			listItems = box.drawSection3Layer1Rect(stack1, &pr);
+			for (QGraphicsRectItem* item : listItems)
+			{
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+			
+			//Section2
+
+			this->scene->addItem(box.drawSection2Layer2OverDraw(stack2, bW, constcX, constcZ));
+			listItems = box.drawSection2Layer2Rect(stack2, &pgr, constcX, constcZ);
+			for (QGraphicsRectItem* item : listItems)
+			{
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			this->scene->addItem(box.drawSection2Layer4OverDraw(stack4, bW, constcX, constcZ, cRBX, cRBY, cRBZ));
+			listItems = box.drawSection2Layer4Rect(stack4, &pm, constcX, constcZ, cRBX, cRBY, cRBZ);
+			for (QGraphicsRectItem* item : listItems)
+			{
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			this->scene->addItem(box.drawSection2Layer3OverDraw(stack3, bW, constcX, constcZ, cRBX, cRBY, cRBZ));
+			listItems = box.drawSection2Layer3Rect(stack3, &pblue, constcX, constcZ, cRBX, cRBY, cRBZ);
+			for (QGraphicsRectItem* item : listItems)
+			{
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+			
+			this->scene->addItem(box.drawSection2Layer1OverDraw(stack1, bW));
+			listItems = box.drawSection2Layer1Rect(stack1, &pr);
+			for (QGraphicsRectItem* item : listItems)
+			{
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			//Section 1
+
+			this->scene->addItem(box.drawSection1Layer2OverDraw(stack2, bW, constcX));
+			listItems = box.drawSection1Layer2Rect(stack2, &pgr, constcX);
+			for (QGraphicsRectItem * item : listItems) {
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			this->scene->addItem(box.drawSection1Layer4OverDraw(stack4, bW, constcX, constcZ, cRBX, cRBY, cRBZ));
+			listItems = box.drawSection1Layer4Rect(stack4, &pm, constcX, constcZ, cRBX, cRBY, cRBZ);
+			for (QGraphicsRectItem * item : listItems) {
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			this->scene->addItem(box.drawSection1Layer3OverDraw(stack3, bW, constcX, constcZ, cRBX, cRBY, cRBZ));
+			listItems = box.drawSection1Layer3Rect(stack3, &pblue, constcX, constcZ, cRBX, cRBY, cRBZ);
+			for (QGraphicsRectItem * item : listItems) {
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+
+			this->scene->addItem(box.drawSection1Layer1OverDraw(stack1, bW));
+			listItems = box.drawSection1Layer1Rect(stack1, &pr);
+			for (QGraphicsRectItem * item : listItems) {
+				this->scene->addItem(item);
+			}
+			listItems.clear();
+		
+		break;
+	}
+
+	listStackSize = listStack.size();
+	//Section 2 //ToDO:Section2
+
+	std::reverse(listStack.begin(), listStack.end());
+	listStackSize = 1;
+	
+	listStackSize = 1;
+	
+	listStackSize = 1;
+	//Section 6
+	/*for (Stack stack : listStack)
+	{
+		if (listStackSize == listStack.size() + 1)
+		{
+			break;
+		}
+		switch (listStackSize)
+		{
+		case 1:
+			cX = stack.GetBigBox().GetBigBoxWidth() * 20;
+			cY = stack.GetBigBox().GetBigBoxHeight() * 20;
+			cZ = stack.GetBigBox().GetBigBoxLength() * 20;
+
+			bX = stack.GetSmallBox().GetSmallBoxWidth() * 20;
+			bY = stack.GetSmallBox().GetSmallBoxHeight() * 20;
+			bZ = stack.GetSmallBox().GetSmallBoxLength() * 20;
+
+			rectWhite = new QGraphicsRectItem(20 + cX + 10 + cZ + 10 + cX + 10 + constcZ, 20 + cX + 10 + cY, -(bZ)*stack.GetListNumbersZ(), -(bY)*stack.GetListNumbersY());
 			rectWhite->setBrush(bW);
 			rectWhite->update();
 			this->scene->addItem(rectWhite);
-			//Section1
-			for (int i = 1; i <= stack.GetListNumbersX(); i++) {
-				QGraphicsRectItem* rectX = new QGraphicsRectItem(20 + cX, 20 + cX + 10 + cY, -(bX)*i, -(bY));
-				rectX->setPen(pr);
-				rectX->update();
-				this->scene->addItem(rectX);
-				for (int j = 1; j <= stack.GetListNumbersY(); j++) {
-					QGraphicsRectItem* rectY = new QGraphicsRectItem(20 + cX, 20 + cX + 10 + cY, -(bX)*i, -(bY)*j);
-					rectY->setPen(pr);
-					rectY->update();
-					this->scene->addItem(rectY);
-				}
-			}
-
-			//Section 2
-			for (int i = 1; i <= stack.GetListNumbersZ(); i++) 
-			{
-				QGraphicsRectItem* rectX = new QGraphicsRectItem(20 + cX + 10, 20 + cX, (bZ)*i, -(bX));
-				rectX->setPen(pr);
-				rectX->update();
-				this->scene->addItem(rectX);
-				for (int j = 1; j <= stack.GetListNumbersX(); j++) {
-					QGraphicsRectItem* rectZ = new QGraphicsRectItem(20 + cX + 10, 20 + cX, (bZ)*i, -(bX)*j);
-					rectZ->setPen(pr);
-					rectZ->update();
-					this->scene->addItem(rectZ);
-				}
-			}
-
-			//Section 3
-			for (int i = 1; i <= stack.GetListNumbersZ(); i++)
-			{
-				QGraphicsRectItem* rectX = new QGraphicsRectItem(20 + cX + 10, 20 + cX + 10 + cY, (bZ)*i, -(bY));
-				rectX->setPen(pr);
-				rectX->update();
-				this->scene->addItem(rectX);
-				for (int j = 1; j <= stack.GetListNumbersY(); j++) {
-					QGraphicsRectItem* rectZ = new QGraphicsRectItem(20 + cX + 10, 20 + cX + 10 + cY, (bZ)*i, -(bY)*j);
-					rectZ->setPen(pr);
-					rectZ->update();
-					this->scene->addItem(rectZ);
-				}
-			}
-
-			//Secton 4
-			for (int i = 1; i <= stack.GetListNumbersZ(); i++)
-			{
-				QGraphicsRectItem* rectX = new QGraphicsRectItem(20 + cX + 10, 20 + cX + 10 + cY + 10, (bZ)*i, (bX));
-				rectX->setPen(pr);
-				rectX->update();
-				this->scene->addItem(rectX);
-				for (int j = 1; j <= stack.GetListNumbersX(); j++) {
-					QGraphicsRectItem* rectZ = new QGraphicsRectItem(20 + cX + 10, 20 + cX + 10 + cY + 10, (bZ)*i, (bX)*j);
-					rectZ->setPen(pr);
-					rectZ->update();
-					this->scene->addItem(rectZ);
-				}
-			}
-
-			//Section 5
-			for (int i = 1; i <= stack.GetListNumbersX(); i++)
-			{
-				QGraphicsRectItem* rectX = new QGraphicsRectItem(20 + cX + 10 + cZ + 10, 20 + cX + 10 + cY, (bX)*i, -(bY));
-				rectX->setPen(pr);
-				rectX->update();
-				this->scene->addItem(rectX);
-				for (int j = 1; j <= stack.GetListNumbersY(); j++) {
-					QGraphicsRectItem* rectZ = new QGraphicsRectItem(20 + cX + 10 + cZ + 10, 20 + cX + 10 + cY, (bX)*i, -(bY)*j);
-					rectZ->setPen(pr);
-					rectZ->update();
-					this->scene->addItem(rectZ);
-				}
-			}
-
 			//Section 6
 			for (int i = 1; i <= stack.GetListNumbersZ(); i++)
 			{
-				QGraphicsRectItem* rectX = new QGraphicsRectItem(20 + cX + 10 + cZ + 10 + cX + 10 + cZ , 20 + cX + 10 + cY, -(bZ)*i, -(bY));
-				rectX->setPen(pr);
-				rectX->update();
-				this->scene->addItem(rectX);
 				for (int j = 1; j <= stack.GetListNumbersY(); j++) {
-					QGraphicsRectItem* rectZ = new QGraphicsRectItem(20 + cX + 10 + cZ + 10 + cX + 10 + cZ, 20 + cX + 10 + cY, -(bZ)*i, -(bY)*j);
-					rectZ->setPen(pr);
-					rectZ->update();
-					this->scene->addItem(rectZ);
+					rect = new QGraphicsRectItem(20 + cX + 10 + cZ + 10 + cX + 10 + constcZ, 20 + cX + 10 + cY, -(bZ)*i, -(bY)*j);
+					rect->setPen(pr);
+					rect->update();
+					this->scene->addItem(rect);
 				}
 			}
-		}
-		else if(count == listStack.size() - 2)
-		{
-			for (int i = 1; i <= stack.GetListNumbersX(); i++) {
-				QGraphicsRectItem* rectX = new QGraphicsRectItem(20 + cX, 20 + constcX + 10 + constcY, -(bX)*i, -(bY));
+			listStackSize++;
+			continue;
+		case 2:
+			cX = stack.GetBigBox().GetBigBoxWidth() * 20;
+			cY = stack.GetBigBox().GetBigBoxHeight() * 20;
+			cZ = stack.GetBigBox().GetBigBoxLength() * 20;
 
-				this->scene->addItem(rectX);
-				rectX->setPen(pgr);
-				rectX->update();
+			bX = stack.GetSmallBox().GetSmallBoxWidth() * 20;
+			bY = stack.GetSmallBox().GetSmallBoxHeight() * 20;
+			bZ = stack.GetSmallBox().GetSmallBoxLength() * 20;
+
+			rectWhite = new QGraphicsRectItem(20 + constcX + 10 + constcZ + 10 + constcX + 10, 20 + constcX + 10 + cY, (bZ)*stack.GetListNumbersZ(), -(bY)*stack.GetListNumbersY());
+			rectWhite->setBrush(bW);
+			rectWhite->update();
+			this->scene->addItem(rectWhite);
+			for (int i = 1; i <= stack.GetListNumbersZ(); i++) {
 				for (int j = 1; j <= stack.GetListNumbersY(); j++) {
-					QGraphicsRectItem* rectY = new QGraphicsRectItem(20 + cX, 20 + constcX + 10 + constcY, -(bX)*i, -(bY)*j);
-					
-					
-					rectY->setPen(pgr);
-					rectY->update();
-					this->scene->addItem(rectY);
+					rect = new QGraphicsRectItem(20 + constcX + 10 + constcZ + 10 + constcX + 10, 20 + constcX + 10 + cY, (bZ)*i, -(bY)*j);
+					rect->setPen(pgr);
+					rect->update();
+					this->scene->addItem(rect);
 				}
 			}
+			listStackSize++;
+			continue;
+		case 3:
+			listStackSize++;
+			continue;
+		case 4:
+			listStackSize++;
+			continue;
 		}
-		count++;
-	}
 
+	}*/
 }
 
 void MainWindow::set_Container(double cX, double cY, double cZ, double sBX, double sBY, double sBZ)

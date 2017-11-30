@@ -126,9 +126,6 @@
     <ClCompile Include="twodimen.cpp">
       <Filter>Source Files\Backup</Filter>
     </ClCompile>
-    <ClCompile Include="mainwindow.cpp">
-      <Filter>Source Files\Backup</Filter>
-    </ClCompile>
     <ClCompile Include="showResult.cpp">
       <Filter>Source Files\Backup</Filter>
     </ClCompile>
@@ -158,6 +155,12 @@
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_DialogAbout.cpp">
       <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="DrawBoxes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mainwindow.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="FormColorSelector.cpp">
       <Filter>Source Files</Filter>
@@ -218,9 +221,6 @@
     <CustomBuild Include="calculate.ui">
       <Filter>Form Files\Backup</Filter>
     </CustomBuild>
-    <CustomBuild Include="mainwindow.h">
-      <Filter>Header Files\Backup</Filter>
-    </CustomBuild>
     <CustomBuild Include="showresult.ui">
       <Filter>Form Files\Backup</Filter>
     </CustomBuild>
@@ -243,6 +243,9 @@
       <Filter>Form Files</Filter>
     </CustomBuild>
     <CustomBuild Include="FormColorSelector.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="mainwindow.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>
@@ -307,6 +310,9 @@
     <ClInclude Include="GeneratedFiles\ui_dialog_Color_Selector.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
+    <ClInclude Include="DrawBoxes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -319,6 +325,9 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Untitled-4.ico" />
+    <Image Include="BestStacking.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BestBoxStackingConsole.rc" />
