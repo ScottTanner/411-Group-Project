@@ -141,6 +141,15 @@ void MainWindow::on_Night_View_clicked()
 {
 }
 
+void MainWindow::on_QAction_Change_Color_2D_Clicked()
+{
+	FormColorSelector colorSelector;
+	colorSelector.setModal(true);
+	colorSelector.exec();
+	set_color(colorSelector.get_smallBoxFirst(), colorSelector.get_smallBoxSecond(), colorSelector.get_smallBoxThird(), colorSelector.get_smallBoxFourth(), colorSelector.get_container(), colorSelector.get_backGround());
+
+}
+
 void MainWindow::on_UnDo_Clicked()
 {
 	
@@ -226,7 +235,7 @@ void MainWindow::on_ReDo_Clicked()
 
 	this->ui->actionUndo->setEnabled(true);
 	this->ui->actionRedo->setDisabled(true);
-}
+
 
 
 	FormColorSelector colorSelector;
