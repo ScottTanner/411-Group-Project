@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include<string>
+#include <QColorDialog>
 
 #include "OneSizedAlgorithm.h"
 #include "ui_OneSizedSmallBoxes.h"
@@ -82,6 +83,7 @@ void Dialog_OneSized::setTextBoxesEdit()
 
 	return;
 }
+
 
 bool Dialog_OneSized::getCalculated()
 {
@@ -228,7 +230,6 @@ void Dialog_OneSized::on_pushButton_ClearSmallBox_Clicked()
 	ui->lineEdit_SmallBoxHeight->setText("");
 	ui->lineEdit_SmallBoxLength->setText("");
 }
-
 
 void Dialog_OneSized::update_SMvalues()
 {

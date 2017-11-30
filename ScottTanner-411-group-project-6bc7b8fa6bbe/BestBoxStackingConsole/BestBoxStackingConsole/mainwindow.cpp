@@ -3,9 +3,11 @@
 #include "ui_boxstacking.h"
 #include <algorithm>
 #include "DialogAbout.h"
+#include "FormColorSelector.h"
 #include "DrawBoxes.h"
 
 bool styleControl = true;
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -19,9 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect(ui->actionAbout_BestBoxStacking, &QAction::triggered, this, &MainWindow::on_QActionAbout_Clicked);
 	connect(ui->action_ber_BestBoxStacking, &QAction::triggered, this, &MainWindow::on_QActionAbout_Clicked);
 	connect(ui->listWidget_Result, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(on_TableUpdate()));
-	connect(ui->actionUndo, &QAction::triggered, this, &MainWindow::on_UnDo_Clicked);
-	connect(ui->actionRedo, &QAction::triggered, this, &MainWindow::on_ReDo_Clicked);
-	connect(ui->tabWidge_Models, SIGNAL(currentChanged(int)), this, SLOT(on_TableUpdate()));
+	connect(ui->actionChange_Color_2D, &QAction::triggered, this, &MainWindow::on_QAction_Change_Color_2D_Clicked);
 }
 
 void MainWindow::set_container(double cX, double cY, double cZ, double boxX, double boxY, double boxZ)
@@ -41,6 +41,34 @@ void MainWindow::set_container(double cX, double cY, double cZ, double boxX, dou
 	ui->lineEdit_ContainerWidth->setText(QString::number(this->containerX));
 	ui->lineEdit_ContainerHeight->setText(QString::number(this->containerY));
 	ui->lineEdit_ContainerLength->setText(QString::number(this->containerZ));
+}
+
+void MainWindow::set_color(QColor smallBoxFirst, QColor smallBoxSecond, QColor smallBoxThird, QColor smallBoxFourth, QColor container, QColor background)
+{
+	this->smallBoxFirst = smallBoxFirst;
+	this->smallBoxSecond = smallBoxSecond;
+	this->smallBoxThird = smallBoxSecond;
+	this->smallBoxFourth = smallBoxSecond;
+	this->container = container;
+	this->background = background;
+
+	//set styles for pens
+	this->boxFirstPen.setStyle(Qt::SolidLine);
+	this->boxSecondPen.setStyle(Qt::SolidLine);
+	this->boxThirdPen.setStyle(Qt::SolidLine);
+	this->boxFourthPen.setStyle(Qt::SolidLine);
+	this->containerPen.setStyle(Qt::SolidLine);
+
+	//set color for brushes
+	this->boxFirstPen.setColor(this->smallBoxFirst);
+	this->boxSecondPen.setColor(this->smallBoxSecond);
+	this->boxThirdPen.setColor(this->smallBoxThird);
+	this->boxFourthPen.setColor(this->smallBoxFourth);
+	this->containerPen.setColor(this->container);
+	
+	this->allBrush.setStyle(Qt::SolidPattern);
+	this->allBrush.setColor(Qt::white);
+
 }
 
 MainWindow::~MainWindow()
@@ -201,10 +229,17 @@ void MainWindow::on_ReDo_Clicked()
 }
 
 
+	FormColorSelector colorSelector;
+	colorSelector.setModal(true);
+	colorSelector.exec();
+	set_color(colorSelector.get_smallBoxFirst(), colorSelector.get_smallBoxSecond(), colorSelector.get_smallBoxThird(), colorSelector.get_smallBoxFourth(), colorSelector.get_container(), colorSelector.get_backGround());
+}
+
+
 void MainWindow::paintContainers()
 {
 	this->scene = new QGraphicsScene(0, 0, this->ui->graphicsView_TwoDim->width(), this->ui->graphicsView_TwoDim->height(), this->ui->graphicsView_TwoDim);
-	this->scene->setBackgroundBrush(Qt::white);
+	this->scene->setBackgroundBrush(this->background);
 
 	this->ui->graphicsView_TwoDim->setScene(this->scene);
 	double x = this->containerX * 20;
@@ -226,16 +261,11 @@ void MainWindow::paintContainers()
 
 void MainWindow::paintBoxes(std::list<Stack> listStack, double conCX,double conCY,double conCZ)
 {
-	QPen pr(Qt::SolidPattern);
-	pr.setColor(Qt::red);
-	QPen pgr(Qt::SolidPattern);
-	pgr.setColor(Qt::green);
-	QPen pblue(Qt::SolidPattern);
-	pblue.setColor(Qt::blue);
-	QPen pm(Qt::SolidPattern);
-	pm.setColor(Qt::magenta);
-	QBrush bW(Qt::SolidPattern);
-	bW.setColor(Qt::white);
+	QPen pr = this->boxFirstPen;
+	QPen pgr = this->boxSecondPen;
+	QPen pblue = this->boxThirdPen;
+	QPen pm = this->boxFourthPen;
+	QBrush bW = this->allBrush;
 
 	int count = 0;
 	int constcX = conCX*20;
