@@ -126,9 +126,6 @@
     <ClCompile Include="twodimen.cpp">
       <Filter>Source Files\Backup</Filter>
     </ClCompile>
-    <ClCompile Include="mainwindow.cpp">
-      <Filter>Source Files\Backup</Filter>
-    </ClCompile>
     <ClCompile Include="showResult.cpp">
       <Filter>Source Files\Backup</Filter>
     </ClCompile>
@@ -212,9 +209,6 @@
     <CustomBuild Include="calculate.ui">
       <Filter>Form Files\Backup</Filter>
     </CustomBuild>
-    <CustomBuild Include="mainwindow.h">
-      <Filter>Header Files\Backup</Filter>
-    </CustomBuild>
     <CustomBuild Include="showresult.ui">
       <Filter>Form Files\Backup</Filter>
     </CustomBuild>
@@ -231,6 +225,9 @@
       <Filter>Form Files</Filter>
     </CustomBuild>
     <CustomBuild Include="DialogAbout.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="mainwindow.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>

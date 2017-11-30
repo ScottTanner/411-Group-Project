@@ -14,46 +14,157 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QDialog>
-#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QPlainTextEdit>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QSpacerItem>
-#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
 class Ui_DialogAbout
 {
 public:
-    QWidget *layoutWidget;
-    QHBoxLayout *hboxLayout;
-    QSpacerItem *spacerItem;
+    QPlainTextEdit *plainTextEdit;
     QPushButton *okButton;
 
     void setupUi(QDialog *DialogAbout)
     {
         if (DialogAbout->objectName().isEmpty())
             DialogAbout->setObjectName(QStringLiteral("DialogAbout"));
-        DialogAbout->resize(400, 300);
+        DialogAbout->resize(448, 371);
         QIcon icon;
         icon.addFile(QStringLiteral("Untitled-4.ico"), QSize(), QIcon::Normal, QIcon::On);
         DialogAbout->setWindowIcon(icon);
-        layoutWidget = new QWidget(DialogAbout);
-        layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
-        layoutWidget->setGeometry(QRect(20, 250, 351, 33));
-        hboxLayout = new QHBoxLayout(layoutWidget);
-        hboxLayout->setSpacing(6);
-        hboxLayout->setObjectName(QStringLiteral("hboxLayout"));
-        hboxLayout->setContentsMargins(0, 0, 0, 0);
-        spacerItem = new QSpacerItem(131, 31, QSizePolicy::Expanding, QSizePolicy::Minimum);
-
-        hboxLayout->addItem(spacerItem);
-
-        okButton = new QPushButton(layoutWidget);
+        DialogAbout->setStyleSheet(QLatin1String("QDialog{\n"
+"\n"
+"}\n"
+"\n"
+"QMenuBar{\n"
+"background-color:#1d1d1d;\n"
+"padding:5px;\n"
+"	font: 12pt \"MS Shell Dlg 2\";\n"
+"}\n"
+"\n"
+"QMenuBar::item{\n"
+"background-color:#1d1d1d;\n"
+"color:#fff;\n"
+"padding:5px;\n"
+"\n"
+"}\n"
+"\n"
+"QMenu{\n"
+"color:#fff;\n"
+"padding:0;\n"
+"}\n"
+"\n"
+"QMenu::item:selected{\n"
+"color:#fff;\n"
+"background-color:#00aba9;\n"
+"}\n"
+"\n"
+"QTableWidget{\n"
+"background-color:#3d3d3d;\n"
+"color:#fff;\n"
+"  selection-background-color: #da532c;\n"
+"border:solid;\n"
+"border-width:3px;\n"
+"border-color:#da532c;\n"
+"}\n"
+"QHeaderView::section{\n"
+"background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(20, 158, 217, 255), stop:1 rgba(36, 158, 217, 255));\n"
+"border:none;\n"
+"border-top-style:solid;\n"
+"border-width:1px;\n"
+"border-top-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(20, 158, 217, 255), stop:1 rgba(36, 158, 217, 255));\n"
+"color:#fff;\n"
+"\n"
+"}\n"
+"QHeaderView{\n"
+"background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1"
+                        ", y2:0, stop:0 rgba(20, 158, 217, 255), stop:1 rgba(36, 158, 217, 255));\n"
+"\n"
+"border:none;\n"
+"border-top-style:solid;\n"
+"border-width:1px;\n"
+"border-top-color:#149ED9;\n"
+"color:#fff;\n"
+"	font: 75 12pt \"Calibri\";\n"
+"}\n"
+"\n"
+"QTableCornerButton::section{\n"
+"border:none;\n"
+"background-color:#149ED9;\n"
+"}\n"
+"\n"
+"QListWidget{\n"
+"background-color:#3d3d3d;\n"
+"color:#fff;\n"
+"}\n"
+"\n"
+"QMenu{\n"
+"background-color:#3d3d3d;\n"
+"}\n"
+"QStatusBar{\n"
+"background-color:#7e3878;\n"
+"color:#fff;\n"
+"}\n"
+"QComboBox\n"
+"{\n"
+"border-style:solid;\n"
+"\n"
+"background-color:#3d3d3d;\n"
+"color:#fff;\n"
+"border-radius:7px;\n"
+"}\n"
+"QPushButton{\n"
+"border-style:solid;\n"
+"\n"
+"background-color:#3d3d3d;\n"
+"color:#fff;\n"
+"border-radius:7px;\n"
+"}\n"
+"QPushButton:hover{\n"
+"color:#ccc;\n"
+"	background-color: qlineargradient(spread:pad, x1:0.517, y1:0, x2:0.517, y2:1, stop:0 rgba(45, 45, 45, 255), stop:0.505682 rgba(45, 45, 45, 255), stop:1 rgba(29, 29, 29, 255));\n"
+"	border-color:#2d89ef;\n"
+"border-width:2p"
+                        "x;\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"background-color: qlineargradient(spread:pad, x1:0.517, y1:0, x2:0.517, y2:1, stop:0 rgba(29, 29, 29, 255), stop:0.505682 rgba(45, 45, 45, 255), stop:1 rgba(29, 29, 29, 255));\n"
+"}\n"
+"\n"
+"\n"
+"QTabWidget::tab{\n"
+"background-color:#3d3d3d;\n"
+"}\n"
+"\n"
+"QLineEdit{\n"
+"border-radius:0;\n"
+"}\n"
+"\n"
+"QProgressBar{\n"
+"border-radius:0;\n"
+"text-align:center;\n"
+"color:#fff;\n"
+"background-color:transparent;\n"
+"border: 2px solid #e3a21a;\n"
+"border-radius:7px;\n"
+"	font: 75 12pt \"Open Sans\";\n"
+"\n"
+"}\n"
+"\n"
+"QProgressBar::chunk{\n"
+"background-color:#2d89ef;\n"
+"width:20px;\n"
+"}"));
+        plainTextEdit = new QPlainTextEdit(DialogAbout);
+        plainTextEdit->setObjectName(QStringLiteral("plainTextEdit"));
+        plainTextEdit->setEnabled(false);
+        plainTextEdit->setGeometry(QRect(10, 10, 431, 311));
+        okButton = new QPushButton(DialogAbout);
         okButton->setObjectName(QStringLiteral("okButton"));
-
-        hboxLayout->addWidget(okButton);
-
+        okButton->setGeometry(QRect(360, 340, 81, 21));
 
         retranslateUi(DialogAbout);
         QObject::connect(okButton, SIGNAL(clicked()), DialogAbout, SLOT(accept()));
@@ -64,6 +175,31 @@ public:
     void retranslateUi(QDialog *DialogAbout)
     {
         DialogAbout->setWindowTitle(QApplication::translate("DialogAbout", "About Box Stacking", nullptr));
+        plainTextEdit->setPlainText(QApplication::translate("DialogAbout", "English.\n"
+"\n"
+"Box Sorting and Management System (BSMS) \n"
+"is designed to be a convenient and easy-to-use \n"
+"application that allows users to better manage \n"
+"their storage space. Above all, we hope to provide a comfortable user experience. \n"
+"\n"
+"Deutsche.\n"
+"\n"
+"Sortier- und Managementsystem (BSMS)\n"
+"ist so konzipiert, dass es bequem und einfach zu bedienen ist\n"
+"Anwendung, die Benutzer besser verwalten k\303\266nnen\n"
+"ihr Speicherplatz. Wir hoffen vor allem, eine komfortable Benutzererfahrung zu bieten.\n"
+"\n"
+"\n"
+"Developers\n"
+"\n"
+"Scott T.\n"
+"Steffen G.\n"
+"Ryan V.\n"
+"Justin J.\n"
+"Jon S.\n"
+" \n"
+"\n"
+"", nullptr));
         okButton->setText(QApplication::translate("DialogAbout", "OK", nullptr));
     } // retranslateUi
 
