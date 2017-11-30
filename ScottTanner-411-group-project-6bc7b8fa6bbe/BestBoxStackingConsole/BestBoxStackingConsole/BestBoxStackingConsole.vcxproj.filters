@@ -159,6 +159,9 @@
     <ClCompile Include="DrawBoxes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="mainwindow.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="BestBoxStackingConsole.qrc">
