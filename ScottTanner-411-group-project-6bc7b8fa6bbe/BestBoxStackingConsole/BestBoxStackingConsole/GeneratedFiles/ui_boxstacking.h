@@ -47,6 +47,7 @@ public:
     QAction *actionChange_Color_2D;
     QAction *actionChange_Color_3D;
     QAction *actionNight_View;
+    QAction *action_ber_BestBoxStacking;
     QWidget *centralwidget;
     QGridLayout *gridLayout_4;
     QWidget *widget;
@@ -95,6 +96,130 @@ public:
         QIcon icon;
         icon.addFile(QStringLiteral("Untitled-4.ico"), QSize(), QIcon::Normal, QIcon::On);
         MainWindow->setWindowIcon(icon);
+        MainWindow->setStyleSheet(QLatin1String("QDialog{\n"
+"\n"
+"}\n"
+"\n"
+"QMenuBar{\n"
+"background-color:#1d1d1d;\n"
+"padding:5px;\n"
+"	font: 12pt \"MS Shell Dlg 2\";\n"
+"}\n"
+"\n"
+"QMenuBar::item{\n"
+"background-color:#1d1d1d;\n"
+"color:#fff;\n"
+"padding:5px;\n"
+"\n"
+"}\n"
+"\n"
+"QMenu{\n"
+"color:#fff;\n"
+"padding:0;\n"
+"}\n"
+"\n"
+"QMenu::item:selected{\n"
+"color:#fff;\n"
+"background-color:#00aba9;\n"
+"}\n"
+"\n"
+"QTableWidget{\n"
+"background-color:#3d3d3d;\n"
+"color:#fff;\n"
+"  selection-background-color: #da532c;\n"
+"border:solid;\n"
+"border-width:3px;\n"
+"border-color:#da532c;\n"
+"}\n"
+"QHeaderView::section{\n"
+"background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(20, 158, 217, 255), stop:1 rgba(36, 158, 217, 255));\n"
+"border:none;\n"
+"border-top-style:solid;\n"
+"border-width:1px;\n"
+"border-top-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(20, 158, 217, 255), stop:1 rgba(36, 158, 217, 255));\n"
+"color:#fff;\n"
+"\n"
+"}\n"
+"QHeaderView{\n"
+"background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1"
+                        ", y2:0, stop:0 rgba(20, 158, 217, 255), stop:1 rgba(36, 158, 217, 255));\n"
+"\n"
+"border:none;\n"
+"border-top-style:solid;\n"
+"border-width:1px;\n"
+"border-top-color:#149ED9;\n"
+"color:#fff;\n"
+"	font: 75 12pt \"Calibri\";\n"
+"}\n"
+"\n"
+"QTableCornerButton::section{\n"
+"border:none;\n"
+"background-color:#149ED9;\n"
+"}\n"
+"\n"
+"QListWidget{\n"
+"background-color:#3d3d3d;\n"
+"color:#fff;\n"
+"}\n"
+"\n"
+"QMenu{\n"
+"background-color:#3d3d3d;\n"
+"}\n"
+"QStatusBar{\n"
+"background-color:#7e3878;\n"
+"color:#fff;\n"
+"}\n"
+"QComboBox\n"
+"{\n"
+"border-style:solid;\n"
+"\n"
+"background-color:#3d3d3d;\n"
+"color:#fff;\n"
+"border-radius:7px;\n"
+"}\n"
+"QPushButton{\n"
+"border-style:solid;\n"
+"\n"
+"background-color:#3d3d3d;\n"
+"color:#fff;\n"
+"border-radius:7px;\n"
+"}\n"
+"QPushButton:hover{\n"
+"color:#ccc;\n"
+"	background-color: qlineargradient(spread:pad, x1:0.517, y1:0, x2:0.517, y2:1, stop:0 rgba(45, 45, 45, 255), stop:0.505682 rgba(45, 45, 45, 255), stop:1 rgba(29, 29, 29, 255));\n"
+"	border-color:#2d89ef;\n"
+"border-width:2p"
+                        "x;\n"
+"}\n"
+"\n"
+"QPushButton:pressed{\n"
+"background-color: qlineargradient(spread:pad, x1:0.517, y1:0, x2:0.517, y2:1, stop:0 rgba(29, 29, 29, 255), stop:0.505682 rgba(45, 45, 45, 255), stop:1 rgba(29, 29, 29, 255));\n"
+"}\n"
+"\n"
+"\n"
+"QTabWidget::tab{\n"
+"background-color:#3d3d3d;\n"
+"}\n"
+"\n"
+"QLineEdit{\n"
+"border-radius:0;\n"
+"}\n"
+"\n"
+"QProgressBar{\n"
+"border-radius:0;\n"
+"text-align:center;\n"
+"color:#fff;\n"
+"background-color:transparent;\n"
+"border: 2px solid #e3a21a;\n"
+"border-radius:7px;\n"
+"	font: 75 12pt \"Open Sans\";\n"
+"\n"
+"}\n"
+"\n"
+"QProgressBar::chunk{\n"
+"background-color:#2d89ef;\n"
+"width:20px;\n"
+"}"));
         actionOpen = new QAction(MainWindow);
         actionOpen->setObjectName(QStringLiteral("actionOpen"));
         actionExport = new QAction(MainWindow);
@@ -123,6 +248,8 @@ public:
         actionChange_Color_3D->setObjectName(QStringLiteral("actionChange_Color_3D"));
         actionNight_View = new QAction(MainWindow);
         actionNight_View->setObjectName(QStringLiteral("actionNight_View"));
+        action_ber_BestBoxStacking = new QAction(MainWindow);
+        action_ber_BestBoxStacking->setObjectName(QStringLiteral("action_ber_BestBoxStacking"));
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QStringLiteral("centralwidget"));
         gridLayout_4 = new QGridLayout(centralwidget);
@@ -263,7 +390,7 @@ public:
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QStringLiteral("menubar"));
-        menubar->setGeometry(QRect(0, 0, 1126, 21));
+        menubar->setGeometry(QRect(0, 0, 1126, 40));
         menuFile = new QMenu(menubar);
         menuFile->setObjectName(QStringLiteral("menuFile"));
         menuNew = new QMenu(menuFile);
@@ -296,6 +423,7 @@ public:
         menuView->addAction(actionChange_Color_3D);
         menuView->addAction(actionNight_View);
         menuHelp->addAction(actionAbout_BestBoxStacking);
+        menuHelp->addAction(action_ber_BestBoxStacking);
 
         retranslateUi(MainWindow);
 
@@ -320,6 +448,7 @@ public:
         actionChange_Color_2D->setText(QApplication::translate("MainWindow", "Change Color 2D", nullptr));
         actionChange_Color_3D->setText(QApplication::translate("MainWindow", "Change Color 3D", nullptr));
         actionNight_View->setText(QApplication::translate("MainWindow", "Day/Night View", nullptr));
+        action_ber_BestBoxStacking->setText(QApplication::translate("MainWindow", "\303\234ber BestBoxStacking", nullptr));
         groupBoxContainer->setTitle(QApplication::translate("MainWindow", "Container", nullptr));
         label->setText(QApplication::translate("MainWindow", "Width", nullptr));
         lineEdit_ContainerWidth->setText(QString());
