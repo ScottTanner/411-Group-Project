@@ -4,6 +4,7 @@
 #include <algorithm>
 #include "DialogAbout.h"
 #include "DrawBoxes.h"
+
 bool styleControl = true;
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -18,6 +19,9 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect(ui->actionAbout_BestBoxStacking, &QAction::triggered, this, &MainWindow::on_QActionAbout_Clicked);
 	connect(ui->action_ber_BestBoxStacking, &QAction::triggered, this, &MainWindow::on_QActionAbout_Clicked);
 	connect(ui->listWidget_Result, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(on_TableUpdate()));
+	connect(ui->actionUndo, &QAction::triggered, this, &MainWindow::on_UnDo_Clicked);
+	connect(ui->actionRedo, &QAction::triggered, this, &MainWindow::on_ReDo_Clicked);
+	connect(ui->tabWidge_Models, SIGNAL(currentChanged(int)), this, SLOT(on_TableUpdate()));
 }
 
 void MainWindow::set_container(double cX, double cY, double cZ, double boxX, double boxY, double boxZ)
@@ -105,6 +109,97 @@ void MainWindow::on_QActionAbout_Clicked()
 	about.exec();
 }
 
+void MainWindow::on_Night_View_clicked()
+{
+}
+
+void MainWindow::on_UnDo_Clicked()
+{
+	
+	unReDo.ReDoValue(this->containerX, this->containerY, this->containerZ, this->boxX, this->boxY, this->boxZ);
+
+	this->ui->actionEdit_Boxes->setEnabled(true);
+	this->containerX = unReDo.UnDoGetCX();
+	this->containerY = unReDo.UnDoGetCY();
+	this->containerZ = unReDo.UnDoGetCZ();
+
+	this->boxX = unReDo.UnDoGetBX();
+	this->boxY = unReDo.UnDoGetBY();
+	this->boxZ = unReDo.UnDoGetBZ();
+
+	int count = 0;
+
+	this->ui->listWidget_Result->clear();
+	this->ui->tableWidget_ShowStacks->clear();
+	for (int i = this->ui->tableWidget_ShowStacks->rowCount(); i > 0; i--) {
+		this->ui->tableWidget_ShowStacks->removeRow(i-1);
+	}
+	QTableWidgetItem* item = new QTableWidgetItem(QString::fromStdString("Containers"));
+	this->ui->tableWidget_ShowStacks->setHorizontalHeaderItem(0,item);
+	QTableWidgetItem* item2 = new QTableWidgetItem(QString::fromStdString("Box"));
+	this->ui->tableWidget_ShowStacks->setHorizontalHeaderItem(1, item2);
+	QTableWidgetItem* item3 = new QTableWidgetItem(QString::fromStdString("Number"));
+	this->ui->tableWidget_ShowStacks->setHorizontalHeaderItem(2, item3);
+	this->scene->clear();
+	this->scene->update();
+
+	if (!(this->containerX == 0 && this->containerY == 0 && this->containerZ == 0 &&
+		this->boxX == 0 && this->boxY == 0 && this->boxZ == 0)) {
+		this->sc = *new StackCollection(StackCollection(this->containerX, this->containerY, this->containerZ, this->boxX, this->boxY, this->boxZ));
+	
+		std::list<std::pair<std::list<Stack>, int>> listSC = *new std::list<std::pair<std::list<Stack>, int>>(this->sc.GetCompletedStackCollection());
+		for (std::list<std::pair<std::list<Stack>, int>>::iterator it = listSC.begin(); it != listSC.end(); it++)
+		{
+			this->ui->listWidget_Result->insertItem(count++, QString::number(it->second));
+		}
+	}
+	this->set_Container(this->containerX, this->containerY, this->containerZ, this->boxX, this->boxY, this->boxZ);
+
+	this->ui->actionRedo->setEnabled(true);
+	this->ui->actionUndo->setDisabled(true);
+}
+
+void MainWindow::on_ReDo_Clicked()
+{
+	unReDo.UnDoValue(this->containerX, this->containerY, this->containerZ, this->boxX, this->boxY, this->boxZ);
+
+	this->ui->actionEdit_Boxes->setEnabled(true);
+	this->containerX = unReDo.ReDoGetCX();
+	this->containerY = unReDo.ReDoGetCY();
+	this->containerZ = unReDo.ReDoGetCZ();
+
+	this->boxX = unReDo.ReDoGetBX();
+	this->boxY = unReDo.ReDoGetBY();
+	this->boxZ = unReDo.ReDoGetBZ();
+
+	this->sc = *new StackCollection(StackCollection(this->containerX, this->containerY, this->containerZ, this->boxX, this->boxY, this->boxZ));
+
+	int count = 0;
+	this->ui->listWidget_Result->clear();
+	this->ui->tableWidget_ShowStacks->clear();
+	for (int i = this->ui->tableWidget_ShowStacks->rowCount(); i > 0; i--) {
+		this->ui->tableWidget_ShowStacks->removeRow(i - 1);
+	}
+	QTableWidgetItem* item = new QTableWidgetItem(QString::fromStdString("Containers"));
+	this->ui->tableWidget_ShowStacks->setHorizontalHeaderItem(0, item);
+	QTableWidgetItem* item2 = new QTableWidgetItem(QString::fromStdString("Box"));
+	this->ui->tableWidget_ShowStacks->setHorizontalHeaderItem(1, item2);
+	QTableWidgetItem* item3 = new QTableWidgetItem(QString::fromStdString("Number"));
+	this->ui->tableWidget_ShowStacks->setHorizontalHeaderItem(2, item3);
+	//this->ui->tableWidget_ShowStacks->clear();
+	this->scene->clear();
+	this->scene->update();
+	std::list<std::pair<std::list<Stack>, int>> listSC = *new std::list<std::pair<std::list<Stack>, int>>(this->sc.GetCompletedStackCollection());
+	for (std::list<std::pair<std::list<Stack>, int>>::iterator it = listSC.begin(); it != listSC.end(); it++)
+	{
+		this->ui->listWidget_Result->insertItem(count++, QString::number(it->second));
+	}
+	this->set_Container(this->containerX, this->containerY, this->containerZ, this->boxX, this->boxY, this->boxZ);
+
+	this->ui->actionUndo->setEnabled(true);
+	this->ui->actionRedo->setDisabled(true);
+}
+
 
 void MainWindow::paintContainers()
 {
@@ -168,7 +263,7 @@ void MainWindow::paintBoxes(std::list<Stack> listStack, double conCX,double conC
 			cRBZ = stack.GetBigBox().GetBigBoxLength() * 20;
 		}
 	}
-	//std::reverse(listStack.begin(), listStack.end());
+
 	QGraphicsRectItem* rectWhite;
 	QGraphicsRectItem* rectWhite1;
 	QGraphicsRectItem* rectWhite2;
@@ -879,82 +974,11 @@ void MainWindow::paintBoxes(std::list<Stack> listStack, double conCX,double conC
 		
 		break;
 	}
-
-	listStackSize = listStack.size();
-	//Section 2 //ToDO:Section2
-
-	std::reverse(listStack.begin(), listStack.end());
-	listStackSize = 1;
-	
-	listStackSize = 1;
-	
-	listStackSize = 1;
-	//Section 6
-	/*for (Stack stack : listStack)
-	{
-		if (listStackSize == listStack.size() + 1)
-		{
-			break;
-		}
-		switch (listStackSize)
-		{
-		case 1:
-			cX = stack.GetBigBox().GetBigBoxWidth() * 20;
-			cY = stack.GetBigBox().GetBigBoxHeight() * 20;
-			cZ = stack.GetBigBox().GetBigBoxLength() * 20;
-
-			bX = stack.GetSmallBox().GetSmallBoxWidth() * 20;
-			bY = stack.GetSmallBox().GetSmallBoxHeight() * 20;
-			bZ = stack.GetSmallBox().GetSmallBoxLength() * 20;
-
-			rectWhite = new QGraphicsRectItem(20 + cX + 10 + cZ + 10 + cX + 10 + constcZ, 20 + cX + 10 + cY, -(bZ)*stack.GetListNumbersZ(), -(bY)*stack.GetListNumbersY());
-			rectWhite->setBrush(bW);
-			rectWhite->update();
-			this->scene->addItem(rectWhite);
-			//Section 6
-			for (int i = 1; i <= stack.GetListNumbersZ(); i++)
-			{
-				for (int j = 1; j <= stack.GetListNumbersY(); j++) {
-					rect = new QGraphicsRectItem(20 + cX + 10 + cZ + 10 + cX + 10 + constcZ, 20 + cX + 10 + cY, -(bZ)*i, -(bY)*j);
-					rect->setPen(pr);
-					rect->update();
-					this->scene->addItem(rect);
-				}
-			}
-			listStackSize++;
-			continue;
-		case 2:
-			cX = stack.GetBigBox().GetBigBoxWidth() * 20;
-			cY = stack.GetBigBox().GetBigBoxHeight() * 20;
-			cZ = stack.GetBigBox().GetBigBoxLength() * 20;
-
-			bX = stack.GetSmallBox().GetSmallBoxWidth() * 20;
-			bY = stack.GetSmallBox().GetSmallBoxHeight() * 20;
-			bZ = stack.GetSmallBox().GetSmallBoxLength() * 20;
-
-			rectWhite = new QGraphicsRectItem(20 + constcX + 10 + constcZ + 10 + constcX + 10, 20 + constcX + 10 + cY, (bZ)*stack.GetListNumbersZ(), -(bY)*stack.GetListNumbersY());
-			rectWhite->setBrush(bW);
-			rectWhite->update();
-			this->scene->addItem(rectWhite);
-			for (int i = 1; i <= stack.GetListNumbersZ(); i++) {
-				for (int j = 1; j <= stack.GetListNumbersY(); j++) {
-					rect = new QGraphicsRectItem(20 + constcX + 10 + constcZ + 10 + constcX + 10, 20 + constcX + 10 + cY, (bZ)*i, -(bY)*j);
-					rect->setPen(pgr);
-					rect->update();
-					this->scene->addItem(rect);
-				}
-			}
-			listStackSize++;
-			continue;
-		case 3:
-			listStackSize++;
-			continue;
-		case 4:
-			listStackSize++;
-			continue;
-		}
-
-	}*/
+	//
+	int width = this->scene->sceneRect().width();//this->ui->graphicsView_TwoDim->frameSize().width();
+	int height = this->scene->sceneRect().height();//this->ui->graphicsView_TwoDim->frameSize().height();
+	this->ui->graphicsView_TwoDim->setSceneRect(0, 0, width, height);//fitInView(this->scene->sceneRect(), Qt::KeepAspectRatio);
+	this->ui->graphicsView_TwoDim->update();
 }
 
 void MainWindow::set_Container(double cX, double cY, double cZ, double sBX, double sBY, double sBZ)
@@ -985,10 +1009,12 @@ void MainWindow::on_OneSized_clicked(bool edit)
 	}
 	oneSized.setModal(true);
 	oneSized.exec();
+	unReDo.UnDoValue(this->containerX, this->containerY, this->containerZ, this->boxX, this->boxY, this->boxZ);
 	if(oneSized.getCalculated() == false)
 	{
 		return;
 	}
+	this->ui->actionUndo->setEnabled(true);
 	this->ui->actionEdit_Boxes->setEnabled(true);
 	this->sc = *new StackCollection(StackCollection(oneSized.GetContainerX(), oneSized.GetContainerY(), oneSized.GetContainerZ(), oneSized.GetSmallBoxX(), oneSized.GetSmallBoxY(), oneSized.GetSmallBoxZ()));
 	
@@ -1000,5 +1026,6 @@ void MainWindow::on_OneSized_clicked(bool edit)
 		this->ui->listWidget_Result->insertItem(count++, QString::number(it->second));
 	}
 	this->set_Container(oneSized.GetContainerX(), oneSized.GetContainerY(), oneSized.GetContainerZ(), oneSized.GetSmallBoxX(), oneSized.GetSmallBoxY(), oneSized.GetSmallBoxZ());
+	//this->ui->graphicsView_TwoDim->fitInView(this->scene->sceneRect(), Qt::KeepAspectRatio);
 }
 

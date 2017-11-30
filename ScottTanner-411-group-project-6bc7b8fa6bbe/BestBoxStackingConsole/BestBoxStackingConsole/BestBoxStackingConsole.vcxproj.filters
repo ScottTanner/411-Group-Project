@@ -162,6 +162,9 @@
     <ClCompile Include="mainwindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="UnReDo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="BestBoxStackingConsole.qrc">
@@ -293,6 +296,9 @@
       <Filter>Generated Files</Filter>
     </ClInclude>
     <ClInclude Include="DrawBoxes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="UnReDo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

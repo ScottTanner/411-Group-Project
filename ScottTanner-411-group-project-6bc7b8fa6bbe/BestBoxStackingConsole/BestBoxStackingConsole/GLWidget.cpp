@@ -37,10 +37,10 @@ void GLWidget::drawCube(float size)
 	glBegin(GL_QUADS);
 	// front face
 	glColor3f(1.0, 0.0, 0.0);
-	glVertex3f(size / 2, size / 2, size / 2);
-	glVertex3f(-size / 2, size / 2, size / 2);
-	glVertex3f(-size / 2, -size / 2, size / 2);
-	glVertex3f(size / 2, -size / 2, size / 2);
+	glVertex3f(size , size / 2, size / 2);
+	glVertex3f(-size , size / 2, size / 2);
+	glVertex3f(-size , -size / 2, size / 2);
+	glVertex3f(size , -size / 2, size / 2);
 	// left face
 	glColor3f(0.0, 1.0, 0.0);
 	glVertex3f(-size / 2, size / 2, size / 2);

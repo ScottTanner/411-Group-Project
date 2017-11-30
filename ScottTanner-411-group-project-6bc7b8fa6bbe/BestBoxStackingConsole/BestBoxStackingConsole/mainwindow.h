@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QGraphicsItem>
 #include "StackCollection.h"
+#include "UnReDo.h"
 
 namespace Ui {
 class MainWindow;
@@ -25,16 +26,18 @@ private slots:
 	void on_Edit_Boxes();
 	void on_QActionAbout_Clicked();
 	void on_Night_View_clicked();
+	void on_UnDo_Clicked();
+	void on_ReDo_Clicked();
 
 private:
     Ui::MainWindow *ui;
 	QGraphicsScene *scene;
-	double containerX;
-	double containerY;
-	double containerZ;
-	double boxX;
-	double boxY;
-	double boxZ;
+	double containerX = 0;
+	double containerY = 0;
+	double containerZ = 0;
+	double boxX = 0;
+	double boxY = 0;
+	double boxZ = 0;
 	StackCollection sc;
 	void paintContainers();
 	void paintBoxes(std::list<Stack> listStack,double conCX, double conCY, double conCZ);
@@ -43,6 +46,8 @@ private:
 	Stack stack2;
 	Stack stack3;
 	Stack stack4;
+
+	UnReDo unReDo;
 };
 
 #endif // MAINWINDOW_H
