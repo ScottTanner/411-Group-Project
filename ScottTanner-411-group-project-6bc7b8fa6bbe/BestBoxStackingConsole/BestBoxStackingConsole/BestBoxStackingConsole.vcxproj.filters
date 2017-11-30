@@ -159,6 +159,9 @@
     <ClCompile Include="GeneratedFiles\Release\moc_DialogAbout.cpp">
       <Filter>Generated Files</Filter>
     </ClCompile>
+    <ClCompile Include="DrawBoxes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="BestBoxStackingConsole.qrc">
@@ -289,6 +292,9 @@
     <ClInclude Include="GeneratedFiles\ui_AboutDialog.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
+    <ClInclude Include="DrawBoxes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -301,6 +307,9 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Untitled-4.ico" />
+    <Image Include="BestStacking.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="BestBoxStackingConsole.rc" />

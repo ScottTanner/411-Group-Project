@@ -38,6 +38,10 @@ private:
 	void paintContainers();
 	void paintBoxes(std::list<Stack> listStack,double conCX, double conCY, double conCZ);
 	void set_Container(double cX, double cY, double cZ, double sBX, double sBY, double sBZ);
+	Stack stack1;
+	Stack stack2;
+	Stack stack3;
+	Stack stack4;
 };
 
 #endif // MAINWINDOW_H
