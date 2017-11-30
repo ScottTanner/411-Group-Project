@@ -3,6 +3,7 @@
 #include "ui_boxstacking.h"
 #include <algorithm>
 #include "DialogAbout.h"
+bool styleControl = true;
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -10,13 +11,14 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 	this->showMaximized();
-
 	connect(ui->actionOne_Sized_Small_Boxes, &QAction::triggered, this, &MainWindow::on_OneSized_clicked);
 	connect(ui->actionExit, &QAction::triggered, this, &MainWindow::on_Exit_clicked);
 	connect(ui->actionEdit_Boxes, &QAction::triggered, this, &MainWindow::on_Edit_Boxes);
 	connect(ui->actionAbout_BestBoxStacking, &QAction::triggered, this, &MainWindow::on_QActionAbout_Clicked);
 	connect(ui->action_ber_BestBoxStacking, &QAction::triggered, this, &MainWindow::on_QActionAbout_Clicked);
 	connect(ui->listWidget_Result, SIGNAL(itemClicked(QListWidgetItem*)), this, SLOT(on_TableUpdate()));
+	connect(ui->actionNight_View, &QAction::triggered, this, &MainWindow::on_Night_View_clicked);
+
 }
 
 void MainWindow::set_container(double cX, double cY, double cZ, double boxX, double boxY, double boxZ)
@@ -102,6 +104,24 @@ void MainWindow::on_QActionAbout_Clicked()
 	DialogAbout about;
 	about.setModal(true);
 	about.exec();
+}
+
+void MainWindow::on_Night_View_clicked()
+{
+	if (styleControl == true) {
+		//QString styleSheet = "QPushButton{border-style:solid;background-color:#da532c;color:#fff;border-radius:7px;}";
+		QString styleSheet = "QDialog{}QGroupBox{background-color:#2d2d2d;color: #fff;border: none;}QLabel{color: #fff;}QMenuBar{background-color:#1d1d1d;padding:5px;	font: 12pt 'MS Shell Dlg 2';}QMenuBar::item{background-color:#1d1d1d;color:#fff;padding:5px;}QMenu{color:#fff;padding:0;}QMenu::item:selected{color:#fff;background-color:#00aba9;}QMenu::QAction{color: #ffffff;}QWidget{background-color: #2d2d2d;font-color: #ffffff;}QTabWidget{background-color: #2d2d2d;}QTableWidget{background-color:#2d2d2d;color:#fff;  selection-background-color: #da532c;border:solid;border-width:3px;border-color:#da532c;}QHeaderView::section{background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(20, 158, 217, 255), stop:1 rgba(36, 158, 217, 255));border:none;border-top-style:solid;border-width:1px;border-top-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(20, 158, 217, 255), stop:1 rgba(36, 158, 217, 255));color:#fff;}QHeaderView{background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(20, 158, 217, 255), stop:1 rgba(36, 158, 217, 255));border:none;border-top-style:solid;border-width:1px;border-top-color:#149ED9;color:#fff;	font: 75 12pt 'Calibri';}QTableCornerButton::section{border:none;background-color:#149ED9;}QListWidget{background-color:#3d3d3d;color:#fff;}QMenu{background-color:#3d3d3d;}QStatusBar{background-color:#7e3878;color:#fff;}QComboBox{border-style:solid;background-color:#3d3d3d;color:#fff;border-radius:7px;}QPushButton{border-style:solid;background-color:#3d3d3d;color:#fff;border-radius:7px;}QPushButton:hover{color:#ccc;	background-color: qlineargradient(spread:pad, x1:0.517, y1:0, x2:0.517, y2:1, stop:0 rgba(45, 45, 45, 255), stop:0.505682 rgba(45, 45, 45, 255), stop:1 rgba(29, 29, 29, 255));	border-color:#2d89ef;border-width:2px;}QPushButton:pressed{background-color: qlineargradient(spread:pad, x1:0.517, y1:0, x2:0.517, y2:1, stop:0 rgba(29, 29, 29, 255), stop:0.505682 rgba(45, 45, 45, 255), stop:1 rgba(29, 29, 29, 255));}QTabWidget::tab{background-color:#3d3d3d;}QLineEdit{border-radius:0;}QProgressBar{border-radius:0;text-align:center;color:#fff;background-color:transparent;border: 2px solid #e3a21a;border-radius:7px;	font: 75 12pt 'Open Sans';}QLineEdit{background-color: #ffffff;}QProgressBar::chunk{background-color:#2d89ef;width:20px;}";
+		styleControl = false;
+		this->setStyleSheet(styleSheet);
+	}
+	else {
+		QString styleSheet2 = "QDialog{ } QMenuBar{ background-color:#1d1d1d; padding:5px; font: 12pt 'MS Shell Dlg 2'; } QMenuBar::item{ background-color:#1d1d1d; color:#fff; padding:5px; } QMenu{ color:#fff; padding:0; } QMenu::item:selected{ color:#fff; background-color:#00aba9; } QTableWidget{ background-color:#3d3d3d; color:#fff; selection-background-color: #da532c; border:solid; border-width:3px; border-color:#da532c; } QHeaderView::section{ background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(20, 158, 217, 255), stop:1 rgba(36, 158, 217, 255)); border:none; border-top-style:solid; border-width:1px; border-top-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(20, 158, 217, 255), stop:1 rgba(36, 158, 217, 255)); color:#fff; } QHeaderView{ background-color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:0, stop:0 rgba(20, 158, 217, 255), stop:1 rgba(36, 158, 217, 255)); border:none; border-top-style:solid; border-width:1px; border-top-color:#149ED9; color:#fff; font: 75 12pt 'Calibri'; } QTableCornerButton::section{ border:none; background-color:#149ED9; } QListWidget{ background-color:#3d3d3d; color:#fff; } QMenu{ background-color:#3d3d3d; } QStatusBar{ background-color:#7e3878; color:#fff; } QComboBox { border-style:solid; background-color:#3d3d3d; color:#fff; border-radius:7px; } QPushButton{ border-style:solid; background-color:#3d3d3d; color:#fff; border-radius:7px; } QPushButton:hover{ color:#ccc; background-color: qlineargradient(spread:pad, x1:0.517, y1:0, x2:0.517, y2:1, stop:0 rgba(45, 45, 45, 255), stop:0.505682 rgba(45, 45, 45, 255), stop:1 rgba(29, 29, 29, 255)); border-color:#2d89ef; border-width:2px; } QPushButton:pressed{ background-color: qlineargradient(spread:pad, x1:0.517, y1:0, x2:0.517, y2:1, stop:0 rgba(29, 29, 29, 255), stop:0.505682 rgba(45, 45, 45, 255), stop:1 rgba(29, 29, 29, 255)); } QTabWidget::tab{ background-color:#3d3d3d; } QLineEdit{ border-radius:0; } QProgressBar{ border-radius:0; text-align:center; color:#fff; background-color:transparent; border: 2px solid #e3a21a; border-radius:7px; font: 75 12pt 'Open Sans'; } QProgressBar::chunk{ background-color:#2d89ef; width:20px; }";
+		styleControl = true;
+		this->setStyleSheet(styleSheet2);
+	}
+
+
+    //ui->menubar->setStyleSheet(styleSheet);
 }
 
 

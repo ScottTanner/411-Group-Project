@@ -24,6 +24,7 @@ private slots:
 	void on_TableUpdate();
 	void on_Edit_Boxes();
 	void on_QActionAbout_Clicked();
+	void on_Night_View_clicked();
 
 private:
     Ui::MainWindow *ui;

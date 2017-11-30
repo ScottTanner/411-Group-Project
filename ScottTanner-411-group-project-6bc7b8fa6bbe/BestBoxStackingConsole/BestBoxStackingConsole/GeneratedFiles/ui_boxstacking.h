@@ -299,6 +299,7 @@ public:
         groupBoxContainer_2 = new QGroupBox(widget);
         groupBoxContainer_2->setObjectName(QStringLiteral("groupBoxContainer_2"));
         groupBoxContainer_2->setGeometry(QRect(0, 190, 271, 171));
+        groupBoxContainer_2->setStyleSheet(QStringLiteral(""));
         gridLayout_2 = new QGridLayout(groupBoxContainer_2);
         gridLayout_2->setObjectName(QStringLiteral("gridLayout_2"));
         label_4 = new QLabel(groupBoxContainer_2);

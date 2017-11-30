@@ -30,7 +30,7 @@ public:
     {
         if (DialogAbout->objectName().isEmpty())
             DialogAbout->setObjectName(QStringLiteral("DialogAbout"));
-        DialogAbout->resize(442, 353);
+        DialogAbout->resize(448, 371);
         QIcon icon;
         icon.addFile(QStringLiteral("Untitled-4.ico"), QSize(), QIcon::Normal, QIcon::On);
         DialogAbout->setWindowIcon(icon);
@@ -161,10 +161,10 @@ public:
         plainTextEdit = new QPlainTextEdit(DialogAbout);
         plainTextEdit->setObjectName(QStringLiteral("plainTextEdit"));
         plainTextEdit->setEnabled(false);
-        plainTextEdit->setGeometry(QRect(10, 10, 431, 301));
+        plainTextEdit->setGeometry(QRect(10, 10, 431, 311));
         okButton = new QPushButton(DialogAbout);
         okButton->setObjectName(QStringLiteral("okButton"));
-        okButton->setGeometry(QRect(340, 320, 81, 21));
+        okButton->setGeometry(QRect(360, 340, 81, 21));
 
         retranslateUi(DialogAbout);
         QObject::connect(okButton, SIGNAL(clicked()), DialogAbout, SLOT(accept()));
@@ -175,12 +175,14 @@ public:
     void retranslateUi(QDialog *DialogAbout)
     {
         DialogAbout->setWindowTitle(QApplication::translate("DialogAbout", "About Box Stacking", nullptr));
-        plainTextEdit->setPlainText(QApplication::translate("DialogAbout", "Box Sorting and Management System (BSMS) \n"
+        plainTextEdit->setPlainText(QApplication::translate("DialogAbout", "English.\n"
+"\n"
+"Box Sorting and Management System (BSMS) \n"
 "is designed to be a convenient and easy-to-use \n"
 "application that allows users to better manage \n"
 "their storage space. Above all, we hope to provide a comfortable user experience. \n"
 "\n"
-"Deutsche\n"
+"Deutsche.\n"
 "\n"
 "Sortier- und Managementsystem (BSMS)\n"
 "ist so konzipiert, dass es bequem und einfach zu bedienen ist\n"
